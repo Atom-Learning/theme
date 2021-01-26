@@ -1,0 +1,16 @@
+{
+  "name": "@atom-learning/theme",
+  "version": "0.1.0",
+  "description": "",
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "esmodules": "dist/index.modern.js",
+  "scripts": {
+    "build": "microbundle --format modern,cjs --strict"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "microbundle": "^0.13.0"
+  }
+}

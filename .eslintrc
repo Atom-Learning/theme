@@ -1,0 +1,41 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser", // Specifies the ESLint parser
+  "parserOptions": {
+    "ecmaFeatures": {
+      "impliedStrict": true
+    },
+    "ecmaVersion": 2020, // Allows for the parsing of modern ECMAScript features
+    "sourceType": "module" // Allows for the use of imports
+  },
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "prettier/@typescript-eslint",
+    "prettier"
+  ],
+  "plugins": ["simple-import-sort"],
+  "rules": {
+    "no-prototype-builtins": "off",
+    "no-unneeded-ternary": ["warn", { "defaultAssignment": false }],
+    "no-unused-vars": ["warn", { "ignoreRestSiblings": true }],
+    "no-useless-concat": "warn",
+    "no-useless-escape": "warn",
+    "prefer-const": "error",
+    "prefer-template": "warn",
+    "simple-import-sort/imports": "warn"
+  }
+}
