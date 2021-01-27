@@ -38,12 +38,10 @@
       "base": { "value": "hsl(137, 60%, 42.5%)" },
       "dark": { "value": "hsl(137, 60%, 31.5%)" }
     },
-
     "warning": {
       "base": { "value": "hsl(24 ,100%, 55%)" },
       "dark": { "value": "hsl(24 ,100%, 41%)" }
     },
-
     "danger": {
       "light": { "value": "hsl(354.5, 88%, 67%)" },
       "base": { "value": "hsl(354.5, 70.5%, 53.5%)" },
@@ -53,8 +51,10 @@
     "subject": {
       "english": { "value": "#b7373f" },
       "maths": { "value": "#31a6d8" },
-      "vr": { "value": "#0cd394" },
-      "nvr": { "value": "#ffaf02" }
+      "vr": { "value": "#0cd394", "comment": "verbal reasoning" },
+      "nvr": { "value": "#ffaf02", "comment": "non-verbal reasoning" },
+      "cw": { "value": "#ff7518", "comment": "creative writing" },
+      "es": { "value": "#9954bb", "comment": "exam skills" }
     }
   }
 }

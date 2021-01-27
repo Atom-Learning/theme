@@ -1,0 +1,9 @@
+{
+  "effects": {
+    "drop-shadows": {
+      "0": {
+        "value": "0px 2px 1px -1px {color.tonal.200.value}, 0px 1px 1px 0px {color.tonal.200.value}, 0px 1px 3px 0px {color.tonal.200.value}"
+      }
+    }
+  }
+}

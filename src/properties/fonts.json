@@ -1,0 +1,12 @@
+{
+  "font": {
+    "families": {
+      "sans": {
+        "value": "'urw-din', system-ui, -apple-system, 'Helvetica Neue', sans-serif"
+      },
+      "mono": {
+        "value": "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace"
+      }
+    }
+  }
+}
