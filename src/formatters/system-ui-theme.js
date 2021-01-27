@@ -1,4 +1,4 @@
-const removeEmptyOrNull = (obj) => {
+const removeEmpty = (obj) => {
   Object.keys(obj).map((key) => {
     if (Object.keys(obj[key]).length === 0) {
       obj[key] = undefined
@@ -33,61 +33,36 @@ const schema = {
   transitions: {}
 }
 
+const matchSchema = {
+  'effects.shadows': 'shadows',
+  font: 'fonts',
+  'size.font': 'fontSizes',
+  'size.radii': 'radii',
+  'size.size': 'sizes',
+  'size.space': 'space'
+}
+
 const formatter = (dictionary) => {
   const theme = { ...schema }
 
   dictionary.allProperties.forEach((property) => {
     const { type, category, item } = property.attributes
+    const key = matchSchema[`${category}.${type}`] || matchSchema[category]
 
     if (category === 'color') {
-      theme.colors = {
+      return (theme.colors = {
         ...theme.colors,
         [prefix(type, item)]: property.value
-      }
-    }
-    if (category === 'font') {
-      theme.fonts = {
-        ...theme.fonts,
-        [prefix(item)]: property.value
-      }
-    }
-    if (category === 'effects' && type === 'drop-shadows') {
-      theme.shadows = {
-        ...theme.shadows,
-        [prefix(item)]: property.value
-      }
+      })
     }
 
-    if (category === 'size') {
-      if (type === 'font') {
-        theme.fontSizes = {
-          ...theme.fontSizes,
-          [prefix(item)]: property.value
-        }
-      }
-
-      if (type === 'space') {
-        theme.space = {
-          ...theme.space,
-          [prefix(item)]: property.value
-        }
-      }
-      if (type === 'size') {
-        theme.sizes = {
-          ...theme.sizes,
-          [prefix(item)]: property.value
-        }
-      }
-      if (type === 'radii') {
-        theme.radii = {
-          ...theme.radii,
-          [prefix(item)]: property.value
-        }
-      }
+    theme[key] = {
+      ...theme[key],
+      [prefix(item)]: property.value
     }
   })
 
-  return `export default ${JSON.stringify(removeEmptyOrNull(theme), null, 2)}`
+  return `export default ${JSON.stringify(removeEmpty(theme), null, 2)}`
 }
 
 module.exports = formatter
