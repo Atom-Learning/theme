@@ -3,7 +3,7 @@ module.exports = {
   platforms: {
     scss: {
       transformGroup: 'scss',
-      buildPath: 'dist/scss/',
+      buildPath: 'dist/',
       files: [
         {
           destination: '_colors.scss',
@@ -17,15 +17,16 @@ module.exports = {
           filter: ({ attributes: { category } }) =>
             category === 'size' || category === 'effects'
         }
-      ]
+      ],
+      actions: ['merge-files']
     },
     js: {
       transformGroup: 'js',
       transforms: ['attribute/cti', 'name/cti/pascal', 'size/rem', 'color/hsl'],
-      buildPath: 'dist/js/',
+      buildPath: 'dist/',
       files: [
         {
-          destination: 'index.js',
+          destination: 'index.ts',
           format: 'custom/format/system-ui-theme'
         }
       ]
