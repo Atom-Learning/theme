@@ -6,13 +6,13 @@ module.exports = {
       buildPath: 'dist/',
       files: [
         {
-          destination: '_colors.scss',
+          destination: '_variables.scss',
           format: 'scss/variables',
           filter: ({ attributes: { category } }) =>
             category === 'color' || category === 'font'
         },
         {
-          destination: '_sizes.scss',
+          destination: '_scales.scss',
           format: 'custom/format/scss-map-flat',
           filter: ({ attributes: { category } }) =>
             category === 'size' || category === 'effects'
