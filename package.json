@@ -4,8 +4,12 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "node ./scripts/build.js"
+    "build": "node ./scripts/build.js",
+    "prepublishOnly": "yarn build"
   },
+  "files": [
+    "./dist"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
