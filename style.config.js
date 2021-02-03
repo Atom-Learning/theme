@@ -26,7 +26,7 @@ module.exports = {
       buildPath: 'dist/',
       files: [
         {
-          destination: 'index.ts',
+          destination: 'index.js',
           format: 'custom/format/system-ui-theme'
         }
       ]
