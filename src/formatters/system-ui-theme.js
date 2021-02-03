@@ -62,7 +62,7 @@ const formatter = (dictionary) => {
     }
   })
 
-  return `export default ${JSON.stringify(removeEmpty(theme), null, 2)}`
+  return `module.exports = ${JSON.stringify(removeEmpty(theme), null, 2)}`
 }
 
 module.exports = formatter
