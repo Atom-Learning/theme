@@ -8,11 +8,15 @@ const removeEmpty = (obj) => {
 }
 
 const prefix = (type, item) => {
-  if (!item || item === 'base') return `$${type}`
-  if (parseInt(item)) {
-    return `$${type}${item}`
+  if (!item || item === 'base') {
+    return `${type}`
   }
-  return `$${type}${item.charAt(0).toUpperCase() + item.slice(1)}`
+
+  if (parseInt(item)) {
+    return `${type}${item}`
+  }
+
+  return `${type}${item.charAt(0).toUpperCase() + item.slice(1)}`
 }
 
 const schema = {
