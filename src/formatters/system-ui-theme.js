@@ -9,7 +9,7 @@ const removeEmpty = (obj) => {
 
 const prefix = (type, item) => {
   if (!item || item === 'base') {
-    return `${type}`
+    return type
   }
 
   if (parseInt(item)) {
