@@ -1,0 +1,17 @@
+---
+title: Effects
+---
+
+## Shadows
+
+<Scale scale={theme.shadows} css={{ mb: '$5' }}>
+  {(value) => (
+    <Box
+      css={{
+        boxShadow: value,
+        bg: 'white',
+        size: '$3'
+      }}
+    />
+  )}
+</Scale>

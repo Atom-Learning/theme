@@ -1,0 +1,73 @@
+---
+title: Layout and space
+description: Visualising the space in and around components is tricky, this page aims to demonstrate the levels of spacing that can be applied through our space and size scale
+---
+
+## Space
+
+The space scale applies to the following CSS layout properties: `margin`, `padding`, `grid-gap` and flexbox `gap`.
+
+<Scale scale={theme.space} css={{ mb: '$5' }}>
+  {(value) => (
+    <Box
+      css={{
+        size: value,
+        bg: '$primary900'
+      }}
+    />
+  )}
+</Scale>
+
+## Size
+
+The size scale applies to the following CSS properties: `width`, `height`, including `max` and `min` of both.
+
+<Scale scale={theme.sizes} css={{ mb: '$5' }}>
+  {(value) => (
+    <Box
+      css={{
+        size: value,
+        bg: '$primary900'
+      }}
+    />
+  )}
+</Scale>
+
+As an example, the following "Avatar" style component is created using the size and space scale. A `size` of `$3` is used to set the `height` and `width`, and `mr` and `mb` are used to set varying values from the space scale.
+
+```jsx preview
+<Flex css={{ alignItems: 'center' }}>
+  <Box
+    css={{
+      bg: '$primary900',
+      borderRadius: '50%',
+      size: '$3',
+      mr: '$3'
+    }}
+  />
+  <Flex css={{ flexDirection: 'column' }}>
+    <Heading size="sm" css={{ mb: '$2' }}>
+      Steve Brusatte
+    </Heading>
+    <Text size="sm" css={{ color: '$tonal700' }}>
+      @SteveBrusatte
+    </Text>
+  </Flex>
+</Flex>
+```
+
+## Radius
+
+The border-radii scale uses similar scale values for applying a border-radius.
+
+<Scale scale={theme.radii} css={{ mb: '$5' }}>
+  {(value) => (
+    <Box
+      css={{
+        borderRadius: value,
+        bg: '$primary900',
+        size: '$3'
+      }}
+    />
+  )}
+</Scale>

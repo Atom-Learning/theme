@@ -5,13 +5,31 @@ description: For consistent typography throughout the application we created a v
 
 ## Fonts
 
-<TypographyFamilies families={theme.fonts} css={{ mb: '$5' }} />
+<Scale scale={theme.fonts} css={{ mb: '$5' }}>
+  {(value) => (
+    <Box css={{ pr: '$5' }}>
+      <Text
+        css={{
+          fontFamily: value,
+          fontSize: '5rem',
+          lineHeight: 1.4,
+          '&::before, &::after': { display: 'none' }
+        }}
+      >
+        Abc-Xyz
+      </Text>
+      <Text size="lg">{value}</Text>
+    </Box>
+  )}
+</Scale>
 
 ## Sizes
 
-This typographic sizing scale represents the font-size values used in our components, it follows the Perfect Fourth scale and can be accessed by using t-shirt notation
+This typographic sizing scale represents the `font-size` values used in our components, it loosely follows the [Perfect Fourth](https://type-scale.com/?scale=1.333&font=Inter) scale and can be accessed by using t-shirt notation
 
-<TypographyScale scale={theme.fontSizes} css={{ mb: '$5' }} />
+<Scale scale={theme.fontSizes} css={{ mb: '$5' }}>
+  {(value) => <Text css={{ fontSize: value }}>{value}</Text>}
+</Scale>
 
 An important thing to note is that most of our typography components, `Text`, `Heading`, `Label` and others, use [capsize](https://seek-oss.github.io/capsize/) to offset the white-space between the cap-height and the line-height. This means that spacing in and around our text will be tight to the characters.
 
