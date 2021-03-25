@@ -8,14 +8,7 @@ description: Visualising the space in and around components is tricky(, so t|. T
 The space scale applies to the following CSS layout properties: `margin`, `padding`, `grid-gap` and flexbox `gap`.
 
 <Scale scale={theme.space} css={{ mb: '$5' }}>
-  {(value) => (
-    <Box
-      css={{
-        size: value,
-        bg: '$primary900'
-      }}
-    />
-  )}
+  {(value) => <Box css={{ size: value, bg: '$primary900' }} />}
 </Scale>
 
 ## Size
@@ -23,14 +16,7 @@ The space scale applies to the following CSS layout properties: `margin`, `paddi
 The size scale applies to the following CSS properties: `width`, `height`, including `max` and `min` of both.
 
 <Scale scale={theme.sizes} css={{ mb: '$5' }}>
-  {(value) => (
-    <Box
-      css={{
-        size: value,
-        bg: '$primary900'
-      }}
-    />
-  )}
+  {(value) => <Box css={{ size: value, bg: '$primary900' }} />}
 </Scale>
 
 As an example, the following "Avatar" style component is created using the size and space scale. A `size` of `$3` is used to set the `height` and `width`, and `mr` and `mb` are used to set varying values from the space scale.

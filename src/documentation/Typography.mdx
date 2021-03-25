@@ -1,24 +1,17 @@
 ---
 title: Typography
-description: We have a variety of Text components to provide consistent typography throughout the application. You can read more about those specific font styles in the Text Component documentation.
+description: We have a variety of Text components to provide consistent typography throughout the application. You can read more about those specific font styles in the Text component documentation.
 ---
 
 ## Fonts
 
-<Scale scale={theme.fonts} css={{ mb: '$5' }}>
+<Scale scale={theme.fonts} css={{ mb: '$5' }} displayValue={false}>
   {(value) => (
-    <Box css={{ pr: '$5' }}>
-      <Text
-        css={{
-          fontFamily: value,
-          fontSize: '4rem',
-          lineHeight: 1.4,
-          '&::before, &::after': { display: 'none' }
-        }}
-      >
+    <Box css={{ pl: '$2', textAlign: 'right' }}>
+      <Text css={{ fontFamily: value, mb: '$3' }} size="xxl">
         Abc-Xyz
       </Text>
-      <Text size="lg" css={{ fontFamily: value }}>
+      <Text size="sm" css={{ fontFamily: value }}>
         {value}
       </Text>
     </Box>
@@ -37,7 +30,7 @@ Note that most of our typography components (`Text`, `Heading`, `Label` and othe
 
 ```jsx preview
 <Box css={{ bg: '$primary200', p: '$4' }}>
-  <Text size="lg" css={{ bg: 'white' }}>
+  <Text size="xl" css={{ bg: 'white' }}>
     Hello World
   </Text>
 </Box>
