@@ -7,6 +7,8 @@ const removeEmpty = (obj) => {
   return obj
 }
 
+const capitalise = (str) => str.charAt(0).toUpperCase() + str.slice(1)
+
 const prefix = (type, item) => {
   if (!item || item === 'base') {
     return type
@@ -16,7 +18,7 @@ const prefix = (type, item) => {
     return `${type}${item}`
   }
 
-  return `${type}${item.charAt(0).toUpperCase() + item.slice(1)}`
+  return `${type}${capitalise(item)}`
 }
 
 const schema = {
