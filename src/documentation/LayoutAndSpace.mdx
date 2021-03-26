@@ -1,46 +1,23 @@
 ---
 title: Layout and space
-description: Visualising the space in and around components is tricky(, so t|. T)his page demonstrates the levels of spacing that can be applied through our space and size scales.
+description: Visualising the space in and around components is tricky. This page demonstrates the levels of spacing that can be applied through our space and size scales.
 ---
 
 ## Space
 
-The space scale applies to the following CSS layout properties: `margin`, `padding`, `grid-gap` and flexbox `gap`.
+This scale will apply to the space between and internal to elements, it applies to the following common CSS layout properties, `margin`, `padding`, `grid-gap` and flexbox `gap`.
 
 <Scale scale={theme.space} css={{ mb: '$5' }}>
-  {(value) => <Box css={{ size: value, bg: '$primary900' }} />}
+  {(value) => <Box css={{ height: '$1', width: value, bg: '$primary900' }} />}
 </Scale>
 
 ## Size
 
-The size scale applies to the following CSS properties: `width`, `height`, including `max` and `min` of both.
+The size scale is used when defining the dimensions of an element, it applies to the following common CSS properties, `width` and `height`, including the `max` and `min` of both.
 
 <Scale scale={theme.sizes} css={{ mb: '$5' }}>
   {(value) => <Box css={{ size: value, bg: '$primary900' }} />}
 </Scale>
-
-As an example, the following "Avatar" style component is created using the size and space scale. A `size` of `$3` is used to set the `height` and `width`, and `mr` and `mb` are used to set varying values from the space scale.
-
-```jsx preview
-<Flex css={{ alignItems: 'center' }}>
-  <Box
-    css={{
-      bg: '$primary900',
-      borderRadius: '50%',
-      size: '$5',
-      mr: '$3'
-    }}
-  />
-  <Flex css={{ flexDirection: 'column' }}>
-    <Heading size="sm" css={{ mb: '$3' }}>
-      Steve Brusatte
-    </Heading>
-    <Text size="sm" css={{ color: '$tonal700' }}>
-      @SteveBrusatte
-    </Text>
-  </Flex>
-</Flex>
-```
 
 ## Radius
 
@@ -57,3 +34,36 @@ The radii scale uses similar scale values for applying a border-radius.
     />
   )}
 </Scale>
+
+## Example
+
+The following "Avatar" style component is created using the size, space and radii scale. A `size` of `$3` is used to set the `height` and `width`, `mr` and `mb` are used to set the spacing between elements, and the `$round` token is used to apply a circluar border-radius.
+
+```jsx preview
+<Flex
+  css={{
+    alignItems: 'center',
+    border: '1px solid $tonal300',
+    borderRadius: '$2',
+    p: '$3',
+    width: '320px'
+  }}
+>
+  <Box
+    css={{
+      bg: '$primary900',
+      borderRadius: '$round',
+      size: '$5',
+      mr: '$3'
+    }}
+  />
+  <Flex css={{ flexDirection: 'column' }}>
+    <Heading size="sm" css={{ mb: '$3' }}>
+      Steve Brusatte
+    </Heading>
+    <Text size="sm" css={{ color: '$tonal700' }}>
+      @SteveBrusatte
+    </Text>
+  </Flex>
+</Flex>
+```
