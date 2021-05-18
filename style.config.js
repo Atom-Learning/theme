@@ -30,6 +30,16 @@ module.exports = {
           format: 'custom/format/system-ui-theme'
         }
       ]
+    },
+    ts: {
+      transformGroup: 'js',
+      buildPath: 'dist/',
+      files: [
+        {
+          destination: 'index.d.ts',
+          format: 'custom/format/system-ui-theme-types'
+        }
+      ]
     }
   }
 }

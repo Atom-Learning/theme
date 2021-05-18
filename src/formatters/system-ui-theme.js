@@ -48,7 +48,7 @@ const matchSchema = {
   'size.space': 'space'
 }
 
-const formatter = (dictionary) => {
+const transformPropertiesToTheme = (dictionary) => {
   const theme = { ...schema }
 
   dictionary.allProperties.forEach((property) => {
@@ -68,7 +68,13 @@ const formatter = (dictionary) => {
     }
   })
 
-  return `module.exports = ${JSON.stringify(removeEmpty(theme), null, 2)}`
+  return removeEmpty(theme)
+}
+
+const formatter = (dictionary) => {
+  const theme = transformPropertiesToTheme(dictionary)
+  return `module.exports = ${JSON.stringify(theme, null, 2)}`
 }
 
 module.exports = formatter
+module.exports.transformPropertiesToTheme = transformPropertiesToTheme
