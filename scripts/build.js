@@ -1,6 +1,7 @@
 const config = require('../style.config')
 const StyleDictionary = require('style-dictionary').extend(config)
 
+const formatterSystemUiThemeTypes = require('../src/formatters/system-ui-theme-types')
 const formatterSystemUiTheme = require('../src/formatters/system-ui-theme')
 const formatterScssMapFlat = require('../src/formatters/scss-map-flat')
 const actionMergeFiles = require('../src/actions/merge-files')
@@ -8,6 +9,11 @@ const actionMergeFiles = require('../src/actions/merge-files')
 StyleDictionary.registerFormat({
   name: 'custom/format/system-ui-theme',
   formatter: formatterSystemUiTheme
+})
+
+StyleDictionary.registerFormat({
+  name: 'custom/format/system-ui-theme-types',
+  formatter: formatterSystemUiThemeTypes
 })
 
 StyleDictionary.registerFormat({
