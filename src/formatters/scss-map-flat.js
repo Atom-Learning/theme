@@ -1,3 +1,13 @@
+const resolveValue = (val) => {
+  if (val.includes(',')) {
+    val = `(${val})`
+  }
+  if (val.includes('rem')) {
+    val = `${parseFloat(val.replace('rem', '')) * 16}px`
+  }
+  return val
+}
+
 const formatter = (dictionary) => {
   // group properties by category and type
   const properties = dictionary.allProperties.reduce((obj, curr, i) => {
@@ -20,7 +30,7 @@ const formatter = (dictionary) => {
       return `
 $${key}: (${Object.entries(val).map(
         ([key, val]) => `
-  ${key}: ${val}`
+  ${key}: ${resolveValue(val)}`
       )}
 );`
     })
