@@ -2,10 +2,16 @@
   "font": {
     "families": {
       "sans": {
-        "value": "'urw-din', system-ui, -apple-system, 'Helvetica Neue', sans-serif"
+        "value": "system-ui, -apple-system, 'Helvetica Neue', sans-serif"
       },
       "mono": {
         "value": "'SFMono-Regular', Consolas, Menlo, monospace"
+      },
+      "display": {
+        "value": "'Space Grotesk', {font.families.sans.value}"
+      },
+      "body": {
+        "value": "'Inter', {font.families.sans.value}"
       }
     }
   }
