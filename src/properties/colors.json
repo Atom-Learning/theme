@@ -58,6 +58,7 @@
     "subject": {
       "english": { "value": "#b7373f" },
       "maths": { "value": "#31a6d8" },
+      "science": { "value": "#7f5edd" },
       "vr": { "value": "#0cd394", "comment": "verbal reasoning" },
       "nvr": { "value": "#ffaf02", "comment": "non-verbal reasoning" },
       "cw": { "value": "#ff7518", "comment": "creative writing" },
