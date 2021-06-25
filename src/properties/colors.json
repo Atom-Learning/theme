@@ -1,68 +1,51 @@
 {
   "color": {
     "tonal": {
-      "100": { "value": "hsl(0, 6%, 97%)" },
-      "200": { "value": "hsl(0, 6%, 95%)" },
-      "300": { "value": "hsl(0, 6%, 90%)" },
-      "400": { "value": "hsl(0, 2%, 80%)" },
-      "500": { "value": "hsl(0, 2%, 70%)" },
-      "600": { "value": "hsl(0, 0%, 55%)" },
-      "700": { "value": "hsl(0, 0%, 40%)" },
-      "800": { "value": "hsl(0, 0%, 25%)" },
-      "900": { "value": "hsl(0, 0%, 15%)" }
-    },
-    "alpha": {
-      "100": { "value": "hsla(0, 0%, 15%, 0.1)" },
-      "150": { "value": "hsla(0, 0%, 15%, 0.15)" },
-      "200": { "value": "hsla(0, 0%, 15%, 0.2)" },
-      "250": { "value": "hsla(0, 0%, 15%, 0.25)" },
-      "600": { "value": "hsla(0, 0%, 15%, 0.6)" }
-    },
-    "primary": {
-      "100": { "value": "hsl(200, 75%, 95%)" },
-      "200": { "value": "hsl(200, 74%, 86.5)" },
-      "300": { "value": "hsl(201, 74%, 78%)" },
-      "400": { "value": "hsl(201, 74%, 69%)" },
-      "500": { "value": "hsl(201, 74%, 60%)" },
-      "600": { "value": "hsl(203, 66.5%, 54.5%)" },
-      "700": { "value": "hsl(204, 62%, 49%)" },
-      "800": { "value": "hsl(206, 72%, 43.5%)" },
-      "900": { "value": "hsl(208, 85%, 38%)" }
-    },
-    "secondary": {
-      "300": { "value": "hsl(215, 60%, 27%)" },
-      "500": { "value": "hsl(215, 60%, 19%)" },
-      "700": { "value": "hsl(228, 66%, 14%)" }
-    },
-    "tertiary": {
-      "300": { "value": "hsl(220, 19%, 40%)" },
-      "500": { "value": "hsl(219, 19.5%, 29%)" },
-      "700": { "value": "hsl(218, 20%, 18.5%)" }
+      "50": { "value": "hsl(0, 0%, 96%)" },
+      "100": { "value": "hsl(0, 0%, 93%)" },
+      "200": { "value": "hsl(0, 0%, 89%)" },
+      "300": { "value": "hsl(0, 0%, 80%)" },
+      "400": { "value": "hsl(0, 0%, 69%)" },
+      "500": { "value": "hsl(0, 0%, 46%)" },
+      "600": { "value": "hsl(0, 0%, 33%)" },
+      "700": { "value": "hsl(0, 0%, 20%)" },
+      "800": { "value": "hsl(0, 0%, 12%)" },
+      "900": { "value": "hsl(0, 0%, 8%)" }
     },
 
-    "success": {
-      "light": { "value": "hsl(137, 44.5%, 60%)" },
-      "base": { "value": "hsl(137, 60%, 42.5%)" },
-      "dark": { "value": "hsl(137, 60%, 31.5%)" }
+    "alpha": {
+      "100": { "value": "hsla(0, 0%, 20%, 0.1)" },
+      "150": { "value": "hsla(0, 0%, 20%, 0.15)" },
+      "200": { "value": "hsla(0, 0%, 20%, 0.2)" },
+      "250": { "value": "hsla(0, 0%, 20%, 0.25)" },
+      "600": { "value": "hsla(0, 0%, 20%, 0.6)" }
     },
-    "warning": {
-      "base": { "value": "hsl(24 ,100%, 55%)" },
-      "dark": { "value": "hsl(24 ,100%, 41%)" }
+
+    "primary": { "value": "hsl(217, 92%, 54%)" },
+    "secondary": { "value": "hsl(204, 100%, 72%)" },
+    "tertiary": { "value": "hsl(228, 82%, 35%)" },
+
+    "success": {
+      "base": { "value": "hsl(119, 100%, 27%)" },
+      "dark": { "value": "hsl(126, 100%, 20%)" }
     },
     "danger": {
-      "light": { "value": "hsl(354.5, 88%, 67%)" },
-      "base": { "value": "hsl(354.5, 70.5%, 53.5%)" },
-      "dark": { "value": "hsl(354.5, 70.5%, 40%)" }
+      "base": { "value": "hsl(0, 92%, 54%)" },
+      "dark": { "value": "hsl(0, 89%, 36%)" }
+    },
+    "warning": {
+      "base": { "value": "hsl(41, 100%, 55%)" },
+      "dark": { "value": "hsl(41, 89%, 48%)" }
     },
 
     "subject": {
-      "english": { "value": "#b7373f" },
-      "maths": { "value": "#31a6d8" },
-      "science": { "value": "#7f5edd" },
-      "vr": { "value": "#0cd394", "comment": "verbal reasoning" },
-      "nvr": { "value": "#ffaf02", "comment": "non-verbal reasoning" },
-      "cw": { "value": "#ff7518", "comment": "creative writing" },
-      "es": { "value": "#9954bb", "comment": "exam skills" }
+      "english": { "value": "#F74E4E" },
+      "maths": { "value": "#1D6FF5" },
+      "science": { "value": "#7F5EDD" },
+      "vr": { "value": "#4FBF5E" },
+      "nvr": { "value": "#FFB71B" },
+      "cw": { "value": "#ff7518" },
+      "es": { "value": "#9954bb" }
     }
   }
 }
