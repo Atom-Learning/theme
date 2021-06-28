@@ -8,7 +8,7 @@ description: Visualising the space in and around components is tricky. This page
 This scale will apply to the space between and internal to elements, it applies to the following common CSS layout properties, `margin`, `padding`, `grid-gap` and flexbox `gap`.
 
 <Scale scale={theme.space} css={{ mb: '$5' }}>
-  {(value) => <Box css={{ height: '$1', width: value, bg: '$primary900' }} />}
+  {(value) => <Box css={{ width: '$1', height: value, bg: '$primary' }} />}
 </Scale>
 
 ## Size
@@ -16,7 +16,7 @@ This scale will apply to the space between and internal to elements, it applies 
 The size scale is used when defining the dimensions of an element, it applies to the following common CSS properties, `width` and `height`, including the `max` and `min` of both.
 
 <Scale scale={theme.sizes} css={{ mb: '$5' }}>
-  {(value) => <Box css={{ size: value, bg: '$primary900' }} />}
+  {(value) => <Box css={{ size: value, bg: '$primary' }} />}
 </Scale>
 
 ## Radius
@@ -28,7 +28,7 @@ The radii scale uses similar scale values for applying a border-radius.
     <Box
       css={{
         borderRadius: value,
-        bg: '$primary900',
+        bg: '$primary',
         size: '$5'
       }}
     />
@@ -51,7 +51,7 @@ The following "Avatar" style component is created using the size, space and radi
 >
   <Box
     css={{
-      bg: '$primary900',
+      bg: '$primary',
       borderRadius: '$round',
       size: '$5',
       mr: '$3'
