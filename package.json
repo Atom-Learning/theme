@@ -11,7 +11,7 @@
     "clean": "del ./lib"
   },
   "files": [
-    "dist"
+    "lib"
   ],
   "author": "",
   "license": "ISC",
