@@ -2,13 +2,13 @@
   "name": "@atom-learning/theme",
   "version": "1.0.0-beta.1",
   "description": "",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build:lib": "node ./scripts/build.js",
-    "build:docs": "cp -r ./src/documentation/. ./dist",
+    "build:docs": "cp -r ./src/documentation/. ./lib",
     "prepublishOnly": "run-s clean build:lib build:docs",
-    "clean": "del ./dist"
+    "clean": "del ./lib"
   },
   "files": [
     "dist"
