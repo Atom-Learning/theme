@@ -55,14 +55,14 @@ const transformPropertiesToTheme = (dictionary) => {
     const { type, category, item } = property.attributes
     const key = matchSchema[`${category}.${type}`] || matchSchema[category]
 
-    if (!key) return
-
     if (category === 'color') {
       return (theme.colors = {
         ...theme.colors,
         [prefix(type, item)]: property.value
       })
     }
+
+    if (!key) return
 
     theme[key] = {
       ...theme[key],
