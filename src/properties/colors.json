@@ -22,7 +22,7 @@
     },
 
     "primary": {
-      "light": { "value": "hsla(217, 92%, 97%)" },
+      "light": { "value": "hsl(217, 92%, 97%)" },
       "base": { "value": "hsl(217, 92%, 54%)" }
     },
 
