@@ -21,8 +21,11 @@
       "600": { "value": "hsla(0, 0%, 20%, 0.6)" }
     },
 
-    "primary-light": { "value": "hsla(217, 92%, 97%)" },
-    "primary": { "value": "hsl(217, 92%, 54%)" },
+    "primary": {
+      "light": { "value": "hsla(217, 92%, 97%)" },
+      "base": { "value": "hsl(217, 92%, 54%)" }
+    },
+
     "secondary": { "value": "hsl(204, 100%, 72%)" },
     "tertiary": { "value": "hsl(228, 82%, 35%)" },
 
