@@ -8,7 +8,7 @@ description: Visualising the space in and around components is tricky. This page
 This scale will apply to the space between and internal to elements, it applies to the following common CSS layout properties, `margin`, `padding`, `grid-gap` and flexbox `gap`.
 
 <Scale scale={theme.space} css={{ mb: '$5' }}>
-  {(value) => <Box css={{ width: '$1', height: value, bg: '$primary' }} />}
+  {(value) => <Box css={{ height: '$1', width: value, bg: '$primary' }} />}
 </Scale>
 
 ## Size
@@ -61,7 +61,7 @@ The following "Avatar" style component is created using the size, space and radi
     <Heading size="sm" css={{ mb: '$3' }}>
       Steve Brusatte
     </Heading>
-    <Text size="sm" css={{ color: '$tonal700' }}>
+    <Text size="sm" css={{ color: '$tonal600' }}>
       @SteveBrusatte
     </Text>
   </Flex>

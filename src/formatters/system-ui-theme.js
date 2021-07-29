@@ -1,3 +1,5 @@
+const { pascalCase } = require('pascal-case')
+
 const removeEmpty = (obj) => {
   Object.keys(obj).map((key) => {
     if (Object.keys(obj[key]).length === 0) {
@@ -6,8 +8,6 @@ const removeEmpty = (obj) => {
   })
   return obj
 }
-
-const capitalise = (str) => str.charAt(0).toUpperCase() + str.slice(1)
 
 const prefix = (type, item) => {
   if (!item || item === 'base') {
@@ -18,7 +18,7 @@ const prefix = (type, item) => {
     return `${type}${item}`
   }
 
-  return `${type}${capitalise(item)}`
+  return `${type}${pascalCase(item)}`
 }
 
 const schema = {

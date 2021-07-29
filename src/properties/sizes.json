@@ -1,8 +1,8 @@
 {
   "size": {
     "font": {
-      "xs": { "value": 0.625 },
-      "sm": { "value": 0.8125 },
+      "xs": { "value": 0.75 },
+      "sm": { "value": 0.875 },
       "md": { "value": 1 },
       "lg": { "value": 1.3125 },
       "xl": { "value": 1.75 },
@@ -38,7 +38,7 @@
       "1": { "value": 0.5 },
       "2": { "value": 0.75 },
       "3": { "value": 1 },
-      "round": { "value": "50%" }
+      "round": { "value": 100 }
     }
   }
 }
