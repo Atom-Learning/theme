@@ -1,3 +1,8 @@
+/**
+ *
+ * @param {string} val
+ * @returns {string}
+ */
 const resolveValue = (val) => {
   if (val.includes(',')) {
     val = `(${val})`
@@ -8,6 +13,17 @@ const resolveValue = (val) => {
   return val
 }
 
+/**
+ *
+ * @param {{
+ *    allProperties: {
+ *      type: string
+ *      category: string
+ *      item: string
+ *    }[]
+ * }} dictionary
+ * @returns {object}
+ */
 const formatter = (dictionary) => {
   // group properties by category and type
   const properties = dictionary.allProperties.reduce((obj, curr, i) => {

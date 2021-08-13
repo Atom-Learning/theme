@@ -1,7 +1,0 @@
-{
-  "logo": {
-    "standard": { "value": "assets/logo.svg" },
-    "light": { "value": "assets/logo-light.svg" },
-    "primary": { "value": "assets/logo-primary.svg" }
-  }
-}

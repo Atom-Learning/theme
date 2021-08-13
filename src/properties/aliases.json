@@ -1,0 +1,13 @@
+{
+  "color": {
+    "text": {
+      "foreground": { "value": "{color.tonal.600.value}" },
+      "subtle": { "value": "{color.tonal.400.value}" },
+      "placeholder": { "value": "{color.tonal.300.value}" }
+    },
+    "background": {
+      "base": { "value": "{color.tonal.50.value}" },
+      "accent": { "value": "{color.primary.light.value}" }
+    }
+  }
+}
