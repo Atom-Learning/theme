@@ -5,13 +5,20 @@ description: We have a variety of Text components to provide consistent typograp
 
 ## Fonts
 
-<Scale scale={theme.fonts} css={{ mb: '$5' }} displayValue={false}>
+<Scale scale={theme.fonts} css={{ mb: '$6' }} displayValue={false}>
   {(value) => (
-    <Box css={{ pl: '$2', textAlign: 'right' }}>
-      <Text css={{ fontFamily: value, mb: '$3' }} size="xxl">
+    <Box css={{ pl: '$3', textAlign: 'right' }}>
+      <Text
+        css={{
+          fontFamily: value,
+          fontSize: '$2xl',
+          mb: '$4',
+          '@md': { fontSize: '$3xl' }
+        }}
+      >
         Abc-Xyz
       </Text>
-      <Text size="sm" css={{ color: '$tonal600', fontFamily: value }}>
+      <Text size="sm" css={{ color: '$tonal600', fontFamily: '$body' }}>
         {value}
       </Text>
     </Box>
@@ -22,14 +29,16 @@ description: We have a variety of Text components to provide consistent typograp
 
 This typographic sizing scale represents the `font-size` values used in our components. It loosely follows the [Perfect Fourth](https://type-scale.com/?scale=1.333&font=Inter) scale and can be accessed by using t-shirt notation
 
-<Scale scale={theme.fontSizes} css={{ mb: '$5' }}>
-  {(value) => <Text css={{ fontSize: value }}>Hello World</Text>}
+<Scale scale={theme.fontSizes} css={{ mb: '$6' }}>
+  {(value) => (
+    <Text css={{ fontSize: value, whiteSpace: 'nowrap' }}>Hello World</Text>
+  )}
 </Scale>
 
 Note that most of our typography components (`Text`, `Heading`, `Label` and others) use [capsize](https://seek-oss.github.io/capsize/) to offset the white-space between the cap-height and the line-height. This means that spacing in and around our text will be tight to the characters.
 
 ```jsx preview
-<Box css={{ bg: '$primary200', p: '$4' }}>
+<Box css={{ bg: '$tonal100', p: '$5' }}>
   <Text size="xl" css={{ bg: 'white' }}>
     Hello World
   </Text>

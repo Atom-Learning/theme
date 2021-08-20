@@ -3,7 +3,15 @@ const transformPropertiesToTheme =
 
 const formatter = (dictionary) => {
   const theme = transformPropertiesToTheme(dictionary)
-  return `export interface Theme ${JSON.stringify(theme, null, 2)}`
+
+  return `export type Theme = {${Object.entries(theme)
+    .filter(([_, value]) => Boolean(value))
+    .map(
+      ([key]) =>
+        `\n  "${key}": {${Object.keys(theme[key])
+          .map((token) => `\n    "${token}": string`)
+          .join('')}\n  }`
+    )}\n}`
 }
 
 module.exports = formatter

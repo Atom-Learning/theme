@@ -3,7 +3,7 @@ module.exports = {
   platforms: {
     scss: {
       transformGroup: 'scss',
-      buildPath: 'dist/',
+      buildPath: 'lib/',
       files: [
         {
           destination: '_variables.scss',
@@ -23,7 +23,7 @@ module.exports = {
     js: {
       transformGroup: 'js',
       transforms: ['attribute/cti', 'name/cti/pascal', 'size/rem', 'color/hsl'],
-      buildPath: 'dist/',
+      buildPath: 'lib/',
       files: [
         {
           destination: 'index.js',
@@ -33,13 +33,18 @@ module.exports = {
     },
     ts: {
       transformGroup: 'js',
-      buildPath: 'dist/',
+      buildPath: 'lib/',
       files: [
         {
           destination: 'index.d.ts',
           format: 'custom/format/system-ui-theme-types'
         }
       ]
+    },
+    'assets/copy': {
+      actions: ['copy_assets'],
+      buildPath: 'lib/',
+      transformGroup: 'assets'
     }
   }
 }

@@ -1,39 +1,44 @@
 {
   "size": {
     "font": {
-      "xs": { "value": 0.625 },
-      "sm": { "value": 0.8125 },
+      "xs": { "value": 0.75 },
+      "sm": { "value": 0.875 },
       "md": { "value": 1 },
       "lg": { "value": 1.3125 },
       "xl": { "value": 1.75 },
-      "xxl": { "value": 2.3125 },
-      "xxxl": { "value": 3.125 }
+      "2xl": { "value": 2.3125 },
+      "3xl": { "value": 3.125 },
+      "4xl": { "value": 5.625 }
     },
     "space": {
       "0": { "value": 0.125 },
       "1": { "value": 0.25 },
       "2": { "value": 0.5 },
-      "3": { "value": 1 },
-      "4": { "value": 2 },
-      "5": { "value": 4 },
-      "6": { "value": 8 }
+      "3": { "value": 0.75 },
+      "4": { "value": 1 },
+      "5": { "value": 2 },
+      "6": { "value": 2.5 },
+      "7": { "value": 3 },
+      "8": { "value": 4 },
+      "9": { "value": 5 }
     },
     "size": {
       "0": { "value": 0.5 },
       "1": { "value": 1 },
       "2": { "value": 1.5 },
       "3": { "value": 2 },
-      "4": { "value": 3 },
-      "5": { "value": 4 },
-      "6": { "value": 6 },
-      "7": { "value": 8 }
+      "4": { "value": 2.5 },
+      "5": { "value": 3 },
+      "6": { "value": 4 },
+      "7": { "value": 6 },
+      "8": { "value": 8 }
     },
     "radii": {
       "0": { "value": 0.25 },
       "1": { "value": 0.5 },
       "2": { "value": 0.75 },
       "3": { "value": 1 },
-      "round": { "value": "50%" }
+      "round": { "value": 100 }
     }
   }
 }
