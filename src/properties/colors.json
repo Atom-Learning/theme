@@ -59,7 +59,7 @@
       "dark": { "value": "hsl(0, 97%, 34%)" }
     },
     "warning": {
-      "light": { "value": "hsl(41, 100%, 98%)" },
+      "light": { "value": "hsl(39, 100%, 94%)" },
       "base": { "value": "hsl(41, 100%, 55%)" },
       "mid": { "value": "hsl(41, 89%, 48%)" },
       "dark": { "value": "hsl(41, 100%, 41%)" }
