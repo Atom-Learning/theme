@@ -20,7 +20,7 @@
 
     "primary": {
       "light": { "value": "hsl(217, 92%, 97%)" },
-      "base": { "value": "hsl(217,92,51)" },
+      "base": { "value": "hsl(217, 92,51)" },
       "mid": { "value": "hsl(223, 78%, 45%)" },
       "dark": { "value": "hsl(228, 82%, 35%)" }
     },
