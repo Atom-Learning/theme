@@ -20,7 +20,7 @@
 
     "primary": {
       "light": { "value": "hsl(217, 92%, 97%)" },
-      "base": { "value": "hsl(217, 92%, 54%)" },
+      "base": { "value": "hsl(217, 92%, 51%)" },
       "mid": { "value": "hsl(223, 78%, 45%)" },
       "dark": { "value": "hsl(228, 82%, 35%)" }
     },
@@ -62,7 +62,8 @@
       "light": { "value": "hsl(39, 100%, 94%)" },
       "base": { "value": "hsl(41, 100%, 55%)" },
       "mid": { "value": "hsl(41, 89%, 48%)" },
-      "dark": { "value": "hsl(41, 100%, 41%)" }
+      "dark": { "value": "hsl(41, 100%, 41%)" },
+      "text": { "value": "hsl(24, 100%, 37%)" }
     },
 
     "subject": {
