@@ -15,7 +15,8 @@ const schema = {
   radii: {},
   shadows: {},
   zIndices: {},
-  transitions: {}
+  transitions: {},
+  ratios: {}
 }
 
 const matchSchema = {
@@ -24,7 +25,8 @@ const matchSchema = {
   'size.font': 'fontSizes',
   'size.radii': 'radii',
   'size.size': 'sizes',
-  'size.space': 'space'
+  'size.space': 'space',
+  'ratios.ratio': 'ratios'
 }
 
 /**

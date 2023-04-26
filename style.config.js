@@ -15,7 +15,7 @@ module.exports = {
           destination: '_scales.scss',
           format: 'custom/format/scss-map-flat',
           filter: ({ attributes: { category } }) =>
-            category === 'size' || category === 'effects'
+            category === 'size' || category === 'effects' || category === 'ratios'
         }
       ],
       actions: ['merge-files']
