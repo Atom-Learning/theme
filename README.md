@@ -42,3 +42,28 @@ If you need to add tokens that are not part of the [theme specification](https:/
   * In `style.config.js` add your new category (if you added a new category) to the filter of the formatter `'custom/format/scss-map-flat'`. So it's treated the same way than `'size'` and `'effects'`
 
   * In `theme-map.js` add the (css property -> category) relation to `themeMap`, in this example, we added `aspectRatio: 'ratios'`. This `themeMap` config is exported and used by projects using our `theme` repo. It's used by `createStitches()` from `@stitches/react` so that we don't have to reference the `type`, so we can call the token like `'$16-9'` instead of `'$ratios$16-9'`
+
+### How is `themeMap` used?
+
+For example, in `components` repo we use it like this:
+
+```
+...
+import { createStitches, defaultThemeMap } from '@stitches/react'
+import { themeMap } from '@atom-learning/theme/theme-map'
+
+...
+
+const stitchesConfig = createStitches({
+  theme: atomTheme as Theme,
+  themeMap: {
+    ...defaultThemeMap,
+    ...themeMap
+  },
+  utils,
+  media
+})
+```
+
+### Why/When do we need `themeMap`?
+Some CSS properties are not included in the [defaultThemeMap](https://stitches.dev/docs/api#defaultthememap). If they are missing (e.g.: aspectRatio) you need to add them to our custom `themeMap` which we pass to stitches [themeMap](https://stitches.dev/docs/api#thememap) config
