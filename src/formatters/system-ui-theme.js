@@ -26,7 +26,7 @@ const matchSchema = {
   'size.radii': 'radii',
   'size.size': 'sizes',
   'size.space': 'space',
-  'ratios.ratio': 'ratios'
+  ratio: 'ratios'
 }
 
 /**
@@ -88,6 +88,13 @@ const transformPropertiesToTheme = (dictionary) => {
       return (theme.colors = {
         ...theme.colors,
         [prefix(type, item, subitem)]: property.value
+      })
+    }
+
+    if (category === 'ratio') {
+      return (theme.ratios = {
+        ...theme.ratios,
+        [prefix(type)]: property.value
       })
     }
 

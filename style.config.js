@@ -4,21 +4,30 @@ module.exports = {
     scss: {
       transformGroup: 'scss',
       buildPath: 'lib/',
+      transforms: [
+        'scsslist',
+        'attribute/cti',
+        'name/cti/kebab',
+        'time/seconds',
+        'content/icon',
+        'size/rem',
+        'color/css'
+      ],
       files: [
         {
           destination: '_variables.scss',
           format: 'scss/variables',
           filter: ({ attributes: { category } }) =>
-            category === 'color' || category === 'font'
+            category === 'color' || category === 'font' || category === 'ratio'
         },
         {
           destination: '_scales.scss',
           format: 'custom/format/scss-map-flat',
           filter: ({ attributes: { category } }) =>
-            category === 'size' || category === 'effects' || category === 'ratios'
+            category === 'size' || category === 'effects'
         }
       ],
-      actions: ['merge-files']
+      actions: ['merge-files', 'prefix-file']
     },
     js: {
       transformGroup: 'js',
