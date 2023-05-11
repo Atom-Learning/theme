@@ -29,6 +29,7 @@ const formatter = (dictionary) => {
   const properties = dictionary.allProperties.reduce((obj, curr, i) => {
     const { type, category, item } = curr.attributes
     const group = `${category}-${type}`
+
     return {
       ...obj,
       [group]: { ...obj[group], [item]: curr.value }

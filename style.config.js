@@ -14,8 +14,12 @@ module.exports = {
         {
           destination: '_scales.scss',
           format: 'custom/format/scss-map-flat',
+          // purposely omitting category === 'ratios'
+          // The ratio values include a slash (`/`) which is deprecated in the sass
+          // version we use. As sass is legacy for us and we are going to remove it, we
+          // decided that is not worth the hassle to make it work
           filter: ({ attributes: { category } }) =>
-            category === 'size' || category === 'effects' || category === 'ratios'
+            category === 'size' || category === 'effects'
         }
       ],
       actions: ['merge-files']
