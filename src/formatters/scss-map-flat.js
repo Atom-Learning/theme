@@ -29,6 +29,16 @@ const formatter = (dictionary) => {
   const properties = dictionary.allProperties.reduce((obj, curr, i) => {
     const { type, category, item } = curr.attributes
     const group = `${category}-${type}`
+
+    // the ratio values include a slash (`/`) which is deprecated in the sass version we
+    // use. As it's legacy and we are going to remove it (and not use the tokens in places
+    // where sass is used), we decided that is not worth the hassle to try to make it
+    // work with sass, so here we omit sass output for the ratios
+    if (type === 'ratio') {
+      return obj
+    }
+
+
     return {
       ...obj,
       [group]: { ...obj[group], [item]: curr.value }
