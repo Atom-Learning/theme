@@ -1,5 +1,4 @@
-const yargs = require('yargs/yargs')
-const { hideBin } = require('yargs/helpers')
+const yargs = require('yargs')
 
 const formatterSystemUiThemeTypes = require('../src/formatters/system-ui-theme-types')
 const formatterSystemUiTheme = require('../src/formatters/system-ui-theme')
@@ -7,7 +6,7 @@ const formatterScssMapFlat = require('../src/formatters/scss-map-flat')
 const actionMergeFiles = require('../src/actions/merge-files')
 const config = require('../style.config')
 
-const argv = yargs(hideBin(process.argv)).argv
+const argv = yargs(process.argv).argv
 
 const StyleDictionary = require('style-dictionary').extend(config(argv.theme))
 
