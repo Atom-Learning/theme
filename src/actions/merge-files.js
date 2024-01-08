@@ -16,7 +16,7 @@ const action = async (_, config) => {
   const content = await Promise.all(files.map((path) => readFile(path)))
 
   const err = await fs.writeFile(
-    `./${config.buildPath}/${config.name || 'index'}.scss`,
+    `./${config.buildPath}/${`theme-${config.name}` || 'index'}.scss`,
     content.join('\n')
   )
 

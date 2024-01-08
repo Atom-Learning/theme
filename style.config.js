@@ -1,5 +1,5 @@
 module.exports = (name) => ({
-  source: ['src/properties/**/*.json', name && `src/themes/${name}.json`],
+  source: ['src/properties/**/*.json', name && `src/themes/${name}/**/*.json`],
   platforms: {
     scss: {
       transformGroup: 'scss',
