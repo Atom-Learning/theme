@@ -1,5 +1,5 @@
-module.exports = {
-  source: ['src/properties/**/*.json'],
+module.exports = (name) => ({
+  source: ['src/properties/**/*.json', name && `src/themes/${name}/**/*.json`],
   platforms: {
     scss: {
       transformGroup: 'scss',
@@ -22,6 +22,7 @@ module.exports = {
             category === 'size' || category === 'effects'
         }
       ],
+      name,
       actions: ['merge-files']
     },
     js: {
@@ -30,7 +31,7 @@ module.exports = {
       buildPath: 'lib/',
       files: [
         {
-          destination: 'index.js',
+          destination: name ? `theme-${name}.js` : 'index.js',
           format: 'custom/format/system-ui-theme'
         }
       ]
@@ -40,7 +41,7 @@ module.exports = {
       buildPath: 'lib/',
       files: [
         {
-          destination: 'index.d.ts',
+          destination: name ? `theme-${name}.d.ts` : 'index.d.ts',
           format: 'custom/format/system-ui-theme-types'
         }
       ]
@@ -51,4 +52,4 @@ module.exports = {
       transformGroup: 'assets'
     }
   }
-}
+})

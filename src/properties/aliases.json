@@ -7,7 +7,7 @@
     },
     "background": {
       "base": { "value": "{color.tonal.50.value}" },
-      "accent": { "value": "{color.primary.light.value}" }
+      "accent": { "value": "{color.blue.100.value}" }
     }
   }
 }

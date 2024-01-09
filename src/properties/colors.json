@@ -14,7 +14,6 @@
       "1100": { "value": "hsl(0, 0%, 10%)" },
       "1200": { "value": "hsl(0, 0%, 6%)" }
     },
-
     "blue": {
       "100": { "value": "hsl(215, 100%, 98%)" },
       "200": { "value": "hsl(212, 100%, 95%)" },
@@ -29,7 +28,6 @@
       "1100": { "value": "hsl(228, 63%, 23%)" },
       "1200": { "value": "hsl(227, 57%, 11%)" }
     },
-
     "purple": {
       "100": { "value": "hsl(282, 100%, 98%)" },
       "200": { "value": "hsl(270, 100%, 95%)" },
@@ -44,7 +42,6 @@
       "1100": { "value": "hsl(265, 63%, 23%)" },
       "1200": { "value": "hsl(265, 61%, 14%)" }
     },
-
     "cyan": {
       "100": { "value": "hsl(198, 100%, 97%)" },
       "200": { "value": "hsl(199, 100%, 94%)" },
@@ -59,7 +56,6 @@
       "1100": { "value": "hsl(206, 97%, 15%)" },
       "1200": { "value": "hsl(207, 73%, 9%)" }
     },
-
     "green": {
       "100": { "value": "hsl(135, 80%, 96%)" },
       "200": { "value": "hsl(135, 72%, 92%)" },
@@ -74,7 +70,6 @@
       "1100": { "value": "hsl(135, 91%, 9%)" },
       "1200": { "value": "hsl(123, 56%, 6%)" }
     },
-
     "magenta": {
       "100": { "value": "hsl(330, 100%, 99%)" },
       "200": { "value": "hsl(329, 100%, 96%)" },
@@ -89,7 +84,6 @@
       "1100": { "value": "hsl(333, 95%, 16%)" },
       "1200": { "value": "hsl(334, 62%, 10%)" }
     },
-
     "red": {
       "100": { "value": "hsl(0, 100%, 99%)" },
       "200": { "value": "hsl(0, 100%, 96%)" },
@@ -104,7 +98,6 @@
       "1100": { "value": "hsl(357, 91%, 17%)" },
       "1200": { "value": "hsl(357, 73%, 10%)" }
     },
-
     "teal": {
       "100": { "value": "hsl(180, 83%, 95%)" },
       "200": { "value": "hsl(180, 75%, 88%)" },
@@ -119,7 +112,6 @@
       "1100": { "value": "hsl(187, 92%, 10%)" },
       "1200": { "value": "hsl(186, 56%, 7%)" }
     },
-
     "orange": {
       "100": { "value": "hsl(38, 100%, 95%)" },
       "200": { "value": "hsl(38, 100%, 90%)" },
@@ -134,7 +126,6 @@
       "1100": { "value": "hsl(20, 97%, 15%)" },
       "1200": { "value": "hsl(20, 96%, 11%)" }
     },
-
     "yellow": {
       "100": { "value": "hsl(53, 94%, 93%)" },
       "200": { "value": "hsl(54, 92%, 85%)" },
@@ -182,15 +173,6 @@
       "600": { "value": "hsla(0, 0%, 20%, 0.6)" }
     },
 
-    "primary": {
-      "light": { "value": "{color.blue.100.value}" },
-      "base": { "value": "{color.blue.800.value}" },
-      "mid": { "value": "{color.blue.900.value}" },
-      "dark": { "value": "{color.blue.1000.value}" }
-    },
-
-    "secondary": { "value": "hsl(204, 100%, 72%)" },
-
     "brand": {
       "red": {
         "base": { "value": "hsl(0, 91%, 64%)" },
@@ -210,6 +192,12 @@
       }
     },
 
+    "info": {
+      "light": { "value": "{color.blue.100.value}" },
+      "base": { "value": "{color.blue.800.value}" },
+      "mid": { "value": "{color.blue.900.value}" },
+      "dark": { "value": "{color.blue.1000.value}" }
+    },
     "success": {
       "light": { "value": "hsl(119, 44%, 94%)" },
       "base": { "value": "hsl(119, 100%, 27%)" },
@@ -232,7 +220,7 @@
 
     "subject": {
       "english": { "value": "{color.brand.red.base.value}" },
-      "maths": { "value": "{color.primary.base.value}" },
+      "maths": { "value": "{color.blue.800.value}" },
       "science": { "value": "{color.brand.purple.base.value}" },
       "verbal-reasoning": { "value": "{color.brand.green.base.value}" },
       "non-verbal-reasoning": { "value": "{color.brand.yellow.base.value}" },

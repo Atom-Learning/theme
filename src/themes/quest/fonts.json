@@ -1,0 +1,12 @@
+{
+  "font": {
+    "families": {
+      "display": {
+        "value": "'Make', {font.families.sans.value}"
+      },
+      "body": {
+        "value": "'DM Sans', {font.families.sans.value}"
+      }
+    }
+  }
+}
