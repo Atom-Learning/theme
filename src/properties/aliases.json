@@ -1,9 +1,10 @@
 {
   "color": {
     "text": {
-      "foreground": { "value": "{color.tonal.600.value}" },
-      "subtle": { "value": "{color.tonal.400.value}" },
-      "placeholder": { "value": "{color.tonal.300.value}" }
+      "bold": { "value": "{color.grey.1000.value}" },
+      "regular": { "value": "{color.grey.9000.value}" },
+      "subtle": { "value": "{color.grey.800.value}" },
+      "minimal": { "value": "{color.grey.700.value}" }
     },
     "background": {
       "base": { "value": "{color.tonal.50.value}" },
