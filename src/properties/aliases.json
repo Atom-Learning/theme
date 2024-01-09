@@ -2,7 +2,7 @@
   "color": {
     "text": {
       "bold": { "value": "{color.grey.1000.value}" },
-      "regular": { "value": "{color.grey.9000.value}" },
+      "regular": { "value": "{color.grey.900.value}" },
       "subtle": { "value": "{color.grey.800.value}" },
       "minimal": { "value": "{color.grey.700.value}" }
     },
