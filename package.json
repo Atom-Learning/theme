@@ -1,13 +1,12 @@
 {
   "name": "@atom-learning/theme",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Design tokens and assets for Atom Learning",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "build:lib": "node ./scripts/build.js --theme=atom && node ./scripts/build.js --theme=quest",
-    "build:docs": "cp -r ./src/documentation/. ./lib",
-    "prepublishOnly": "run-s clean build:lib build:docs",
+    "build": "node ./scripts/build.js --theme=atom && node ./scripts/build.js --theme=quest",
+    "prepublishOnly": "run-s clean build",
     "clean": "del ./lib"
   },
   "files": [
