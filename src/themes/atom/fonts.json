@@ -2,7 +2,7 @@
   "font": {
     "families": {
       "display": {
-        "value": "'Space Grotesk', {font.families.sans.value}"
+        "value": "'National 2 Condensed', {font.families.sans.value}"
       },
       "body": {
         "value": "'Inter', {font.families.sans.value}"
