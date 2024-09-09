@@ -219,6 +219,7 @@
       "600": { "value": "hsla(0, 0%, 20%, 0.6)" }
     },
 
+
     "info": {
       "light": { "value": "{color.blue.100.value}" },
       "base": { "value": "{color.blue.800.value}" },
@@ -246,15 +247,15 @@
     },
 
     "subject": {
-      "english": { "value": "{color.brand.red.base.value}" },
+      "english": { "value": "hsl(0, 91%, 64%)" },
       "maths": { "value": "{color.blue.800.value}" },
-      "science": { "value": "{color.brand.purple.base.value}" },
-      "verbal-reasoning": { "value": "{color.brand.green.base.value}" },
-      "non-verbal-reasoning": { "value": "{color.brand.yellow.base.value}" },
-      "creative-writing": { "value": "{color.brand.yellow.accent.value}" },
-      "exam-skills": { "value": "{color.brand.purple.accent.value}" }
+      "science": { "value": "hsl(256, 65%, 62%)" },
+      "verbal-reasoning": { "value": "hsl(128, 47%, 53%)" },
+      "non-verbal-reasoning": { "value": "hsl(41, 100%, 55%)" },
+      "creative-writing": { "value": "hsl(33, 100%, 50%)" },
+      "exam-skills": { "value": "hsl(256, 93%, 35%)" }
     },
-    
+
     "gl": {
       "blue": {
         "light": { "value": "hsl(222, 68%, 78%)" },

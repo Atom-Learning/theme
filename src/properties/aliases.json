@@ -7,7 +7,7 @@
       "minimal": { "value": "{color.grey.700.value}" }
     },
     "background": {
-      "base": { "value": "{color.tonal.50.value}" },
+      "base": { "value": "{color.grey.100.value}" },
       "accent": { "value": "{color.blue.100.value}" }
     }
   }
