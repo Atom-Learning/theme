@@ -211,41 +211,12 @@
       "1200": { "value": "hsl(147, 14%, 7%)" }
     },
 
-    "tonal": {
-      "50": { "value": "{color.grey.100.value}" },
-      "100": { "value": "{color.grey.200.value}" },
-      "200": { "value": "{color.grey.600.value}" },
-      "300": { "value": "{color.grey.700.value}" },
-      "400": { "value": "{color.grey.800.value}" },
-      "500": { "value": "{color.grey.900.value}" },
-      "600": { "value": "{color.grey.1000.value}" }
-    },
-
     "alpha": {
       "100": { "value": "hsla(0, 0%, 20%, 0.1)" },
       "150": { "value": "hsla(0, 0%, 20%, 0.15)" },
       "200": { "value": "hsla(0, 0%, 20%, 0.2)" },
       "250": { "value": "hsla(0, 0%, 20%, 0.25)" },
       "600": { "value": "hsla(0, 0%, 20%, 0.6)" }
-    },
-
-    "brand": {
-      "red": {
-        "base": { "value": "hsl(0, 91%, 64%)" },
-        "accent": { "value": "hsl(14, 100%, 71%)" }
-      },
-      "green": {
-        "base": { "value": "hsl(128, 47%, 53%)" },
-        "accent": { "value": "hsl(168, 100%, 20%)" }
-      },
-      "purple": {
-        "base": { "value": "hsl(256, 65%, 62%)" },
-        "accent": { "value": "hsl(256, 93%, 35%)" }
-      },
-      "yellow": {
-        "base": { "value": "hsl(41, 100%, 55%)" },
-        "accent": { "value": "hsl(33, 100%, 50%)" }
-      }
     },
 
     "info": {
@@ -283,6 +254,7 @@
       "creative-writing": { "value": "{color.brand.yellow.accent.value}" },
       "exam-skills": { "value": "{color.brand.purple.accent.value}" }
     },
+    
     "gl": {
       "blue": {
         "light": { "value": "hsl(222, 68%, 78%)" },
