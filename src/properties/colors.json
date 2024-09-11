@@ -14,6 +14,7 @@
       "1100": { "value": "hsl(0, 0%, 10%)" },
       "1200": { "value": "hsl(0, 0%, 6%)" }
     },
+    
     "blue": {
       "100": { "value": "hsl(215, 100%, 98%)" },
       "200": { "value": "hsl(212, 100%, 95%)" },
@@ -247,13 +248,13 @@
     },
 
     "subject": {
-      "english": { "value": "hsl(0, 91%, 64%)" },
-      "maths": { "value": "{color.blue.800.value}" },
-      "science": { "value": "hsl(256, 65%, 62%)" },
-      "verbal-reasoning": { "value": "hsl(128, 47%, 53%)" },
-      "non-verbal-reasoning": { "value": "hsl(41, 100%, 55%)" },
-      "creative-writing": { "value": "hsl(33, 100%, 50%)" },
-      "exam-skills": { "value": "hsl(256, 93%, 35%)" }
+      "english": { "value": "{color.magenta.700.value}" },
+      "maths": { "value": "{color.blue.700.value}" },
+      "science": { "value": "{color.purple.700.value}" },
+      "verbal-reasoning": { "value": "{color.green.700.value}" },
+      "non-verbal-reasoning": { "value": "{color.orange.500.value}" },
+      "creative-writing": { "value": "{color.orange.700.value}" },
+      "exam-skills": { "value": "{color.purple.1000.value}" }
     },
 
     "gl": {
