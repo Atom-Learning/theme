@@ -1,7 +1,7 @@
 {
   "name": "@atom-learning/theme",
-  "version": "3.0.1",
-  "description": "Design tokens and assets for Atom Learning",
+  "version": "4.0.0",
+  "description": "Design tokens and assets for Atom Learning and Quest",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
