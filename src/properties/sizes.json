@@ -1,7 +1,6 @@
 {
   "size": {
     "font": {
-      "xxs": { "value": 0.625 },
       "xs": { "value": 0.75 },
       "sm": { "value": 0.875 },
       "md": { "value": 1 },
