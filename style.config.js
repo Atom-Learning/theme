@@ -1,14 +1,11 @@
-module.exports = (name, path = name) => {
+module.exports = (themes) => {
+  const name = themes.join('-')
   const source = ['src/properties/**/*.json']
 
-  if (Array.isArray(path)) {
-    path.reduce((prev, curr) => {
-      source.push(`src/themes${prev}/${curr}/**/*.json`)
-      return `${prev}/${curr}`
-    }, '')
-  } else {
-    source.push(`src/themes/${path}/**/*.json`)
-  }
+  themes.reduce((prev, curr) => {
+    source.push(`src/themes${prev}/${curr}/**/*.json`)
+    return `${prev}/${curr}`
+  }, '')
 
   console.log(`Building theme from source: ${source}`)
 

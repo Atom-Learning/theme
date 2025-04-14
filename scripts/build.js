@@ -9,10 +9,10 @@ const config = require('../style.config')
 
 const argv = yargs(process.argv).argv
 
-const buildTheme = (name, path) => {
-  console.log(`\n> Building ${name} theme`)
+const buildTheme = (themes) => {
+  console.log(`\n> Building ${themes.join('-')} theme`)
 
-  const StyleDictionary = require('style-dictionary').extend(config(name, path))
+  const StyleDictionary = require('style-dictionary').extend(config(themes))
 
   StyleDictionary.registerFormat({
     name: 'custom/format/system-ui-theme',
@@ -33,7 +33,15 @@ const buildTheme = (name, path) => {
   StyleDictionary.buildAllPlatforms()
 }
 
-const isDir = (child) => child.type === 'directory'
+const buildNestedTheme = (directories, children) => {
+  // build theme from directory
+  buildTheme(directories)
+
+  // loop through nested themes
+  for (const dir of children.filter((child) => child.type === 'directory')) {
+    buildNestedTheme([...directories, dir.name], dir.children)
+  }
+}
 
 const run = () => {
   const { children } = dree.scan(path.resolve(process.cwd(), argv.path), {
@@ -44,18 +52,7 @@ const run = () => {
   })
 
   for (const dir of children) {
-    const name = dir.name
-
-    // build root theme
-    buildTheme(name)
-
-    if (dir.children.some(isDir)) {
-      for (const nestedDir of dir.children.filter(isDir)) {
-        const nestedName = nestedDir.name
-
-        buildTheme(`${name}-${nestedName}`, [name, nestedName])
-      }
-    }
+    buildNestedTheme([dir.name], dir.children)
   }
 }
 
