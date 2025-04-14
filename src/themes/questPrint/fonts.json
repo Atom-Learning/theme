@@ -1,0 +1,12 @@
+{
+  "font": {
+    "families": {
+      "display": {
+        "value": "'DM Sans', {font.families.sans.value}"
+      },
+      "body": {
+        "value": "'Inter', {font.families.sans.value}"
+      }
+    }
+  }
+}
