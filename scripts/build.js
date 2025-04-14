@@ -1,10 +1,9 @@
-const yargs = require('yargs')
-const path = require('node:path')
 const dree = require('dree')
+const path = require('node:path')
+const yargs = require('yargs')
 
 const formatterSystemUiThemeTypes = require('../src/formatters/system-ui-theme-types')
 const formatterSystemUiTheme = require('../src/formatters/system-ui-theme')
-const formatterScssMapFlat = require('../src/formatters/scss-map-flat')
 const actionMergeFiles = require('../src/actions/merge-files')
 const config = require('../style.config')
 
@@ -23,11 +22,6 @@ const buildTheme = (name, path) => {
   StyleDictionary.registerFormat({
     name: 'custom/format/system-ui-theme-types',
     formatter: formatterSystemUiThemeTypes
-  })
-
-  StyleDictionary.registerFormat({
-    name: 'custom/format/scss-map-flat',
-    formatter: formatterScssMapFlat
   })
 
   StyleDictionary.registerAction({
