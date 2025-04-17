@@ -3,7 +3,7 @@ module.exports = (themes) => {
   const source = ['src/properties/**/*.json']
 
   themes.reduce((prev, curr) => {
-    source.push(`src/themes${prev}/${curr}/**/*.json`)
+    source.push(`src/themes${prev}/${curr}/*.json`)
     return `${prev}/${curr}`
   }, '')
 
