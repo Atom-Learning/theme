@@ -254,7 +254,12 @@
       "verbal-reasoning": { "value": "{color.green.700.value}" },
       "non-verbal-reasoning": { "value": "{color.orange.500.value}" },
       "creative-writing": { "value": "{color.orange.700.value}" },
-      "exam-skills": { "value": "{color.purple.1000.value}" }
+      "exam-skills": { "value": "{color.purple.1000.value}" },
+      "gcse-english-literature": { "value": "{color.magenta.700.value}" },
+      "gcse-maths": { "value": "{color.blue.700.value}" },
+      "gcse-chemistry": { "value": "{color.orange.700.value}" },
+      "gcse-physics": { "value": "{color.grey.700.value}" },
+      "gcse-biology": { "value": "{color.green.700.value}" }
     },
 
     "gl": {
