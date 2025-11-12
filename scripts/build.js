@@ -4,14 +4,13 @@ const yargs = require('yargs')
 
 const formatterSystemUiThemeTypes = require('../src/formatters/system-ui-theme-types')
 const formatterSystemUiTheme = require('../src/formatters/system-ui-theme')
+const formatterTailwindTheme = require('../src/formatters/tailwind-theme')
 const actionMergeFiles = require('../src/actions/merge-files')
 const config = require('../style.config')
 
 const argv = yargs(process.argv).argv
 
 const buildTheme = (themes) => {
-  console.log(`\n> Building ${themes.join('-')} theme`)
-
   const StyleDictionary = require('style-dictionary').extend(config(themes))
 
   StyleDictionary.registerFormat({
@@ -22,6 +21,11 @@ const buildTheme = (themes) => {
   StyleDictionary.registerFormat({
     name: 'custom/format/system-ui-theme-types',
     formatter: formatterSystemUiThemeTypes
+  })
+
+  StyleDictionary.registerFormat({
+    name: 'custom/format/tailwind-theme',
+    formatter: formatterTailwindTheme
   })
 
   StyleDictionary.registerAction({

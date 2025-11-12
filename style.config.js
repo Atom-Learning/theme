@@ -12,6 +12,16 @@ module.exports = (themes) => {
   return {
     source,
     platforms: {
+      css: {
+        transformGroup: 'css',
+        buildPath: 'lib/',
+        files: [
+          {
+            destination: name ? `theme-${name}.css` : 'index.css',
+            format: 'custom/format/tailwind-theme'
+          }
+        ]
+      },
       js: {
         transformGroup: 'js',
         transforms: [
