@@ -35,7 +35,13 @@ const transformPropertiesToTheme = (dictionary) =>
 
 const formatter = (dictionary) => {
   const theme = transformPropertiesToTheme(dictionary).join('\n  ')
-  return `@theme {\n  ${theme}\n}`
+  return `@theme {
+  --color-*: initial;
+  --font-*: initial;
+  --text-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+  ${theme}\n}`
 }
 
 module.exports = formatter
