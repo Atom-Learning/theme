@@ -35,10 +35,10 @@
       "8": { "value": 8 }
     },
     "radii": {
-      "0": { "value": 0.25 },
-      "1": { "value": 0.5 },
-      "2": { "value": 0.75 },
-      "3": { "value": 1 },
+      "sm": { "value": 0.25 },
+      "md": { "value": 0.5 },
+      "lg": { "value": 0.75 },
+      "xl": { "value": 1 },
       "round": { "value": 100 }
     }
   }

@@ -3,7 +3,7 @@ const transformPropertiesToTheme = (dictionary) =>
     .map((property) => {
       const { type, category, item } = property.attributes
 
-      let name = property.name
+      let name = property.name.replace('-base', '')
       let value = property.value
 
       if (
@@ -29,19 +29,27 @@ const transformPropertiesToTheme = (dictionary) =>
         name = `shadow-${item}`
       }
 
+      console.log({ name })
+
       return `--${name}: ${value};`
     })
     .filter((property) => !!property)
 
 const formatter = (dictionary) => {
   const theme = transformPropertiesToTheme(dictionary).join('\n  ')
-  return `@theme {
+  return `
+@theme {
   --color-*: initial;
   --font-*: initial;
   --text-*: initial;
   --radius-*: initial;
   --shadow-*: initial;
-  ${theme}\n}`
+
+${theme}
+
+  --default-font-family: var(--font-body);
+}
+`
 }
 
 module.exports = formatter
