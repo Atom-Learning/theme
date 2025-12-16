@@ -11,25 +11,32 @@ const formatPropertyName = (name) => {
   return needsQuotes(name) ? `'${name}'` : name
 }
 
+// Escape string for TypeScript literal type
+const escapeString = (str) => {
+  return str.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"')
+}
+
 const formatter = (dictionary) => {
   const theme = transformPropertiesToTheme(dictionary)
 
-  const typeEntries = Object.entries(theme)
+  const constObjectEntries = Object.entries(theme)
     .filter(([_, value]) => Boolean(value))
     .map(([key, value]) => {
       const formattedKey = formatPropertyName(key)
-      const nestedEntries = Object.keys(value)
-        .map((token) => {
+      const nestedEntries = Object.entries(value)
+        .map(([token, tokenValue]) => {
           const formattedToken = formatPropertyName(token)
-          return `\n    ${formattedToken}: string`
+          const escapedValue = escapeString(tokenValue)
+          return `\n    ${formattedToken}: "${escapedValue}"`
         })
         .join('')
       return `\n  ${formattedKey}: {${nestedEntries}\n  }`
     })
 
-  return `export type Theme = {${typeEntries.join('')}\n}
+  return `declare const theme: {${constObjectEntries.join('')}\n}
 
-declare const theme: Theme
+export type Theme = typeof theme
+
 export default theme
 `
 }

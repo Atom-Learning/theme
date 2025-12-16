@@ -14,6 +14,7 @@ module.exports = (themes) => {
     platforms: {
       css: {
         transformGroup: 'css',
+        transforms: ['attribute/cti', 'color/hsl'],
         buildPath: 'lib/',
         files: [
           {
@@ -40,6 +41,12 @@ module.exports = (themes) => {
       },
       ts: {
         transformGroup: 'js',
+        transforms: [
+          'attribute/cti',
+          'name/cti/pascal',
+          'size/rem',
+          'color/hsl'
+        ],
         buildPath: 'lib/',
         files: [
           {
