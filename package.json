@@ -1,6 +1,6 @@
 {
   "name": "@atom-learning/theme",
-  "version": "5.1.0",
+  "version": "6.0.0-beta.1",
   "description": "Design tokens and assets for Atom Learning and Quest",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -24,5 +24,19 @@
     "yargs": "^17.7.2"
   },
   "dependencies": {},
-  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610",
+  "exports": {
+    "./quest": {
+      "types": "./lib/theme-quest.d.ts",
+      "default": "./lib/theme-quest.js"
+    },
+    "./atom": {
+      "types": "./lib/theme-atom.d.ts",
+      "default": "./lib/theme-atom.js"
+    },
+    "./quest-reports": {
+      "types": "./lib/theme-quest-reports.d.ts",
+      "default": "./lib/theme-quest-reports.js"
+    }
+  }
 }

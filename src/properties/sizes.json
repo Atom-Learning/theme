@@ -11,35 +11,13 @@
       "4xl": { "value": 5.625 }
     },
     "space": {
-      "0": { "value": 0.125 },
-      "1": { "value": 0.25 },
-      "2": { "value": 0.5 },
-      "3": { "value": 0.75 },
-      "4": { "value": 1 },
-      "5": { "value": 2 },
-      "6": { "value": 2.5 },
-      "7": { "value": 3 },
-      "8": { "value": 4 },
-      "9": { "value": 5 },
-      "24": { "value": 1.5 }
-    },
-    "size": {
-      "0": { "value": 0.5 },
-      "1": { "value": 1 },
-      "2": { "value": 1.5 },
-      "3": { "value": 2 },
-      "4": { "value": 2.5 },
-      "5": { "value": 3 },
-      "6": { "value": 4 },
-      "7": { "value": 6 },
-      "8": { "value": 8 }
+      "base": { "value": 0.25 }
     },
     "radii": {
       "sm": { "value": 0.25 },
       "md": { "value": 0.5 },
       "lg": { "value": 0.75 },
-      "xl": { "value": 1 },
-      "round": { "value": 100 }
+      "xl": { "value": 1 }
     }
   }
 }

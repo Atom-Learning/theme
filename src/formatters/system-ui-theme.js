@@ -109,7 +109,7 @@ const transformPropertiesToTheme = (dictionary) => {
  */
 const formatter = (dictionary) => {
   const theme = transformPropertiesToTheme(dictionary)
-  return `module.exports = ${JSON.stringify(theme, null, 2)}`
+  return `export default ${JSON.stringify(theme, null, 2)}`
 }
 
 module.exports = formatter

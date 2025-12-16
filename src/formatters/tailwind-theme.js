@@ -29,8 +29,6 @@ const transformPropertiesToTheme = (dictionary) =>
         name = `shadow-${item}`
       }
 
-      console.log({ name })
-
       return `--${name}: ${value};`
     })
     .filter((property) => !!property)
@@ -44,8 +42,7 @@ const formatter = (dictionary) => {
   --text-*: initial;
   --radius-*: initial;
   --shadow-*: initial;
-
-${theme}
+  ${theme}
 
   --default-font-family: var(--font-body);
 }
