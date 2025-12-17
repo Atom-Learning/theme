@@ -1,3 +1,30 @@
+// Check if a value is a plain number (not already containing units)
+const isPlainNumber = (value) => {
+  if (typeof value !== 'string' && typeof value !== 'number') return false
+  const str = String(value).trim()
+  // Check if it's a number (including decimals) and doesn't contain unit characters
+  return /^-?\d*\.?\d+$/.test(str) && !/[a-zA-Z%]/.test(str)
+}
+
+// Append rem to plain numeric values
+const formatValue = (value, category, type) => {
+  // Don't modify colors, shadows, or font families
+  if (
+    category === 'color' ||
+    category === 'effects' ||
+    (category === 'font' && type === 'families')
+  ) {
+    return value
+  }
+
+  // If it's a plain number, append rem
+  if (isPlainNumber(value)) {
+    return `${value}rem`
+  }
+
+  return value
+}
+
 const transformPropertiesToTheme = (dictionary) =>
   dictionary.allProperties
     .map((property) => {
@@ -13,6 +40,11 @@ const transformPropertiesToTheme = (dictionary) =>
         return
       }
 
+      console.log({ name, category, type, item, value })
+
+      if (category === 'color') {
+        name = `color-${type}${name !== 'base' ? `-${name}` : ''}`
+      }
       if (category === 'size' && type === 'font') {
         name = `text-${item}`
       }
@@ -29,7 +61,10 @@ const transformPropertiesToTheme = (dictionary) =>
         name = `shadow-${item}`
       }
 
-      return `--${name}: ${value};`
+      // Format the value to append rem for numeric values
+      const formattedValue = formatValue(value, category, type)
+
+      return `--${name}: ${formattedValue};`
     })
     .filter((property) => !!property)
 

@@ -1,6 +1,6 @@
 {
   "name": "@atom-learning/theme",
-  "version": "6.0.0-beta.3",
+  "version": "6.0.0-beta.4",
   "description": "Design tokens and assets for Atom Learning and Quest",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -28,16 +28,42 @@
   "exports": {
     "./quest": {
       "types": "./lib/theme-quest.d.ts",
+      "style": "./lib/theme-quest.css",
       "default": "./lib/theme-quest.js"
     },
+    "./quest.css": "./lib/theme-quest.css",
     "./atom": {
       "types": "./lib/theme-atom.d.ts",
+      "style": "./lib/theme-atom.css",
       "default": "./lib/theme-atom.js"
     },
+    "./atom.css": "./lib/theme-atom.css",
     "./quest-reports": {
       "types": "./lib/theme-quest-reports.d.ts",
+      "style": "./lib/theme-quest-reports.css",
       "default": "./lib/theme-quest-reports.js"
-    }
+    },
+    "./quest-reports.css": "./lib/theme-quest-reports.css",
+    "./assets/fonts/national-2-condensed-bold.woff2": "./lib/assets/fonts/national-2-condensed-bold.woff2",
+    "./assets/logos/atom/atom-home-light.svg": "./lib/assets/logos/atom/atom-home-light.svg",
+    "./assets/logos/atom/atom-home-primary.svg": "./lib/assets/logos/atom/atom-home-primary.svg",
+    "./assets/logos/atom/atom-learning-horizontal-logotype-dark.svg": "./lib/assets/logos/atom/atom-learning-horizontal-logotype-dark.svg",
+    "./assets/logos/atom/atom-learning-horizontal-logotype-light.svg": "./lib/assets/logos/atom/atom-learning-horizontal-logotype-light.svg",
+    "./assets/logos/atom/atom-learning-horizontal-logotype-primary.svg": "./lib/assets/logos/atom/atom-learning-horizontal-logotype-primary.svg",
+    "./assets/logos/atom/atom-learning-logomark-dark.svg": "./lib/assets/logos/atom/atom-learning-logomark-dark.svg",
+    "./assets/logos/atom/atom-learning-logomark-light.svg": "./lib/assets/logos/atom/atom-learning-logomark-light.svg",
+    "./assets/logos/atom/atom-learning-logomark-primary.svg": "./lib/assets/logos/atom/atom-learning-logomark-primary.svg",
+    "./assets/logos/atom/atom-learning-logotype-dark.svg": "./lib/assets/logos/atom/atom-learning-logotype-dark.svg",
+    "./assets/logos/atom/atom-learning-logotype-light.svg": "./lib/assets/logos/atom/atom-learning-logotype-light.svg",
+    "./assets/logos/atom/atom-learning-logotype-primary.svg": "./lib/assets/logos/atom/atom-learning-logotype-primary.svg",
+    "./assets/logos/atom/atom-school-light.svg": "./lib/assets/logos/atom/atom-school-light.svg",
+    "./assets/logos/atom/atom-school-primary.svg": "./lib/assets/logos/atom/atom-school-primary.svg",
+    "./assets/logos/atom/atom-tuition-light.svg": "./lib/assets/logos/atom/atom-tuition-light.svg",
+    "./assets/logos/atom/atom-tuition-primary.svg": "./lib/assets/logos/atom/atom-tuition-primary.svg",
+    "./assets/logos/quest/logo-light.png": "./lib/assets/logos/quest/logo-light.png",
+    "./assets/logos/quest/logo-light.svg": "./lib/assets/logos/quest/logo-light.svg",
+    "./assets/logos/quest/logo.png": "./lib/assets/logos/quest/logo.png",
+    "./assets/logos/quest/logo.svg": "./lib/assets/logos/quest/logo.svg"
   },
   "typesVersions": {
     "*": {
