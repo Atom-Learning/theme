@@ -38,5 +38,7 @@ const formatter = (dictionary: Dictionary): string => {
   return `export const media = ${JSON.stringify(media, null, 2)}`
 }
 
+formatter.nested = true
+
 export default formatter
 export { setBuildConfig } from './shared.ts'

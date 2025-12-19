@@ -63,5 +63,7 @@ export type Properties = typeof properties
 `
 }
 
+formatter.nested = true
+
 export default formatter
 export { setBuildConfig } from './shared.ts'

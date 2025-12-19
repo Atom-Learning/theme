@@ -77,7 +77,13 @@ export const transformPropertiesToTheme = (
   const properties = dictionary.allTokens || dictionary.allProperties || []
 
   properties.forEach((property) => {
-    if (!shouldIncludeProperty(property as unknown as Parameters<typeof shouldIncludeProperty>[0], config)) return
+    if (
+      !shouldIncludeProperty(
+        property as unknown as Parameters<typeof shouldIncludeProperty>[0],
+        config
+      )
+    )
+      return
 
     const { type, category, item, subitem } = property.attributes
     const key = matchSchema[`${category}.${type}`] || matchSchema[category]
@@ -153,7 +159,13 @@ export const generateCustomProperties = (
   const properties = dictionary.allTokens || dictionary.allProperties || []
 
   properties.forEach((property) => {
-    if (!shouldIncludeProperty(property as unknown as Parameters<typeof shouldIncludeProperty>[0], config)) return
+    if (
+      !shouldIncludeProperty(
+        property as unknown as Parameters<typeof shouldIncludeProperty>[0],
+        config
+      )
+    )
+      return
 
     const { type, category } = property.attributes
 
@@ -187,6 +199,8 @@ const formatter = (dictionary: Dictionary): string => {
 
 export const properties = ${JSON.stringify(properties, null, 2)}`
 }
+
+formatter.nested = true
 
 export default formatter
 export { setBuildConfig } from './shared.ts'

@@ -22,7 +22,11 @@ const isPlainNumber = (value: unknown): boolean => {
   return /^-?\d*\.?\d+$/.test(str) && !/[a-zA-Z%]/.test(str)
 }
 
-const formatValue = (value: string | number, category: string, type: string): string => {
+const formatValue = (
+  value: string | number,
+  category: string,
+  type: string
+): string => {
   const strValue = String(value)
   if (
     category === 'color' ||
@@ -34,11 +38,20 @@ const formatValue = (value: string | number, category: string, type: string): st
   return isPlainNumber(strValue) ? `${strValue}rem` : strValue
 }
 
-const transformPropertiesToTheme = (dictionary: Dictionary, config?: ReturnType<typeof getBuildConfig>): string[] => {
+const transformPropertiesToTheme = (
+  dictionary: Dictionary,
+  config?: ReturnType<typeof getBuildConfig>
+): string[] => {
   const properties = dictionary.allTokens || dictionary.allProperties || []
   return properties
     .map((property) => {
-      if (!shouldIncludeProperty(property as unknown as Parameters<typeof shouldIncludeProperty>[0], config)) return
+      if (
+        !shouldIncludeProperty(
+          property as unknown as Parameters<typeof shouldIncludeProperty>[0],
+          config
+        )
+      )
+        return
 
       const { type, category, item } = property.attributes
       let name = property.name.replace('-base', '')
@@ -51,9 +64,10 @@ const transformPropertiesToTheme = (dictionary: Dictionary, config?: ReturnType<
       }
 
       if (category === 'color') {
-        name = type === name
-          ? `color-${type}`
-          : `color-${type}${name !== 'base' ? `-${name}` : ''}`
+        name =
+          type === name
+            ? `color-${type}`
+            : `color-${type}${name !== 'base' ? `-${name}` : ''}`
       } else if (category === 'size' && type === 'font') {
         name = `text-${item}`
       } else if (category === 'size' && type === 'radii') {
@@ -96,6 +110,7 @@ ${wildcardProperties}  ${theme}${defaultFontFamily}
 `
 }
 
+formatter.nested = true
+
 export default formatter
 export { setBuildConfig } from './shared.ts'
-

@@ -1,25 +1,16 @@
-import path from 'node:path'
 import { parseArgs } from 'node:util'
-
-import { setBuildConfig } from './formatters/shared.ts'
-import * as dree from 'dree'
 import StyleDictionary from 'style-dictionary'
+import path from 'node:path'
+import * as dree from 'dree'
 
-import systemUi from './formatters/system-ui-theme.ts'
-import systemUiTypes from './formatters/system-ui-theme-types.ts'
-import tailwindTheme from './formatters/tailwind-theme.ts'
 import mediaQueries from './formatters/media-queries.ts'
+import systemUiTypes from './formatters/system-ui-theme-types.ts'
 import mediaQueriesTypes from './formatters/media-queries-types.ts'
-import actionCopyAssets from './actions/copy-assets.ts'
-import config from './style.config.ts'
+import systemUi from './formatters/system-ui-theme.ts'
+import tailwindTheme from './formatters/tailwind-theme.ts'
+import { setBuildConfig } from './formatters/shared.ts'
 
-const formatters = {
-  'custom/format/system-ui-theme': systemUi,
-  'custom/format/system-ui-theme-types': systemUiTypes,
-  'custom/format/tailwind-theme': tailwindTheme,
-  'custom/format/media-queries': mediaQueries,
-  'custom/format/media-queries-types': mediaQueriesTypes
-}
+import config from './style.config.ts'
 
 const { values } = parseArgs({
   options: {
@@ -40,28 +31,34 @@ const buildTheme = async (
   configObj.includeBase = includeBaseInOutput
   configObj.themePath = configObj.themePath || null
 
-  const buildConfig = {
-    includeBase: includeBaseInOutput,
-    themePath: configObj.themePath
-  }
-
-  setBuildConfig(buildConfig)
-
-  // Style Dictionary v5: Create instance with config
   const sd = new StyleDictionary(configObj)
 
-  // Register formats and actions on the instance
-  Object.entries(formatters).forEach(([name, formatter]) => {
-    sd.registerFormat({ name, format: formatter })
+  setBuildConfig({
+    includeBase: includeBaseInOutput,
+    themePath: configObj.themePath
   })
 
-  sd.registerAction({
-    name: 'copy_assets',
-    do: actionCopyAssets,
-    undo: () => Promise.resolve()
+  sd.registerFormat({
+    name: 'custom/format/system-ui-theme',
+    format: systemUi
+  })
+  sd.registerFormat({
+    name: 'custom/format/system-ui-theme-types',
+    format: systemUiTypes
+  })
+  sd.registerFormat({
+    name: 'custom/format/tailwind-theme',
+    format: tailwindTheme
+  })
+  sd.registerFormat({
+    name: 'custom/format/media-queries',
+    format: mediaQueries
+  })
+  sd.registerFormat({
+    name: 'custom/format/media-queries-types',
+    format: mediaQueriesTypes
   })
 
-  // Build all platforms (v5 uses async)
   await sd.buildAllPlatforms()
 }
 
