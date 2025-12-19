@@ -1,49 +1,60 @@
 {
   "name": "@atom-learning/theme",
-  "version": "6.0.0-beta.4",
+  "version": "6.0.0-beta.6",
   "description": "Design tokens and assets for Atom Learning and Quest",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "type": "module",
+  "main": "lib/theme-base.js",
+  "types": "lib/theme-base.d.ts",
   "scripts": {
-    "build": "node ./scripts/build.js --path=./src/themes",
-    "prepublishOnly": "run-s clean build",
-    "clean": "del ./lib"
+    "build": "node ./src/build.ts --path=./src/themes",
+    "prepublishOnly": "run-s clean build test:run",
+    "clean": "del ./lib",
+    "test": "vitest",
+    "test:run": "vitest run"
   },
   "files": [
-    "lib",
-    "theme-map.js"
+    "lib"
   ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^20.0.0",
     "del-cli": "^3.0.1",
     "dree": "^5.1.5",
     "npm-run-all": "^4.1.5",
     "pascal-case": "^3.1.2",
-    "style-dictionary": "^3.0.1",
-    "yargs": "^17.7.2"
+    "style-dictionary": "^5.1.1",
+    "tsx": "^4.7.0",
+    "typescript": "^5.0.0",
+    "vitest": "^4.0.16"
   },
   "dependencies": {},
   "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610",
   "exports": {
+    ".": {
+      "types": "./lib/theme-base.d.ts",
+      "style": "./lib/theme-base.css",
+      "default": "./lib/theme-base.js"
+    },
+    "./media": {
+      "types": "./lib/media.d.ts",
+      "default": "./lib/media.js"
+    },
     "./quest": {
       "types": "./lib/theme-quest.d.ts",
       "style": "./lib/theme-quest.css",
       "default": "./lib/theme-quest.js"
     },
-    "./quest.css": "./lib/theme-quest.css",
     "./atom": {
       "types": "./lib/theme-atom.d.ts",
       "style": "./lib/theme-atom.css",
       "default": "./lib/theme-atom.js"
     },
-    "./atom.css": "./lib/theme-atom.css",
     "./quest-reports": {
       "types": "./lib/theme-quest-reports.d.ts",
       "style": "./lib/theme-quest-reports.css",
       "default": "./lib/theme-quest-reports.js"
     },
-    "./quest-reports.css": "./lib/theme-quest-reports.css",
     "./assets/fonts/national-2-condensed-bold.woff2": "./lib/assets/fonts/national-2-condensed-bold.woff2",
     "./assets/logos/atom/atom-home-light.svg": "./lib/assets/logos/atom/atom-home-light.svg",
     "./assets/logos/atom/atom-home-primary.svg": "./lib/assets/logos/atom/atom-home-primary.svg",
@@ -67,6 +78,9 @@
   },
   "typesVersions": {
     "*": {
+      ".": [
+        "./lib/theme-base.d.ts"
+      ],
       "quest": [
         "./lib/theme-quest.d.ts"
       ],
@@ -75,6 +89,9 @@
       ],
       "quest-reports": [
         "./lib/theme-quest-reports.d.ts"
+      ],
+      "media": [
+        "./lib/media.d.ts"
       ]
     }
   }

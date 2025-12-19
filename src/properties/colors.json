@@ -215,6 +215,21 @@
       "1200": { "value": "hsl(147, 14%, 7%)" }
     },
 
+    "primary": {
+      "100": { "value": "{color.blue.100}" },
+      "200": { "value": "{color.blue.200}" },
+      "300": { "value": "{color.blue.300}" },
+      "400": { "value": "{color.blue.400}" },
+      "500": { "value": "{color.blue.500}" },
+      "600": { "value": "{color.blue.600}" },
+      "700": { "value": "{color.blue.700}" },
+      "800": { "value": "{color.blue.800}" },
+      "900": { "value": "{color.blue.900}" },
+      "1000": { "value": "{color.blue.1000}" },
+      "1100": { "value": "{color.blue.1100}" },
+      "1200": { "value": "{color.blue.1200}" }
+    },
+
     "alpha": {
       "100": { "value": "hsla(0, 0%, 20%, 0.1)" },
       "150": { "value": "hsla(0, 0%, 20%, 0.15)" },
@@ -224,10 +239,10 @@
     },
 
     "info": {
-      "light": { "value": "{color.blue.100.value}" },
-      "base": { "value": "{color.blue.800.value}" },
-      "mid": { "value": "{color.blue.900.value}" },
-      "dark": { "value": "{color.blue.1000.value}" }
+      "light": { "value": "{color.blue.100}" },
+      "base": { "value": "{color.blue.800}" },
+      "mid": { "value": "{color.blue.900}" },
+      "dark": { "value": "{color.blue.1000}" }
     },
     "success": {
       "light": { "value": "hsl(119, 44%, 94%)" },
@@ -250,18 +265,18 @@
     },
 
     "subject": {
-      "english": { "value": "{color.magenta.700.value}" },
-      "maths": { "value": "{color.blue.700.value}" },
-      "science": { "value": "{color.purple.700.value}" },
-      "verbal-reasoning": { "value": "{color.green.700.value}" },
-      "non-verbal-reasoning": { "value": "{color.orange.500.value}" },
-      "creative-writing": { "value": "{color.orange.700.value}" },
-      "exam-skills": { "value": "{color.purple.1000.value}" },
-      "gcse-english-literature": { "value": "{color.magenta.700.value}" },
-      "gcse-maths": { "value": "{color.blue.700.value}" },
-      "gcse-chemistry": { "value": "{color.orange.700.value}" },
-      "gcse-physics": { "value": "{color.grey.700.value}" },
-      "gcse-biology": { "value": "{color.green.700.value}" }
+      "english": { "value": "{color.magenta.700}" },
+      "maths": { "value": "{color.blue.700}" },
+      "science": { "value": "{color.purple.700}" },
+      "verbal-reasoning": { "value": "{color.green.700}" },
+      "non-verbal-reasoning": { "value": "{color.orange.500}" },
+      "creative-writing": { "value": "{color.orange.700}" },
+      "exam-skills": { "value": "{color.purple.1000}" },
+      "gcse-english-literature": { "value": "{color.magenta.700}" },
+      "gcse-maths": { "value": "{color.blue.700}" },
+      "gcse-chemistry": { "value": "{color.orange.700}" },
+      "gcse-physics": { "value": "{color.grey.700}" },
+      "gcse-biology": { "value": "{color.green.700}" }
     },
 
     "gl": {
