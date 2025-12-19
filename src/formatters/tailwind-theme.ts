@@ -6,7 +6,7 @@ interface Property {
     category: string
     item: string
   }
-  value: string
+  value: string | number
   name: string
   filePath?: string
 }
@@ -22,22 +22,23 @@ const isPlainNumber = (value: unknown): boolean => {
   return /^-?\d*\.?\d+$/.test(str) && !/[a-zA-Z%]/.test(str)
 }
 
-const formatValue = (value: string, category: string, type: string): string => {
+const formatValue = (value: string | number, category: string, type: string): string => {
+  const strValue = String(value)
   if (
     category === 'color' ||
     category === 'effects' ||
     (category === 'font' && type === 'families')
   ) {
-    return value
+    return strValue
   }
-  return isPlainNumber(value) ? `${value}rem` : value
+  return isPlainNumber(strValue) ? `${strValue}rem` : strValue
 }
 
 const transformPropertiesToTheme = (dictionary: Dictionary, config?: ReturnType<typeof getBuildConfig>): string[] => {
   const properties = dictionary.allTokens || dictionary.allProperties || []
   return properties
     .map((property) => {
-      if (!shouldIncludeProperty(property, config)) return
+      if (!shouldIncludeProperty(property as unknown as Parameters<typeof shouldIncludeProperty>[0], config)) return
 
       const { type, category, item } = property.attributes
       let name = property.name.replace('-base', '')

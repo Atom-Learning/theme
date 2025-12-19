@@ -5,8 +5,8 @@ import { setBuildConfig } from './formatters/shared.ts'
 import * as dree from 'dree'
 import StyleDictionary from 'style-dictionary'
 
-import sysmtemUi from './formatters/system-ui-theme.ts'
-import sysmtemUiTypes from './formatters/system-ui-theme-types.ts'
+import systemUi from './formatters/system-ui-theme.ts'
+import systemUiTypes from './formatters/system-ui-theme-types.ts'
 import tailwindTheme from './formatters/tailwind-theme.ts'
 import mediaQueries from './formatters/media-queries.ts'
 import mediaQueriesTypes from './formatters/media-queries-types.ts'
@@ -14,14 +14,14 @@ import actionCopyAssets from './actions/copy-assets.ts'
 import config from './style.config.ts'
 
 const formatters = {
-  'custom/format/system-ui-theme': sysmtemUi,
-  'custom/format/system-ui-theme-types': sysmtemUiTypes,
+  'custom/format/system-ui-theme': systemUi,
+  'custom/format/system-ui-theme-types': systemUiTypes,
   'custom/format/tailwind-theme': tailwindTheme,
   'custom/format/media-queries': mediaQueries,
   'custom/format/media-queries-types': mediaQueriesTypes
 }
 
-const { values: argv } = parseArgs({
+const { values } = parseArgs({
   options: {
     path: {
       type: 'string',
@@ -57,7 +57,8 @@ const buildTheme = async (
 
   sd.registerAction({
     name: 'copy_assets',
-    do: actionCopyAssets
+    do: actionCopyAssets,
+    undo: () => Promise.resolve()
   })
 
   // Build all platforms (v5 uses async)
@@ -91,7 +92,7 @@ const run = async (): Promise<void> => {
   await buildTheme([], true, true)
 
   const { children } = dree.scan(
-    path.resolve(process.cwd(), argv.path || './src/themes'),
+    path.resolve(process.cwd(), values.path || './src/themes'),
     {
       size: false,
       sizeInBytes: false,

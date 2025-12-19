@@ -8,7 +8,7 @@ interface Property {
     item: string
     subitem?: string
   }
-  value: string
+  value: string | number
   path?: string[]
   name: string
   filePath?: string
@@ -77,7 +77,7 @@ export const transformPropertiesToTheme = (
   const properties = dictionary.allTokens || dictionary.allProperties || []
 
   properties.forEach((property) => {
-    if (!shouldIncludeProperty(property, config)) return
+    if (!shouldIncludeProperty(property as unknown as Parameters<typeof shouldIncludeProperty>[0], config)) return
 
     const { type, category, item, subitem } = property.attributes
     const key = matchSchema[`${category}.${type}`] || matchSchema[category]
@@ -119,7 +119,7 @@ const pascalToKebab = (str: string): string => {
 const generateCustomPropertyName = (property: Property): string => {
   const { type, category, item } = property.attributes
   const pathName =
-    property.path?.length > 0
+    property.path && property.path.length > 0
       ? property.path[property.path.length - 1]
       : property.name
   let name = pascalToKebab(pathName).replace('-base', '')
@@ -153,7 +153,7 @@ export const generateCustomProperties = (
   const properties = dictionary.allTokens || dictionary.allProperties || []
 
   properties.forEach((property) => {
-    if (!shouldIncludeProperty(property, config)) return
+    if (!shouldIncludeProperty(property as unknown as Parameters<typeof shouldIncludeProperty>[0], config)) return
 
     const { type, category } = property.attributes
 

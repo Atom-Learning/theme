@@ -6,7 +6,7 @@ interface Property {
     type: string
     item: string
   }
-  value: string
+  value: string | number
 }
 
 interface Dictionary {

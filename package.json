@@ -10,7 +10,8 @@
     "prepublishOnly": "run-s clean build test:run",
     "clean": "del ./lib",
     "test": "vitest",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "validate:types": "tsc --noEmit"
   },
   "files": [
     "lib"
