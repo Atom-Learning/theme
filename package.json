@@ -1,6 +1,6 @@
 {
   "name": "@atom-learning/theme",
-  "version": "6.0.0-beta.6",
+  "version": "6.0.0-beta.7",
   "description": "Design tokens and assets for Atom Learning and Quest",
   "type": "module",
   "main": "lib/theme-base.js",
@@ -55,6 +55,9 @@
       "types": "./lib/theme-quest-reports.d.ts",
       "style": "./lib/theme-quest-reports.css",
       "default": "./lib/theme-quest-reports.js"
+    },
+    "./themes": {
+      "style": "./lib/themes.css"
     },
     "./assets/fonts/national-2-condensed-bold.woff2": "./lib/assets/fonts/national-2-condensed-bold.woff2",
     "./assets/logos/atom/atom-home-light.svg": "./lib/assets/logos/atom/atom-home-light.svg",

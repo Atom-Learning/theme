@@ -72,6 +72,15 @@ export default (themes: string[], includeBase = true): Config => {
     }
   }
 
+  // Add all-themes-css platform for non-base themes
+  if (name !== '') {
+    platforms['all-themes-css'] = createPlatform(
+      CSS_TRANSFORMS,
+      `.theme-${name}.css.tmp`,
+      'custom/format/all-themes-css'
+    )
+  }
+
   if (name === '') {
     platforms.media = createPlatform(
       COMMON_TRANSFORMS,

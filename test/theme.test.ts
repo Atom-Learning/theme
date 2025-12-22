@@ -238,4 +238,74 @@ describe('Theme Output Tests', () => {
       expect(dts).toContain('md: "(min-width: 50rem)"')
     })
   })
+
+  describe('Combined Themes CSS Output', () => {
+    it('should exist and contain @layer theme blocks', () => {
+      const css = fs.readFileSync(
+        path.join(process.cwd(), 'lib', 'themes.css'),
+        'utf-8'
+      )
+
+      expect(css).toContain('@layer theme {')
+      expect(css).not.toContain('@theme static {')
+    })
+
+    it('should contain all theme classes', () => {
+      const css = fs.readFileSync(
+        path.join(process.cwd(), 'lib', 'themes.css'),
+        'utf-8'
+      )
+
+      expect(css).toContain('.theme-atom {')
+      expect(css).toContain('.theme-quest {')
+      expect(css).toContain('.theme-quest-reports {')
+    })
+
+    it('should not contain base theme', () => {
+      const css = fs.readFileSync(
+        path.join(process.cwd(), 'lib', 'themes.css'),
+        'utf-8'
+      )
+
+      expect(css).not.toContain('.theme-base {')
+      expect(css).not.toContain('--color-text-bold:')
+      expect(css).not.toContain('--default-font-family:')
+    })
+
+    it('should contain theme-specific CSS variables', () => {
+      const css = fs.readFileSync(
+        path.join(process.cwd(), 'lib', 'themes.css'),
+        'utf-8'
+      )
+
+      // Atom theme should have primary colors and fonts
+      expect(css).toContain('.theme-atom {')
+      const atomSection = css.split('.theme-atom {')[1]?.split('}')[0] || ''
+      expect(atomSection).toContain('--color-primary-100:')
+      expect(atomSection).toContain('--font-display:')
+      expect(atomSection).toContain('--font-body:')
+
+      // Quest-reports should have font sizes
+      expect(css).toContain('.theme-quest-reports {')
+      const questReportsSection =
+        css.split('.theme-quest-reports {')[1]?.split('}')[0] || ''
+      expect(questReportsSection).toContain('--text-xs:')
+      expect(questReportsSection).toContain('0.625rem')
+    })
+
+    it('should have correct layer structure', () => {
+      const css = fs.readFileSync(
+        path.join(process.cwd(), 'lib', 'themes.css'),
+        'utf-8'
+      )
+
+      // Count @layer theme blocks - should be 3 (one per theme)
+      const layerMatches = css.match(/@layer theme \{/g)
+      expect(layerMatches).toHaveLength(3)
+
+      // Each layer should have a closing brace
+      const closingBraces = css.match(/\}\s*$/gm) || []
+      expect(closingBraces.length).toBeGreaterThanOrEqual(3)
+    })
+  })
 })
