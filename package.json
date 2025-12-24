@@ -1,28 +1,102 @@
 {
   "name": "@atom-learning/theme",
-  "version": "5.1.0",
+  "version": "6.0.0-beta.9",
   "description": "Design tokens and assets for Atom Learning and Quest",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "type": "module",
+  "main": "lib/theme-base.js",
+  "types": "lib/theme-base.d.ts",
   "scripts": {
-    "build": "node ./scripts/build.js --path=./src/themes",
-    "prepublishOnly": "run-s clean build",
-    "clean": "del ./lib"
+    "build": "node ./src/build.ts --path=./src/themes",
+    "prepublishOnly": "run-s clean build test:run",
+    "clean": "del ./lib",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "validate:types": "tsc --noEmit"
   },
   "files": [
-    "lib",
-    "theme-map.js"
+    "lib"
   ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^20.0.0",
     "del-cli": "^3.0.1",
     "dree": "^5.1.5",
     "npm-run-all": "^4.1.5",
     "pascal-case": "^3.1.2",
-    "style-dictionary": "^3.0.1",
-    "yargs": "^17.7.2"
+    "style-dictionary": "^5.1.1",
+    "tsx": "^4.7.0",
+    "typescript": "^5.0.0",
+    "vitest": "^4.0.16"
   },
   "dependencies": {},
-  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610",
+  "exports": {
+    ".": {
+      "types": "./lib/theme-base.d.ts",
+      "style": "./lib/theme-base.css",
+      "default": "./lib/theme-base.js"
+    },
+    "./media": {
+      "types": "./lib/media.d.ts",
+      "default": "./lib/media.js"
+    },
+    "./quest": {
+      "types": "./lib/theme-quest.d.ts",
+      "style": "./lib/theme-quest.css",
+      "default": "./lib/theme-quest.js"
+    },
+    "./atom": {
+      "types": "./lib/theme-atom.d.ts",
+      "style": "./lib/theme-atom.css",
+      "default": "./lib/theme-atom.js"
+    },
+    "./quest-reports": {
+      "types": "./lib/theme-quest-reports.d.ts",
+      "style": "./lib/theme-quest-reports.css",
+      "default": "./lib/theme-quest-reports.js"
+    },
+    "./themes": {
+      "style": "./lib/themes.css"
+    },
+    "./assets/fonts/national-2-condensed-bold.woff2": "./lib/assets/fonts/national-2-condensed-bold.woff2",
+    "./assets/logos/atom/atom-home-light.svg": "./lib/assets/logos/atom/atom-home-light.svg",
+    "./assets/logos/atom/atom-home-primary.svg": "./lib/assets/logos/atom/atom-home-primary.svg",
+    "./assets/logos/atom/atom-learning-horizontal-logotype-dark.svg": "./lib/assets/logos/atom/atom-learning-horizontal-logotype-dark.svg",
+    "./assets/logos/atom/atom-learning-horizontal-logotype-light.svg": "./lib/assets/logos/atom/atom-learning-horizontal-logotype-light.svg",
+    "./assets/logos/atom/atom-learning-horizontal-logotype-primary.svg": "./lib/assets/logos/atom/atom-learning-horizontal-logotype-primary.svg",
+    "./assets/logos/atom/atom-learning-logomark-dark.svg": "./lib/assets/logos/atom/atom-learning-logomark-dark.svg",
+    "./assets/logos/atom/atom-learning-logomark-light.svg": "./lib/assets/logos/atom/atom-learning-logomark-light.svg",
+    "./assets/logos/atom/atom-learning-logomark-primary.svg": "./lib/assets/logos/atom/atom-learning-logomark-primary.svg",
+    "./assets/logos/atom/atom-learning-logotype-dark.svg": "./lib/assets/logos/atom/atom-learning-logotype-dark.svg",
+    "./assets/logos/atom/atom-learning-logotype-light.svg": "./lib/assets/logos/atom/atom-learning-logotype-light.svg",
+    "./assets/logos/atom/atom-learning-logotype-primary.svg": "./lib/assets/logos/atom/atom-learning-logotype-primary.svg",
+    "./assets/logos/atom/atom-school-light.svg": "./lib/assets/logos/atom/atom-school-light.svg",
+    "./assets/logos/atom/atom-school-primary.svg": "./lib/assets/logos/atom/atom-school-primary.svg",
+    "./assets/logos/atom/atom-tuition-light.svg": "./lib/assets/logos/atom/atom-tuition-light.svg",
+    "./assets/logos/atom/atom-tuition-primary.svg": "./lib/assets/logos/atom/atom-tuition-primary.svg",
+    "./assets/logos/quest/logo-light.png": "./lib/assets/logos/quest/logo-light.png",
+    "./assets/logos/quest/logo-light.svg": "./lib/assets/logos/quest/logo-light.svg",
+    "./assets/logos/quest/logo.png": "./lib/assets/logos/quest/logo.png",
+    "./assets/logos/quest/logo.svg": "./lib/assets/logos/quest/logo.svg"
+  },
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./lib/theme-base.d.ts"
+      ],
+      "quest": [
+        "./lib/theme-quest.d.ts"
+      ],
+      "atom": [
+        "./lib/theme-atom.d.ts"
+      ],
+      "quest-reports": [
+        "./lib/theme-quest-reports.d.ts"
+      ],
+      "media": [
+        "./lib/media.d.ts"
+      ]
+    }
+  }
 }
