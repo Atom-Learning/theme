@@ -98,9 +98,13 @@ export const transformPropertiesToTheme = (
 
     if (!key) return
 
-    // Format font sizes with rem
+    // Format font sizes and radii with rem
     let value = property.value
-    if (category === 'size' && type === 'font' && typeof value === 'number') {
+    if (
+      category === 'size' &&
+      (type === 'font' || type === 'radii') &&
+      typeof value === 'number'
+    ) {
       value = `${value}rem`
     } else {
       value = String(value)
@@ -176,9 +180,13 @@ export const generateCustomProperties = (
       return
     }
 
-    // Format font sizes with rem
+    // Format font sizes and radii with rem
     let value = property.value
-    if (category === 'size' && type === 'font' && typeof value === 'number') {
+    if (
+      category === 'size' &&
+      (type === 'font' || type === 'radii') &&
+      typeof value === 'number'
+    ) {
       value = `${value}rem`
     } else {
       value = String(value)

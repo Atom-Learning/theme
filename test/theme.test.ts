@@ -7,6 +7,7 @@ interface ThemeModule {
     colors: Record<string, string>
     fonts: Record<string, string>
     fontSizes?: Record<string, string>
+    radii?: Record<string, string>
   }
   properties: Record<string, string>
   default?: unknown
@@ -101,6 +102,92 @@ describe('Theme Output Tests', () => {
 
         expect(properties['--color-primary-100']).toBe(theme.colors.primary100)
         expect(properties['--font-display']).toBe(theme.fonts.display)
+      })
+    })
+
+    describe('Value Formatting', () => {
+      describe('Radius Values', () => {
+        it('base theme should have radius values with rem units in theme object', async () => {
+          const { theme } = (await import(
+            path.join(process.cwd(), 'lib', 'theme-base.js')
+          )) as ThemeModule
+
+          if (theme.radii) {
+            Object.entries(theme.radii).forEach(([key, value]) => {
+              expect(value).toMatch(/rem$/, `radius ${key} should end with 'rem', got: ${value}`)
+            })
+          }
+        })
+
+        it('base theme should have radius custom properties with rem units', async () => {
+          const { properties } = (await import(
+            path.join(process.cwd(), 'lib', 'theme-base.js')
+          )) as ThemeModule
+
+          Object.entries(properties)
+            .filter(([key]) => key.startsWith('--radius-'))
+            .forEach(([key, value]) => {
+              expect(value).toMatch(/rem$/, `property ${key} should end with 'rem', got: ${value}`)
+            })
+        })
+
+        it('all themes should have radius values with rem units when present', async () => {
+          for (const themeName of themes) {
+            const { theme, properties } = (await import(
+              path.join(process.cwd(), 'lib', `theme-${themeName}.js`)
+            )) as ThemeModule
+
+            // Check theme.radii if it exists
+            if (theme.radii) {
+              Object.entries(theme.radii).forEach(([key, value]) => {
+                expect(value).toMatch(
+                  /rem$/,
+                  `${themeName} theme: radius ${key} should end with 'rem', got: ${value}`
+                )
+              })
+            }
+
+            // Check --radius-* properties if they exist
+            Object.entries(properties)
+              .filter(([key]) => key.startsWith('--radius-'))
+              .forEach(([key, value]) => {
+                expect(value).toMatch(
+                  /rem$/,
+                  `${themeName} theme: property ${key} should end with 'rem', got: ${value}`
+                )
+              })
+          }
+        })
+      })
+
+      describe('Font Size Values', () => {
+        it('all themes should have font size values with rem units when present', async () => {
+          for (const themeName of themes) {
+            const { theme, properties } = (await import(
+              path.join(process.cwd(), 'lib', `theme-${themeName}.js`)
+            )) as ThemeModule
+
+            // Check theme.fontSizes if it exists
+            if (theme.fontSizes) {
+              Object.entries(theme.fontSizes).forEach(([key, value]) => {
+                expect(value).toMatch(
+                  /rem$/,
+                  `${themeName} theme: font size ${key} should end with 'rem', got: ${value}`
+                )
+              })
+            }
+
+            // Check --text-* properties if they exist
+            Object.entries(properties)
+              .filter(([key]) => key.startsWith('--text-'))
+              .forEach(([key, value]) => {
+                expect(value).toMatch(
+                  /rem$/,
+                  `${themeName} theme: property ${key} should end with 'rem', got: ${value}`
+                )
+              })
+          }
+        })
       })
     })
   })
