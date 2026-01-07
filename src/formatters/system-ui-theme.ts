@@ -46,10 +46,17 @@ const matchSchema: Record<string, string> = {
   'effects.shadows': 'shadows',
   font: 'fonts',
   'size.font': 'fontSizes',
+  'size.leading': 'lineHeights',
   'size.radii': 'radii',
   'size.size': 'sizes',
   'size.space': 'space',
   'ratios.ratio': 'ratios'
+}
+
+const isPlainNumber = (value: unknown): boolean => {
+  if (typeof value !== 'string' && typeof value !== 'number') return false
+  const str = String(value).trim()
+  return /^-?\d*\.?\d+$/.test(str) && !/[a-zA-Z%]/.test(str)
 }
 
 const removeEmpty = (obj: Theme): Theme => {
@@ -98,14 +105,16 @@ export const transformPropertiesToTheme = (
 
     if (!key) return
 
-    // Format font sizes and radii with rem
+    // Format font sizes, radii, and space with rem
+    // Ensure units are always added for numeric values
     let value = property.value
     if (
       category === 'size' &&
-      (type === 'font' || type === 'radii') &&
-      typeof value === 'number'
+      (type === 'font' || type === 'radii' || type === 'space') &&
+      isPlainNumber(value)
     ) {
-      value = `${value}rem`
+      const numValue = typeof value === 'number' ? value : parseFloat(String(value))
+      value = `${numValue}rem`
     } else {
       value = String(value)
     }
@@ -142,8 +151,12 @@ const generateCustomPropertyName = (property: Property): string => {
         : `color-${typeKebab}${name !== 'base' ? `-${name}` : ''}`
   } else if (category === 'size' && type === 'font') {
     name = `text-${item}`
+  } else if (category === 'size' && type === 'leading') {
+    name = `text-${item}--line-height`
   } else if (category === 'size' && type === 'radii') {
     name = `radius-${item}`
+  } else if (category === 'size' && type === 'space') {
+    name = `spacing`
   } else if (category === 'size' && type === 'breakpoint') {
     name = `breakpoint-${item}`
   } else if (category === 'font' && type === 'families') {
@@ -174,20 +187,23 @@ export const generateCustomProperties = (
     const { type, category } = property.attributes
 
     if (
-      (category === 'size' && (type === 'size' || type === 'space')) ||
+      (category === 'size' && type === 'size') ||
       category === 'ratios'
     ) {
       return
     }
 
-    // Format font sizes and radii with rem
+    // Format font sizes, radii, and space with rem
+    // leading (line heights) are unitless numbers
+    // Ensure units are always added for numeric values
     let value = property.value
     if (
       category === 'size' &&
-      (type === 'font' || type === 'radii') &&
-      typeof value === 'number'
+      (type === 'font' || type === 'radii' || type === 'space') &&
+      isPlainNumber(value)
     ) {
-      value = `${value}rem`
+      const numValue = typeof value === 'number' ? value : parseFloat(String(value))
+      value = `${numValue}rem`
     } else {
       value = String(value)
     }

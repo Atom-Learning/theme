@@ -31,7 +31,8 @@ const formatValue = (
   if (
     category === 'color' ||
     category === 'effects' ||
-    (category === 'font' && type === 'families')
+    (category === 'font' && type === 'families') ||
+    (category === 'size' && type === 'leading')
   ) {
     return strValue
   }
@@ -57,7 +58,7 @@ const transformPropertiesToTheme = (
       let name = property.name.replace('-base', '')
 
       if (
-        (category === 'size' && (type === 'size' || type === 'space')) ||
+        (category === 'size' && type === 'size') ||
         category === 'ratios'
       ) {
         return
@@ -70,8 +71,12 @@ const transformPropertiesToTheme = (
             : `color-${type}${name !== 'base' ? `-${name}` : ''}`
       } else if (category === 'size' && type === 'font') {
         name = `text-${item}`
+      } else if (category === 'size' && type === 'leading') {
+        name = `text-${item}--line-height`
       } else if (category === 'size' && type === 'radii') {
         name = `radius-${item}`
+      } else if (category === 'size' && type === 'space') {
+        name = `spacing`
       } else if (category === 'size' && type === 'breakpoint') {
         name = `breakpoint-${item}`
       } else if (category === 'font' && type === 'families') {

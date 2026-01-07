@@ -33,7 +33,8 @@ const formatValue = (
   if (
     category === 'color' ||
     category === 'effects' ||
-    (category === 'font' && type === 'families')
+    (category === 'font' && type === 'families') ||
+    (category === 'size' && type === 'leading')
   ) {
     return strValue
   }
@@ -58,6 +59,8 @@ const generateCustomPropertyName = (property: Property): string => {
         : `color-${type}${name !== 'base' ? `-${name}` : ''}`
   } else if (category === 'size' && type === 'font') {
     name = `text-${item}`
+  } else if (category === 'size' && type === 'leading') {
+    name = `text-${item}--line-height`
   } else if (category === 'size' && type === 'radii') {
     name = `radius-${item}`
   } else if (category === 'size' && type === 'breakpoint') {

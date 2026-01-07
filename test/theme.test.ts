@@ -177,9 +177,12 @@ describe('Theme Output Tests', () => {
               })
             }
 
-            // Check --text-* properties if they exist
+            // Check --text-* properties if they exist (excluding line-height)
             Object.entries(properties)
-              .filter(([key]) => key.startsWith('--text-'))
+              .filter(
+                ([key]) =>
+                  key.startsWith('--text-') && !key.includes('--line-height')
+              )
               .forEach(([key, value]) => {
                 expect(value).toMatch(
                   /rem$/,

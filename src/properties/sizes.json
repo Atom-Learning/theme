@@ -10,6 +10,16 @@
       "3xl": { "value": 3.125 },
       "4xl": { "value": 5.625 }
     },
+    "leading": {
+      "xs": { "value": 1.6 },
+      "sm": { "value": 1.53 },
+      "md": { "value": 1.5 },
+      "lg": { "value": 1.52 },
+      "xl": { "value": 1.42 },
+      "2xl": { "value": 1.08 },
+      "3xl": { "value": 1.12 },
+      "4xl": { "value": 1 }
+    },
     "space": {
       "base": { "value": 0.25 }
     },
