@@ -14,7 +14,7 @@
       "1100": { "value": "hsl(0, 0%, 10%)" },
       "1200": { "value": "hsl(0, 0%, 6%)" }
     },
-    
+
     "blue": {
       "100": { "value": "hsl(215, 100%, 98%)" },
       "200": { "value": "hsl(212, 100%, 95%)" },
@@ -220,7 +220,6 @@
       "600": { "value": "hsla(0, 0%, 20%, 0.6)" }
     },
 
-
     "info": {
       "light": { "value": "{color.blue.100.value}" },
       "base": { "value": "{color.blue.800.value}" },
@@ -256,6 +255,7 @@
       "creative-writing": { "value": "{color.orange.700.value}" },
       "exam-skills": { "value": "{color.purple.1000.value}" },
       "gcse-english-literature": { "value": "{color.magenta.700.value}" },
+      "gcse-english-language": { "value": "{color.purple.700.value}" },
       "gcse-maths": { "value": "{color.blue.700.value}" },
       "gcse-chemistry": { "value": "{color.orange.700.value}" },
       "gcse-physics": { "value": "{color.grey.700.value}" },
