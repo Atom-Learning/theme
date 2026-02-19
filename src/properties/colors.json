@@ -215,19 +215,19 @@
       "1200": { "value": "hsl(147, 14%, 7%)" }
     },
 
-    "primary": {
-      "100": { "value": "{color.blue.100}" },
-      "200": { "value": "{color.blue.200}" },
-      "300": { "value": "{color.blue.300}" },
-      "400": { "value": "{color.blue.400}" },
-      "500": { "value": "{color.blue.500}" },
-      "600": { "value": "{color.blue.600}" },
-      "700": { "value": "{color.blue.700}" },
-      "800": { "value": "{color.blue.800}" },
-      "900": { "value": "{color.blue.900}" },
-      "1000": { "value": "{color.blue.1000}" },
-      "1100": { "value": "{color.blue.1100}" },
-      "1200": { "value": "{color.blue.1200}" }
+    "coolGrey": {
+      "100": { "value": "hsl(206, 47%, 97%)" },
+      "200": { "value": "hsl(205, 35%, 93%)" },
+      "300": { "value": "hsl(206, 27%, 90%)" },
+      "400": { "value": "hsl(205, 20%, 83%)" },
+      "500": { "value": "hsl(207, 16%, 76%)" },
+      "600": { "value": "hsl(207, 14%, 65%)" },
+      "700": { "value": "hsl(206, 9%, 49%)" },
+      "800": { "value": "hsl(207, 11%, 35%)" },
+      "900": { "value": "hsl(208, 15%, 22%)" },
+      "1000": { "value": "hsl(208, 19%, 14%)" },
+      "1100": { "value": "hsl(207, 20%, 11%)" },
+      "1200": { "value": "hsl(210, 18%, 7%)" }
     },
 
     "alpha": {
@@ -273,9 +273,10 @@
       "creative-writing": { "value": "{color.orange.700}" },
       "exam-skills": { "value": "{color.purple.1000}" },
       "gcse-english-literature": { "value": "{color.magenta.700}" },
+      "gcse-english-language": { "value": "{color.purple.700}" },
       "gcse-maths": { "value": "{color.blue.700}" },
       "gcse-chemistry": { "value": "{color.orange.700}" },
-      "gcse-physics": { "value": "{color.grey.700}" },
+      "gcse-physics": { "value": "{color.coolGrey.700}" },
       "gcse-biology": { "value": "{color.green.700}" }
     },
 
