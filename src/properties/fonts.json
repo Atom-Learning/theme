@@ -8,10 +8,10 @@
         "value": "'SFMono-Regular', Consolas, Menlo, monospace"
       },
       "display": {
-        "value": "{font.families.sans.value}"
+        "value": "{font.families.sans}"
       },
       "body": {
-        "value": "{font.families.sans.value}"
+        "value": "{font.families.sans}"
       }
     }
   }

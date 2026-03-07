@@ -2,10 +2,10 @@
   "font": {
     "families": {
       "display": {
-        "value": "'National 2 Condensed', {font.families.sans.value}"
+        "value": "'National 2 Condensed', {font.families.sans}"
       },
       "body": {
-        "value": "'Inter', {font.families.sans.value}"
+        "value": "'Inter', {font.families.sans}"
       }
     }
   }

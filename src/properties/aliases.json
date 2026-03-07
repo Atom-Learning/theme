@@ -1,14 +1,14 @@
 {
   "color": {
     "text": {
-      "bold": { "value": "{color.grey.1000.value}" },
-      "regular": { "value": "{color.grey.900.value}" },
-      "subtle": { "value": "{color.grey.800.value}" },
-      "minimal": { "value": "{color.grey.700.value}" }
+      "bold": { "value": "{color.grey.1000}" },
+      "regular": { "value": "{color.grey.900}" },
+      "subtle": { "value": "{color.grey.800}" },
+      "minimal": { "value": "{color.grey.700}" }
     },
     "background": {
-      "base": { "value": "{color.grey.100.value}" },
-      "accent": { "value": "{color.blue.100.value}" }
+      "base": { "value": "{color.grey.100}" },
+      "accent": { "value": "{color.blue.100}" }
     }
   }
 }
