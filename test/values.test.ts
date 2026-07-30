@@ -1,46 +1,22 @@
 import { describe, it, expect } from 'vitest'
 import fs from 'node:fs'
 import path from 'node:path'
+import { parseToRgba } from 'color2k'
 
 const readOutput = (file: string): string =>
   fs.readFileSync(path.join(process.cwd(), 'lib', file), 'utf-8')
 
 const themes = ['base', 'atom', 'quest', 'quest-reports'] as const
 
-// hsl -> sRGB, mirroring what the native transforms do, so the assertions below
-// are derived from the source tokens rather than copied from the output
-const hslToRgb = (h: number, s: number, l: number): [number, number, number] => {
-  const chroma = (1 - Math.abs(2 * l - 1)) * s
-  const x = chroma * (1 - Math.abs(((h / 60) % 2) - 1))
-  const m = l - chroma / 2
-  const [r, g, b] =
-    h < 60
-      ? [chroma, x, 0]
-      : h < 120
-        ? [x, chroma, 0]
-        : h < 180
-          ? [0, chroma, x]
-          : h < 240
-            ? [0, x, chroma]
-            : h < 300
-              ? [x, 0, chroma]
-              : [chroma, 0, x]
-  return [r + m, g + m, b + m]
-}
-
-const parseHsl = (value: string): { rgb: [number, number, number]; alpha: number } => {
-  const match = value.match(
-    /hsla?\(\s*(-?[\d.]+)\s*,\s*([\d.]+)%\s*,\s*([\d.]+)%\s*(?:,\s*([\d.]+))?\)/
-  )
-  if (!match) throw new Error(`not an hsl value: ${value}`)
-  return {
-    rgb: hslToRgb(
-      parseFloat(match[1]),
-      parseFloat(match[2]) / 100,
-      parseFloat(match[3]) / 100
-    ),
-    alpha: match[4] === undefined ? 1 : parseFloat(match[4])
-  }
+// Any CSS colour (hex, hsl, hsla) -> normalised sRGB channels in 0-1.
+// color2k is a deliberately different implementation from the tinycolor2 that
+// style-dictionary converts with, so these assertions are an independent
+// check rather than a restatement of the build's own maths.
+const toSrgb = (
+  value: string
+): { channels: [number, number, number]; alpha: number } => {
+  const [red, green, blue, alpha] = parseToRgba(value)
+  return { channels: [red / 255, green / 255, blue / 255], alpha }
 }
 
 describe('Value Fidelity', () => {
@@ -144,26 +120,17 @@ describe('Value Fidelity', () => {
           expect(match, `${name} missing from theme-${themeName}.swift`).not.toBeNull()
           if (!match) return
 
-          // hex tokens (#000/#fff) are exact; hsl tokens are compared after conversion
-          if (value.startsWith('#')) {
-            const hex = value.slice(1)
-            const expand = hex.length === 3 ? hex.replace(/./g, (c) => c + c) : hex
-            const channels = [0, 2, 4].map(
-              (offset) => parseInt(expand.slice(offset, offset + 2), 16) / 255
-            )
-            channels.forEach((channel, index) => {
-              expect(parseFloat(match[index + 1])).toBeCloseTo(channel, 2)
-            })
-          } else {
-            const { rgb, alpha } = parseHsl(value)
-            rgb.forEach((channel, index) => {
-              expect(
-                parseFloat(match[index + 1]),
-                `${name} channel ${index} should match ${value}`
-              ).toBeCloseTo(channel, 2)
-            })
-            expect(parseFloat(match[4])).toBeCloseTo(alpha, 3)
-          }
+          const { channels, alpha } = toSrgb(value)
+          channels.forEach((channel, index) => {
+            expect(
+              parseFloat(match[index + 1]),
+              `${name} channel ${index} should match ${value}`
+            ).toBeCloseTo(channel, 2)
+          })
+          expect(parseFloat(match[4]), `${name} opacity should match ${value}`).toBeCloseTo(
+            alpha,
+            3
+          )
         })
       })
 
@@ -183,10 +150,9 @@ describe('Value Fidelity', () => {
           expect(match, `${name} missing from Swift output`).not.toBeNull()
           if (!match) return
 
-          const alpha = parseInt(argb.slice(0, 2), 16) / 255
-          const channels = [2, 4, 6].map(
-            (offset) => parseInt(argb.slice(offset, offset + 2), 16) / 255
-          )
+          // Compose packs colours as AARRGGBB; reorder to the RRGGBBAA that
+          // CSS (and so color2k) understands
+          const { channels, alpha } = toSrgb(`#${argb.slice(2)}${argb.slice(0, 2)}`)
 
           channels.forEach((channel, index) => {
             expect(
