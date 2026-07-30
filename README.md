@@ -67,3 +67,16 @@ const stitchesConfig = createStitches({
 
 ### Why/When do we need `themeMap`?
 Some CSS properties are not included in the [defaultThemeMap](https://stitches.dev/docs/api#defaultthememap). If they are missing (e.g.: aspectRatio) you need to add them to our custom `themeMap` which we pass to stitches [themeMap](https://stitches.dev/docs/api#thememap) config
+
+## Native outputs (Swift & Kotlin)
+
+Alongside the web outputs, the build emits the tokens in native-consumable form for the iOS and Android apps:
+
+- `lib/theme-*.swift` — a `ThemeTokens` enum of SwiftUI `Color(red:green:blue:opacity:)` and `CGFloat` constants
+- `lib/theme-*.kt` — the equivalent Compose `Color(0xAARRGGBB)`, `sp`/`dp` and `Float` constants
+
+Values are converted at build time: colours from hsl()/hex to sRGB components, `size.font`/`size.radii`/`size.space` from rem to pt (× 16), and `size.leading` emitted as unitless multipliers. Constant names are flat camelCase from the token path (`color.blue.800` → `blue800`, `size.font.sm` → `fontSm`) — **renames are breaking** for the native apps.
+
+Deliberately excluded: `font.families.*` (web font stacks — the apps bundle their own fonts), `size.breakpoint.*` (windowed-web concern) and `effects.*` (CSS box-shadow strings don't translate to native shadow parameters).
+
+The files ship inside the npm tarball; the native repos vendor the file for a pinned version (e.g. fetched from unpkg in their build). There is no Swift Package or Maven artifact.

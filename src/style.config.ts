@@ -64,6 +64,16 @@ export default (themes: string[], includeBase = true): Config => {
       name ? `theme-${name}.d.ts` : 'theme-base.d.ts',
       'custom/format/system-ui-theme-types'
     ),
+    swift: createPlatform(
+      COMMON_TRANSFORMS,
+      name ? `theme-${name}.swift` : 'theme-base.swift',
+      'custom/format/swift-theme'
+    ),
+    kotlin: createPlatform(
+      COMMON_TRANSFORMS,
+      name ? `theme-${name}.kt` : 'theme-base.kt',
+      'custom/format/kotlin-theme'
+    ),
     'assets/copy': {
       actions: ['copy_assets'],
       buildPath: 'lib/',
