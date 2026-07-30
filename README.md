@@ -91,7 +91,7 @@ The suite is output-focused — it builds the package and inspects the real arti
 - `test/completeness.test.ts` — reconciles the token sources against every output, so a filter or naming regression that silently drops tokens fails the build
 - `test/values.test.ts` — exact values for shadows, breakpoints and font stacks, and cross-output consistency (Swift colours are re-derived from the source hsl and checked against the JS theme and the Kotlin output)
 - `test/native.test.ts` — Swift/Kotlin structure, conversions and per-theme filtering
-- `test/native-compile.test.ts` — compiles the generated files with `swiftc` and `kotlinc`. These tests **skip when the toolchain is absent**, so a local run without Xcode or Kotlin still passes; the macOS CI job installs both so they always execute there
+- `test/native-compile.test.ts` — compiles the generated files with `swiftc` and `kotlinc`. These tests **skip when the toolchain is absent**, so a local run without Xcode or Kotlin still passes. Both CI runners have them (GitHub's Ubuntu image ships Swift and Kotlin; the macOS job additionally validates against the real Xcode toolchain), so they always execute in CI. Invoking a real compiler far exceeds vitest's default 5s timeout, hence the explicit `COMPILE_TIMEOUT`
 - `test/assets.test.ts` — every `package.json` export target, `typesVersions` path and copied asset exists and is non-empty
 
 One known failure is encoded as an expected failure (`it.fails`) in `test/completeness.test.ts`: the CSS formatters emit `--color-coolGrey-100` while the JS/`.d.ts` `properties` map declares `--color-cool-grey-100`, so `var(--color-cool-grey-100)` resolves to nothing. This predates the native outputs work; remove the `.fails` marker when the naming is reconciled.
