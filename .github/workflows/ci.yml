@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    name: Build & test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+      - run: yarn validate:types
+      # test:run builds first via its pretest hook, so outputs are never stale
+      - run: yarn clean && yarn test:run
+
+  native:
+    name: Native output compiles
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - name: Install Kotlin compiler
+        run: brew install kotlin
+      - run: yarn install --frozen-lockfile
+      # Runs the same suite, but with swiftc and kotlinc present the guarded
+      # syntax tests in test/native-compile.test.ts actually execute
+      - run: yarn clean && yarn test:run

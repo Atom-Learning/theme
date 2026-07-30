@@ -80,3 +80,18 @@ Values are converted at build time by style-dictionary's built-in transforms (`c
 Deliberately excluded: `font.families.*` (web font stacks — the apps bundle their own fonts), `size.breakpoint.*` (windowed-web concern) and `effects.*` (CSS box-shadow strings don't translate to native shadow parameters).
 
 The files ship inside the npm tarball; the native repos vendor the file for a pinned version (e.g. fetched from unpkg in their build). There is no Swift Package or Maven artifact.
+
+## Testing
+
+`yarn test` (watch) and `yarn test:run` (single run) both build first via a `pretest` hook, so the suite never asserts against stale `lib/` output. CI runs the same suite on every PR (`.github/workflows/ci.yml`), plus `yarn validate:types`.
+
+The suite is output-focused — it builds the package and inspects the real artifacts in `lib/`:
+
+- `test/theme.test.ts` — JS / CSS / `.d.ts` / media query structure and formatting
+- `test/completeness.test.ts` — reconciles the token sources against every output, so a filter or naming regression that silently drops tokens fails the build
+- `test/values.test.ts` — exact values for shadows, breakpoints and font stacks, and cross-output consistency (Swift colours are re-derived from the source hsl and checked against the JS theme and the Kotlin output)
+- `test/native.test.ts` — Swift/Kotlin structure, conversions and per-theme filtering
+- `test/native-compile.test.ts` — compiles the generated files with `swiftc` and `kotlinc`. These tests **skip when the toolchain is absent**, so a local run without Xcode or Kotlin still passes; the macOS CI job installs both so they always execute there
+- `test/assets.test.ts` — every `package.json` export target, `typesVersions` path and copied asset exists and is non-empty
+
+One known failure is encoded as an expected failure (`it.fails`) in `test/completeness.test.ts`: the CSS formatters emit `--color-coolGrey-100` while the JS/`.d.ts` `properties` map declares `--color-cool-grey-100`, so `var(--color-cool-grey-100)` resolves to nothing. This predates the native outputs work; remove the `.fails` marker when the naming is reconciled.
