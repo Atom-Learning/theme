@@ -12,7 +12,7 @@ If you need to add tokens that are not part of the [theme specification](https:/
   - first level: the `category` mentioned in the step above
   - second level: the `type` mentioned in the step above
   - third level: the token name, as you would use it with `$`, e.g.: `$16-9`
-  - fourth level: `value`, the value the token will be replaced by.
+  - fourth level: `$value`, the value the token will be replaced by (token sources use the [DTCG format](https://tr.designtokens.org/format/); groups may also declare a `$type`).
 
   e.g.:
   ```json
@@ -20,19 +20,19 @@ If you need to add tokens that are not part of the [theme specification](https:/
     "ratios": {
       "ratio": {
         "16-9": {
-          "value": "16/9"
+          "$value": "16/9"
         },
         "3-2": {
-          "value": "3/2"
+          "$value": "3/2"
         },
         "4-3": {
-          "value": "4/3"
+          "$value": "4/3"
         },
         "1-1": {
-          "value": "1/1"
+          "$value": "1/1"
         },
         "3-4": {
-          "value": "3/4"
+          "$value": "3/4"
         }
       }
     }
@@ -72,10 +72,10 @@ Some CSS properties are not included in the [defaultThemeMap](https://stitches.d
 
 Alongside the web outputs, the build emits the tokens in native-consumable form for the iOS and Android apps:
 
-- `lib/theme-*.swift` — a `ThemeTokens` enum of SwiftUI `Color(red:green:blue:opacity:)` and `CGFloat` constants
-- `lib/theme-*.kt` — the equivalent Compose `Color(0xAARRGGBB)`, `sp`/`dp` and `Float` constants
+- `lib/theme-*.swift` — a `ThemeTokens` enum of SwiftUI `Color(red:green:blue:opacity:)` and `CGFloat` constants (style-dictionary's `ios-swift/enum.swift` format)
+- `lib/theme-*.kt` — the equivalent Compose `Color(0xAARRGGBB)`, `.sp`/`.dp` constants in `package uk.co.atomlearning.theme` (style-dictionary's `compose/object` format)
 
-Values are converted at build time: colours from hsl()/hex to sRGB components, `size.font`/`size.radii`/`size.space` from rem to pt (× 16), and `size.leading` emitted as unitless multipliers. Constant names are flat camelCase from the token path (`color.blue.800` → `blue800`, `size.font.sm` → `fontSm`) — **renames are breaking** for the native apps.
+Values are converted at build time by style-dictionary's built-in transforms (`color/ColorSwiftUI`, `color/composeColor`, `size/swift/remToCGFloat`, `size/compose/remToSp`, `size/compose/remToDp`), driven by the `$type` declared on each token group: colours from hsl()/hex to sRGB components, `size.font`/`size.radii`/`size.space` from rem to pt (× 16). `size.leading` has no transform on purpose — the multipliers pass through unitless. Constant names come from the custom `name/native/camel` transform in `src/native.ts`: flat camelCase from the token path (`color.blue.800` → `blue800`, `size.font.sm` → `fontSm`) — **renames are breaking** for the native apps.
 
 Deliberately excluded: `font.families.*` (web font stacks — the apps bundle their own fonts), `size.breakpoint.*` (windowed-web concern) and `effects.*` (CSS box-shadow strings don't translate to native shadow parameters).
 

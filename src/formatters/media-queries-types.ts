@@ -1,4 +1,4 @@
-import { getBuildConfig, isBaseTheme } from './shared.ts'
+import { getBuildConfig, isBaseTheme, tokenValue } from './shared.ts'
 
 interface Property {
   attributes: {
@@ -6,7 +6,8 @@ interface Property {
     type: string
     item: string
   }
-  value: string | number
+  value?: string | number
+  $value?: string | number
 }
 
 interface Dictionary {
@@ -25,7 +26,7 @@ const formatter = (dictionary: Dictionary): string => {
   properties.forEach((property) => {
     const { category, type, item } = property.attributes
     if (category === 'size' && type === 'breakpoint') {
-      media[item] = `(min-width: ${property.value})`
+      media[item] = `(min-width: ${tokenValue(property)})`
     }
   })
 

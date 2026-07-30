@@ -1,18 +1,43 @@
 {
   "color": {
+    "$type": "color",
     "primary": {
-      "100": { "value": "{color.blue.100}" },
-      "200": { "value": "{color.blue.200}" },
-      "300": { "value": "{color.blue.300}" },
-      "400": { "value": "{color.blue.400}" },
-      "500": { "value": "{color.blue.500}" },
-      "600": { "value": "{color.blue.600}" },
-      "700": { "value": "{color.blue.700}" },
-      "800": { "value": "{color.blue.800}" },
-      "900": { "value": "{color.blue.900}" },
-      "1000": { "value": "{color.blue.1000}" },
-      "1100": { "value": "{color.blue.1100}" },
-      "1200": { "value": "{color.blue.1200}" }
+      "100": {
+        "$value": "{color.blue.100}"
+      },
+      "200": {
+        "$value": "{color.blue.200}"
+      },
+      "300": {
+        "$value": "{color.blue.300}"
+      },
+      "400": {
+        "$value": "{color.blue.400}"
+      },
+      "500": {
+        "$value": "{color.blue.500}"
+      },
+      "600": {
+        "$value": "{color.blue.600}"
+      },
+      "700": {
+        "$value": "{color.blue.700}"
+      },
+      "800": {
+        "$value": "{color.blue.800}"
+      },
+      "900": {
+        "$value": "{color.blue.900}"
+      },
+      "1000": {
+        "$value": "{color.blue.1000}"
+      },
+      "1100": {
+        "$value": "{color.blue.1100}"
+      },
+      "1200": {
+        "$value": "{color.blue.1200}"
+      }
     }
   }
 }

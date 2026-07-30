@@ -1,11 +1,12 @@
 {
   "font": {
     "families": {
+      "$type": "fontFamily",
       "display": {
-        "value": "'National 2 Condensed', {font.families.sans}"
+        "$value": "'National 2 Condensed', {font.families.sans}"
       },
       "body": {
-        "value": "'Inter', {font.families.sans}"
+        "$value": "'Inter', {font.families.sans}"
       }
     }
   }

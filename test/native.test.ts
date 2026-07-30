@@ -11,7 +11,7 @@ const swiftConstantNames = (source: string): string[] =>
   [...source.matchAll(/public static let (\w+)/g)].map((match) => match[1])
 
 const kotlinConstantNames = (source: string): string[] =>
-  [...source.matchAll(/(?:const )?val (\w+)/g)].map((match) => match[1])
+  [...source.matchAll(/\bval (\w+)/g)].map((match) => match[1])
 
 describe('Native Token Outputs', () => {
   describe('Swift Output', () => {
@@ -45,29 +45,29 @@ describe('Native Token Outputs', () => {
       const swift = readOutput('theme-base.swift')
 
       expect(swift).toContain(
-        'public static let black = Color(red: 0, green: 0, blue: 0, opacity: 1)'
+        'public static let black = Color(red: 0.000, green: 0.000, blue: 0.000, opacity: 1)'
       )
       expect(swift).toContain(
-        'public static let white = Color(red: 1, green: 1, blue: 1, opacity: 1)'
+        'public static let white = Color(red: 1.000, green: 1.000, blue: 1.000, opacity: 1)'
       )
       // hsl(0, 0%, 96%)
       expect(swift).toContain(
-        'public static let grey100 = Color(red: 0.96, green: 0.96, blue: 0.96, opacity: 1)'
+        'public static let grey100 = Color(red: 0.961, green: 0.961, blue: 0.961, opacity: 1)'
       )
       // hsla(0, 0%, 20%, 0.1) carries its opacity component
       expect(swift).toContain(
-        'public static let alpha100 = Color(red: 0.2, green: 0.2, blue: 0.2, opacity: 0.1)'
+        'public static let alpha100 = Color(red: 0.200, green: 0.200, blue: 0.200, opacity: 0.1)'
       )
     })
 
     it('base should convert sizes from rem to pt as CGFloat', () => {
       const swift = readOutput('theme-base.swift')
 
-      expect(swift).toContain('public static let fontSm: CGFloat = 14')
-      expect(swift).toContain('public static let radiiMd: CGFloat = 8')
-      expect(swift).toContain('public static let space: CGFloat = 4')
-      // leading multipliers are emitted as-is
-      expect(swift).toContain('public static let leadingMd: CGFloat = 1.5')
+      expect(swift).toContain('public static let fontSm = CGFloat(14.00)')
+      expect(swift).toContain('public static let radiiMd = CGFloat(8.00)')
+      expect(swift).toContain('public static let space = CGFloat(4.00)')
+      // leading multipliers are emitted as-is, unitless
+      expect(swift).toContain('public static let leadingMd = 1.5')
     })
 
     it('base should use flat camelCase names from the token path', () => {
@@ -103,9 +103,9 @@ describe('Native Token Outputs', () => {
       it(`${themeName} should declare a ThemeTokens object importing Compose types`, () => {
         const kotlin = readOutput(file)
 
+        expect(kotlin).toContain('package uk.co.atomlearning.theme')
         expect(kotlin).toContain('import androidx.compose.ui.graphics.Color')
-        expect(kotlin).toContain('import androidx.compose.ui.unit.dp')
-        expect(kotlin).toContain('import androidx.compose.ui.unit.sp')
+        expect(kotlin).toContain('import androidx.compose.ui.unit.*')
         expect(kotlin).toContain('object ThemeTokens {')
         expect(kotlinConstantNames(kotlin).length).toBeGreaterThan(0)
       })
@@ -128,21 +128,21 @@ describe('Native Token Outputs', () => {
     it('base should convert colours to ARGB Color constants', () => {
       const kotlin = readOutput('theme-base.kt')
 
-      expect(kotlin).toContain('val black = Color(0xFF000000)')
-      expect(kotlin).toContain('val white = Color(0xFFFFFFFF)')
+      expect(kotlin).toContain('val black = Color(0xff000000)')
+      expect(kotlin).toContain('val white = Color(0xffffffff)')
       // hsl(0, 0%, 96%)
-      expect(kotlin).toContain('val grey100 = Color(0xFFF5F5F5)')
+      expect(kotlin).toContain('val grey100 = Color(0xfff5f5f5)')
       // hsla(0, 0%, 20%, 0.1) carries its opacity in the alpha byte
-      expect(kotlin).toContain('val alpha100 = Color(0x1A333333)')
+      expect(kotlin).toContain('val alpha100 = Color(0x1a333333)')
     })
 
-    it('base should convert sizes to sp/dp and leading to Float', () => {
+    it('base should convert sizes to sp/dp and leave leading unitless', () => {
       const kotlin = readOutput('theme-base.kt')
 
-      expect(kotlin).toContain('val fontSm = 14.sp')
-      expect(kotlin).toContain('val radiiMd = 8.dp')
-      expect(kotlin).toContain('val space = 4.dp')
-      expect(kotlin).toContain('const val leadingMd = 1.5f')
+      expect(kotlin).toContain('val fontSm = 14.00.sp')
+      expect(kotlin).toContain('val radiiMd = 8.00.dp')
+      expect(kotlin).toContain('val space = 4.00.dp')
+      expect(kotlin).toContain('val leadingMd = 1.5')
     })
 
     it('atom should only contain theme-specific tokens', () => {
@@ -157,7 +157,7 @@ describe('Native Token Outputs', () => {
       const kotlin = readOutput('theme-quest-reports.kt')
 
       // 0.625rem × 16
-      expect(kotlin).toContain('val fontXs = 10.sp')
+      expect(kotlin).toContain('val fontXs = 10.00.sp')
     })
   })
 })

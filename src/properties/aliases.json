@@ -1,14 +1,27 @@
 {
   "color": {
+    "$type": "color",
     "text": {
-      "bold": { "value": "{color.grey.1000}" },
-      "regular": { "value": "{color.grey.900}" },
-      "subtle": { "value": "{color.grey.800}" },
-      "minimal": { "value": "{color.grey.700}" }
+      "bold": {
+        "$value": "{color.grey.1000}"
+      },
+      "regular": {
+        "$value": "{color.grey.900}"
+      },
+      "subtle": {
+        "$value": "{color.grey.800}"
+      },
+      "minimal": {
+        "$value": "{color.grey.700}"
+      }
     },
     "background": {
-      "base": { "value": "{color.grey.100}" },
-      "accent": { "value": "{color.blue.100}" }
+      "base": {
+        "$value": "{color.grey.100}"
+      },
+      "accent": {
+        "$value": "{color.blue.100}"
+      }
     }
   }
 }

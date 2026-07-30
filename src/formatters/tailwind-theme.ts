@@ -1,4 +1,9 @@
-import { getBuildConfig, shouldIncludeProperty, isBaseTheme } from './shared.ts'
+import {
+  getBuildConfig,
+  shouldIncludeProperty,
+  isBaseTheme,
+  tokenValue
+} from './shared.ts'
 
 interface Property {
   attributes: {
@@ -6,7 +11,8 @@ interface Property {
     category: string
     item: string
   }
-  value: string | number
+  value?: string | number
+  $value?: string | number
   name: string
   filePath?: string
 }
@@ -85,7 +91,7 @@ const transformPropertiesToTheme = (
         name = `shadow-${item}`
       }
 
-      return `--${name}: ${formatValue(property.value, category, type)};`
+      return `--${name}: ${formatValue(tokenValue(property), category, type)};`
     })
     .filter((property): property is string => Boolean(property))
 }

@@ -9,8 +9,7 @@ import mediaQueriesTypes from './formatters/media-queries-types.ts'
 import systemUi from './formatters/system-ui-theme.ts'
 import tailwindTheme from './formatters/tailwind-theme.ts'
 import allThemesCss from './formatters/all-themes-css.ts'
-import swiftTheme from './formatters/swift-theme.ts'
-import kotlinTheme from './formatters/kotlin-theme.ts'
+import { nativeName } from './native.ts'
 import { setBuildConfig } from './formatters/shared.ts'
 import { readdirSync, readFileSync, writeFileSync, unlinkSync } from 'node:fs'
 import { join } from 'node:path'
@@ -67,13 +66,10 @@ const buildTheme = async (
     name: 'custom/format/all-themes-css',
     format: allThemesCss
   })
-  sd.registerFormat({
-    name: 'custom/format/swift-theme',
-    format: swiftTheme
-  })
-  sd.registerFormat({
-    name: 'custom/format/kotlin-theme',
-    format: kotlinTheme
+  sd.registerTransform({
+    name: 'name/native/camel',
+    type: 'name',
+    transform: nativeName
   })
 
   await sd.buildAllPlatforms()

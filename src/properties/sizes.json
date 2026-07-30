@@ -1,33 +1,79 @@
 {
   "size": {
     "font": {
-      "xs": { "value": 0.75 },
-      "sm": { "value": 0.875 },
-      "md": { "value": 1 },
-      "lg": { "value": 1.3125 },
-      "xl": { "value": 1.75 },
-      "2xl": { "value": 2.3125 },
-      "3xl": { "value": 3.125 },
-      "4xl": { "value": 5.625 }
+      "$type": "fontSize",
+      "xs": {
+        "$value": 0.75
+      },
+      "sm": {
+        "$value": 0.875
+      },
+      "md": {
+        "$value": 1
+      },
+      "lg": {
+        "$value": 1.3125
+      },
+      "xl": {
+        "$value": 1.75
+      },
+      "2xl": {
+        "$value": 2.3125
+      },
+      "3xl": {
+        "$value": 3.125
+      },
+      "4xl": {
+        "$value": 5.625
+      }
     },
     "leading": {
-      "xs": { "value": 1.6 },
-      "sm": { "value": 1.53 },
-      "md": { "value": 1.5 },
-      "lg": { "value": 1.52 },
-      "xl": { "value": 1.42 },
-      "2xl": { "value": 1.08 },
-      "3xl": { "value": 1.12 },
-      "4xl": { "value": 1 }
+      "$type": "number",
+      "xs": {
+        "$value": 1.6
+      },
+      "sm": {
+        "$value": 1.53
+      },
+      "md": {
+        "$value": 1.5
+      },
+      "lg": {
+        "$value": 1.52
+      },
+      "xl": {
+        "$value": 1.42
+      },
+      "2xl": {
+        "$value": 1.08
+      },
+      "3xl": {
+        "$value": 1.12
+      },
+      "4xl": {
+        "$value": 1
+      }
     },
     "space": {
-      "base": { "value": 0.25 }
+      "$type": "dimension",
+      "base": {
+        "$value": 0.25
+      }
     },
     "radii": {
-      "sm": { "value": 0.25 },
-      "md": { "value": 0.5 },
-      "lg": { "value": 0.75 },
-      "xl": { "value": 1 }
+      "$type": "dimension",
+      "sm": {
+        "$value": 0.25
+      },
+      "md": {
+        "$value": 0.5
+      },
+      "lg": {
+        "$value": 0.75
+      },
+      "xl": {
+        "$value": 1
+      }
     }
   }
 }

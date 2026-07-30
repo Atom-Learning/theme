@@ -1,17 +1,18 @@
 {
   "font": {
     "families": {
+      "$type": "fontFamily",
       "sans": {
-        "value": "system-ui, -apple-system, 'Helvetica Neue', sans-serif"
+        "$value": "system-ui, -apple-system, 'Helvetica Neue', sans-serif"
       },
       "mono": {
-        "value": "'SFMono-Regular', Consolas, Menlo, monospace"
+        "$value": "'SFMono-Regular', Consolas, Menlo, monospace"
       },
       "display": {
-        "value": "{font.families.sans}"
+        "$value": "{font.families.sans}"
       },
       "body": {
-        "value": "{font.families.sans}"
+        "$value": "{font.families.sans}"
       }
     }
   }
