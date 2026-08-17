@@ -25,3 +25,9 @@ export const shouldIncludeProperty = (property: Property, config?: BuildConfig |
 export const isBaseTheme = (config?: BuildConfig | null): boolean =>
   config?.includeBase === true && !config?.themePath
 
+// Token sources use the DTCG format ($value); fall back to legacy `value`
+export const tokenValue = (property: {
+  $value?: unknown
+  value?: unknown
+}): string | number => (property.$value ?? property.value) as string | number
+

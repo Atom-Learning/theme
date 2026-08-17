@@ -12,7 +12,7 @@ If you need to add tokens that are not part of the [theme specification](https:/
   - first level: the `category` mentioned in the step above
   - second level: the `type` mentioned in the step above
   - third level: the token name, as you would use it with `$`, e.g.: `$16-9`
-  - fourth level: `value`, the value the token will be replaced by.
+  - fourth level: `$value`, the value the token will be replaced by (token sources use the [DTCG format](https://tr.designtokens.org/format/); groups may also declare a `$type`).
 
   e.g.:
   ```json
@@ -20,19 +20,19 @@ If you need to add tokens that are not part of the [theme specification](https:/
     "ratios": {
       "ratio": {
         "16-9": {
-          "value": "16/9"
+          "$value": "16/9"
         },
         "3-2": {
-          "value": "3/2"
+          "$value": "3/2"
         },
         "4-3": {
-          "value": "4/3"
+          "$value": "4/3"
         },
         "1-1": {
-          "value": "1/1"
+          "$value": "1/1"
         },
         "3-4": {
-          "value": "3/4"
+          "$value": "3/4"
         }
       }
     }
@@ -67,3 +67,31 @@ const stitchesConfig = createStitches({
 
 ### Why/When do we need `themeMap`?
 Some CSS properties are not included in the [defaultThemeMap](https://stitches.dev/docs/api#defaultthememap). If they are missing (e.g.: aspectRatio) you need to add them to our custom `themeMap` which we pass to stitches [themeMap](https://stitches.dev/docs/api#thememap) config
+
+## Native outputs (Swift & Kotlin)
+
+Alongside the web outputs, the build emits the tokens in native-consumable form for the iOS and Android apps:
+
+- `lib/theme-*.swift` — a `ThemeTokens` enum of SwiftUI `Color(red:green:blue:opacity:)` and `CGFloat` constants (style-dictionary's `ios-swift/enum.swift` format)
+- `lib/theme-*.kt` — the equivalent Compose `Color(0xAARRGGBB)`, `.sp`/`.dp` constants in `package uk.co.atomlearning.theme` (style-dictionary's `compose/object` format)
+
+Values are converted at build time by style-dictionary's built-in transforms (`color/ColorSwiftUI`, `color/composeColor`, `size/swift/remToCGFloat`, `size/compose/remToSp`, `size/compose/remToDp`), driven by the `$type` declared on each token group: colours from hsl()/hex to sRGB components, `size.font`/`size.radii`/`size.space` from rem to pt (× 16). `size.leading` has no transform on purpose — the multipliers pass through unitless. Constant names come from the custom `name/native/camel` transform in `src/native.ts`: flat camelCase from the token path (`color.blue.800` → `blue800`, `size.font.sm` → `fontSm`) — **renames are breaking** for the native apps.
+
+Deliberately excluded: `font.families.*` (web font stacks — the apps bundle their own fonts), `size.breakpoint.*` (windowed-web concern) and `effects.*` (CSS box-shadow strings don't translate to native shadow parameters).
+
+The files ship inside the npm tarball; the native repos vendor the file for a pinned version (e.g. fetched from unpkg in their build). There is no Swift Package or Maven artifact.
+
+## Testing
+
+`yarn test` (watch) and `yarn test:run` (single run) both build first via a `pretest` hook, so the suite never asserts against stale `lib/` output. CI runs the same suite on every PR (`.github/workflows/ci.yml`), plus `yarn validate:types`.
+
+The suite is output-focused — it builds the package and inspects the real artifacts in `lib/`:
+
+- `test/theme.test.ts` — JS / CSS / `.d.ts` / media query structure and formatting
+- `test/completeness.test.ts` — reconciles the token sources against every output, so a filter or naming regression that silently drops tokens fails the build
+- `test/values.test.ts` — exact values for shadows, breakpoints and font stacks, and cross-output consistency (Swift colours are re-derived from the source hsl and checked against the JS theme and the Kotlin output)
+- `test/native.test.ts` — Swift/Kotlin structure, conversions and per-theme filtering
+- `test/native-compile.test.ts` — compiles the generated files with `swiftc` and `kotlinc`. These tests **skip when the toolchain is absent**, so a local run without Xcode or Kotlin still passes. Both CI runners have them (GitHub's Ubuntu image ships Swift and Kotlin; the macOS job additionally validates against the real Xcode toolchain), so they always execute in CI. Invoking a real compiler far exceeds vitest's default 5s timeout, hence the explicit `COMPILE_TIMEOUT`
+- `test/assets.test.ts` — every `package.json` export target, `typesVersions` path and copied asset exists and is non-empty
+
+One known failure is encoded as an expected failure (`it.fails`) in `test/completeness.test.ts`: the CSS formatters emit `--color-coolGrey-100` while the JS/`.d.ts` `properties` map declares `--color-cool-grey-100`, so `var(--color-cool-grey-100)` resolves to nothing. This predates the native outputs work; remove the `.fails` marker when the naming is reconciled.

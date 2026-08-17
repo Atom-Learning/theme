@@ -1,5 +1,5 @@
 import { pascalCase } from 'pascal-case'
-import { getBuildConfig, shouldIncludeProperty } from './shared.ts'
+import { getBuildConfig, shouldIncludeProperty, tokenValue } from './shared.ts'
 
 interface Property {
   attributes: {
@@ -8,7 +8,8 @@ interface Property {
     item: string
     subitem?: string
   }
-  value: string | number
+  value?: string | number
+  $value?: string | number
   path?: string[]
   name: string
   filePath?: string
@@ -98,7 +99,7 @@ export const transformPropertiesToTheme = (
     if (category === 'color') {
       theme.colors = {
         ...(theme.colors as Record<string, string>),
-        [prefix(type, item, subitem || '')]: String(property.value)
+        [prefix(type, item, subitem || '')]: String(tokenValue(property))
       }
       return
     }
@@ -107,7 +108,7 @@ export const transformPropertiesToTheme = (
 
     // Format font sizes, radii, and space with rem
     // Ensure units are always added for numeric values
-    let value = property.value
+    let value = tokenValue(property)
     if (
       category === 'size' &&
       (type === 'font' || type === 'radii' || type === 'space') &&
@@ -196,7 +197,7 @@ export const generateCustomProperties = (
     // Format font sizes, radii, and space with rem
     // leading (line heights) are unitless numbers
     // Ensure units are always added for numeric values
-    let value = property.value
+    let value = tokenValue(property)
     if (
       category === 'size' &&
       (type === 'font' || type === 'radii' || type === 'space') &&

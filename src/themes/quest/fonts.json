@@ -1,11 +1,12 @@
 {
   "font": {
     "families": {
+      "$type": "fontFamily",
       "display": {
-        "value": "'DM Sans', {font.families.sans}"
+        "$value": "'DM Sans', {font.families.sans}"
       },
       "body": {
-        "value": "'Inter', {font.families.sans}"
+        "$value": "'Inter', {font.families.sans}"
       }
     }
   }

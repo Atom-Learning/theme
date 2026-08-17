@@ -1,6 +1,6 @@
 {
   "name": "@atom-learning/theme",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "Design tokens and assets for Atom Learning and Quest",
   "type": "module",
   "main": "lib/theme-base.js",
@@ -9,7 +9,9 @@
     "build": "node ./src/build.ts --path=./src/themes",
     "prepublishOnly": "run-s clean build test:run",
     "clean": "del ./lib",
+    "pretest": "run-s build",
     "test": "vitest",
+    "pretest:run": "run-s build",
     "test:run": "vitest run",
     "validate:types": "tsc --noEmit"
   },
@@ -20,6 +22,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.0.0",
+    "color2k": "^2.0.4",
     "del-cli": "^3.0.1",
     "dree": "^5.1.5",
     "npm-run-all": "^4.1.5",

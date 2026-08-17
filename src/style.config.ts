@@ -1,7 +1,16 @@
+import { nativeTokenFilter } from './native.ts'
+
+interface File {
+  destination: string
+  format: string
+  filter?: (token: Record<string, unknown>) => boolean
+  options?: Record<string, unknown>
+}
+
 interface Platform {
   transforms: string[]
   buildPath: string
-  files: Array<{ destination: string; format: string }>
+  files: File[]
 }
 
 interface Config {
@@ -15,13 +24,25 @@ interface Config {
   >
 }
 
-const COMMON_TRANSFORMS = [
+const COMMON_TRANSFORMS = ['attribute/cti', 'name/pascal']
+const CSS_TRANSFORMS = ['attribute/cti']
+
+// Built-in style-dictionary transforms convert values for native platforms:
+// colours to sRGB Color initialisers, rem sizes to pt (× 16). size.leading
+// has no transform on purpose — the multipliers pass through unitless.
+const SWIFT_TRANSFORMS = [
   'attribute/cti',
-  'name/pascal',
-  'size/rem',
-  'color/hsl'
+  'name/native/camel',
+  'color/ColorSwiftUI',
+  'size/swift/remToCGFloat'
 ]
-const CSS_TRANSFORMS = ['attribute/cti', 'color/hsl']
+const COMPOSE_TRANSFORMS = [
+  'attribute/cti',
+  'name/native/camel',
+  'color/composeColor',
+  'size/compose/remToSp',
+  'size/compose/remToDp'
+]
 
 const createPlatform = (
   transforms: string[],
@@ -64,6 +85,33 @@ export default (themes: string[], includeBase = true): Config => {
       name ? `theme-${name}.d.ts` : 'theme-base.d.ts',
       'custom/format/system-ui-theme-types'
     ),
+    swift: {
+      transforms: SWIFT_TRANSFORMS,
+      buildPath: 'lib/',
+      files: [
+        {
+          destination: name ? `theme-${name}.swift` : 'theme-base.swift',
+          format: 'ios-swift/enum.swift',
+          filter: nativeTokenFilter,
+          options: { className: 'ThemeTokens', import: ['SwiftUI'] }
+        }
+      ]
+    },
+    compose: {
+      transforms: COMPOSE_TRANSFORMS,
+      buildPath: 'lib/',
+      files: [
+        {
+          destination: name ? `theme-${name}.kt` : 'theme-base.kt',
+          format: 'compose/object',
+          filter: nativeTokenFilter,
+          options: {
+            className: 'ThemeTokens',
+            packageName: 'uk.co.atomlearning.theme'
+          }
+        }
+      ]
+    },
     'assets/copy': {
       actions: ['copy_assets'],
       buildPath: 'lib/',

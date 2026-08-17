@@ -1,4 +1,4 @@
-import { getBuildConfig, shouldIncludeProperty } from './shared.ts'
+import { getBuildConfig, shouldIncludeProperty, tokenValue } from './shared.ts'
 import { writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 
@@ -8,7 +8,8 @@ interface Property {
     category: string
     item: string
   }
-  value: string | number
+  value?: string | number
+  $value?: string | number
   name: string
   filePath?: string
 }
@@ -102,7 +103,7 @@ const generateThemeCSS = (
     const varName = generateCustomPropertyName(property)
     if (!varName) return
 
-    const value = formatValue(property.value, category, type)
+    const value = formatValue(tokenValue(property), category, type)
     cssVars.push(`  ${varName}: ${value};`)
   })
 
