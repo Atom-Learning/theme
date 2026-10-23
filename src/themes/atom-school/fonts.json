@@ -1,0 +1,13 @@
+{
+  "font": {
+    "families": {
+      "$type": "fontFamily",
+      "display": {
+        "$value": "'Inter', {font.families.sans}"
+      },
+      "body": {
+        "$value": "'Inter', {font.families.sans}"
+      }
+    }
+  }
+}

@@ -87,7 +87,7 @@ describe('Output Completeness', () => {
     })
 
     it('swift and kotlin should expose an identical constant surface', () => {
-      const themes = ['base', 'atom', 'quest', 'quest-reports']
+      const themes = ['base', 'atom', 'quest', 'quest-reports', 'atom-school', 'atom-school-reports']
 
       themes.forEach((themeName) => {
         const swift = swiftConstantNames(readOutput(`theme-${themeName}.swift`)).sort()
@@ -193,7 +193,12 @@ describe('Output Completeness', () => {
   describe('Per-theme outputs', () => {
     const themeSources: Record<string, string[]> = {
       atom: ['src/themes/atom/color.json', 'src/themes/atom/fonts.json'],
-      quest: ['src/themes/quest/color.json', 'src/themes/quest/fonts.json']
+      quest: ['src/themes/quest/color.json', 'src/themes/quest/fonts.json'],
+      'atom-school': [
+        'src/themes/atom-school/aliases.json',
+        'src/themes/atom-school/color.json',
+        'src/themes/atom-school/fonts.json'
+      ]
     }
 
     Object.entries(themeSources).forEach(([themeName, files]) => {
@@ -213,6 +218,20 @@ describe('Output Completeness', () => {
         .filter(isNativeToken)
         .map((token) => nativeName(token.path))
       const actual = swiftConstantNames(readOutput('theme-quest-reports.swift'))
+
+      expect([...actual].sort()).toEqual([...expected].sort())
+    })
+
+    it('atom-school-reports should contain atom-school colours plus its own font scale', () => {
+      const schoolColours = [
+        ...flatten(readJson('src/themes/atom-school/aliases.json')),
+        ...flatten(readJson('src/themes/atom-school/color.json'))
+      ]
+      const reportFonts = flatten(readJson('src/themes/atom-school/reports/sizes.json'))
+      const expected = [...schoolColours, ...reportFonts]
+        .filter(isNativeToken)
+        .map((token) => nativeName(token.path))
+      const actual = swiftConstantNames(readOutput('theme-atom-school-reports.swift'))
 
       expect([...actual].sort()).toEqual([...expected].sort())
     })

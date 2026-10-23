@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import fs from 'node:fs'
 import path from 'node:path'
 
-const themes = ['base', 'atom', 'quest', 'quest-reports'] as const
+const themes = ['base', 'atom', 'quest', 'quest-reports', 'atom-school', 'atom-school-reports'] as const
 
 const readOutput = (file: string): string =>
   fs.readFileSync(path.join(process.cwd(), 'lib', file), 'utf-8')

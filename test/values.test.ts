@@ -6,7 +6,7 @@ import { parseToRgba } from 'color2k'
 const readOutput = (file: string): string =>
   fs.readFileSync(path.join(process.cwd(), 'lib', file), 'utf-8')
 
-const themes = ['base', 'atom', 'quest', 'quest-reports'] as const
+const themes = ['base', 'atom', 'quest', 'quest-reports', 'atom-school', 'atom-school-reports'] as const
 
 // Any CSS colour (hex, hsl, hsla) -> normalised sRGB channels in 0-1.
 // color2k is a deliberately different implementation from the tinycolor2 that
@@ -97,6 +97,29 @@ describe('Value Fidelity', () => {
       expect(properties['--font-display']).toContain("'National 2 Condensed'")
       expect(properties['--font-body']).toContain("'Inter'")
       expect(properties['--font-display']).not.toMatch(/[{}]/)
+    })
+  })
+
+  describe('Emerald', () => {
+    it('should match the quest primary scale step for step', async () => {
+      const { theme: base } = (await import(
+        path.join(process.cwd(), 'lib', 'theme-base.js')
+      )) as { theme: { colors: Record<string, string> } }
+      const { theme: quest } = (await import(
+        path.join(process.cwd(), 'lib', 'theme-quest.js')
+      )) as { theme: { colors: Record<string, string> } }
+
+      const steps = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200]
+      steps.forEach((step) => {
+        const emerald = toSrgb(base.colors[`emerald${step}`])
+        const primary = toSrgb(quest.colors[`primary${step}`])
+        emerald.channels.forEach((channel, index) => {
+          expect(channel, `emerald${step} channel ${index}`).toBeCloseTo(
+            primary.channels[index],
+            2
+          )
+        })
+      })
     })
   })
 

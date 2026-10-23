@@ -111,7 +111,7 @@ describe('Package Outputs', () => {
       // no explicit exports entry needed — the native repos vendor these
       // straight out of the tarball (e.g. via unpkg)
       expect(pkg.files).toContain('lib')
-      ;['base', 'atom', 'quest', 'quest-reports'].forEach((themeName) => {
+      ;['base', 'atom', 'quest', 'quest-reports', 'atom-school', 'atom-school-reports'].forEach((themeName) => {
         expect(fs.existsSync(resolve(`./lib/theme-${themeName}.swift`))).toBe(true)
         expect(fs.existsSync(resolve(`./lib/theme-${themeName}.kt`))).toBe(true)
       })
