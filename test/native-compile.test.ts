@@ -4,7 +4,7 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 
-const themes = ['base', 'atom', 'quest', 'quest-reports'] as const
+const themes = ['base', 'atom', 'quest', 'quest-reports', 'atom-school', 'atom-school-reports'] as const
 
 const hasTool = (tool: string): boolean =>
   spawnSync('which', [tool], { stdio: 'ignore' }).status === 0

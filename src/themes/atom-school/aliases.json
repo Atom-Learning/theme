@@ -1,0 +1,13 @@
+{
+  "color": {
+    "$type": "color",
+    "background": {
+      "base": {
+        "$value": "{color.grey.50}"
+      },
+      "accent": {
+        "$value": "{color.grey.100}"
+      }
+    }
+  }
+}

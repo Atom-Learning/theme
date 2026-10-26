@@ -18,8 +18,8 @@ interface MediaModule {
   default?: unknown
 }
 
-const themes = ['base', 'atom', 'quest', 'quest-reports'] as const
-const themeSpecificThemes = ['atom', 'quest', 'quest-reports'] as const
+const themes = ['base', 'atom', 'quest', 'quest-reports', 'atom-school', 'atom-school-reports'] as const
+const themeSpecificThemes = ['atom', 'quest', 'quest-reports', 'atom-school', 'atom-school-reports'] as const
 
 describe('Theme Output Tests', () => {
   describe('JavaScript Output', () => {
@@ -80,6 +80,55 @@ describe('Theme Output Tests', () => {
         expect(theme.fontSizes?.xs).toBe('0.625rem')
         expect(properties).toHaveProperty('--text-xs')
         expect(properties['--text-xs']).toBe('0.625rem')
+      })
+
+      it('atom-school should use the darker blue primary, grey surfaces and Inter', async () => {
+        const { theme: base } = (await import(
+          path.join(process.cwd(), 'lib', 'theme-base.js')
+        )) as ThemeModule
+        const { theme, properties } = (await import(
+          path.join(process.cwd(), 'lib', 'theme-atom-school.js')
+        )) as ThemeModule
+
+        expect(theme.colors.primary100).toBe(base.colors.blue100)
+        expect(theme.colors.primary700).toBe(base.colors.blue700)
+        expect(theme.colors.primary800).toBe(base.colors.blue1000)
+        expect(theme.colors.primary900).toBe(base.colors.blue1100)
+        expect(theme.colors.primary1000).toBe(base.colors.blue1200)
+        expect(theme.colors.primary1100).toBe(base.colors.blue1100)
+        expect(theme.colors.primary1200).toBe(base.colors.blue1200)
+        expect(properties['--color-background']).toBe('hsl(0, 0%, 98%)')
+        expect(properties['--color-background-accent']).toBe(base.colors.grey100)
+        expect(theme.fonts.display).toContain("'Inter'")
+        expect(theme.fonts.body).toContain("'Inter'")
+        expect(properties).not.toHaveProperty('--color-text-bold')
+      })
+
+      it('atom-school-reports should be atom-school plus the quest-reports font scale', async () => {
+        const school = (await import(
+          path.join(process.cwd(), 'lib', 'theme-atom-school.js')
+        )) as ThemeModule
+        const questReports = (await import(
+          path.join(process.cwd(), 'lib', 'theme-quest-reports.js')
+        )) as ThemeModule
+        const { theme, properties } = (await import(
+          path.join(process.cwd(), 'lib', 'theme-atom-school-reports.js')
+        )) as ThemeModule
+
+        expect(theme.colors).toEqual(school.theme.colors)
+        expect(theme.fonts).toEqual(school.theme.fonts)
+        expect(theme.fontSizes).toEqual(questReports.theme.fontSizes)
+        expect(properties['--text-xs']).toBe('0.625rem')
+      })
+
+      it('base should expose grey50 and the fixed emerald scale', async () => {
+        const { theme } = (await import(
+          path.join(process.cwd(), 'lib', 'theme-base.js')
+        )) as ThemeModule
+
+        expect(theme.colors.grey50).toBe('hsl(0, 0%, 98%)')
+        expect(theme.colors.emerald100).toBe('#EEFCF5')
+        expect(theme.colors.emerald1200).toBe('#101E17')
       })
     })
 
@@ -349,6 +398,8 @@ describe('Theme Output Tests', () => {
       expect(css).toContain('.theme-atom {')
       expect(css).toContain('.theme-quest {')
       expect(css).toContain('.theme-quest-reports {')
+      expect(css).toContain('.theme-atom-school {')
+      expect(css).toContain('.theme-atom-school-reports {')
     })
 
     it('should not contain base theme', () => {
@@ -389,13 +440,13 @@ describe('Theme Output Tests', () => {
         'utf-8'
       )
 
-      // Count @layer theme blocks - should be 3 (one per theme)
+      // Count @layer theme blocks - should be 5 (one per theme)
       const layerMatches = css.match(/@layer theme \{/g)
-      expect(layerMatches).toHaveLength(3)
+      expect(layerMatches).toHaveLength(5)
 
       // Each layer should have a closing brace
       const closingBraces = css.match(/\}\s*$/gm) || []
-      expect(closingBraces.length).toBeGreaterThanOrEqual(3)
+      expect(closingBraces.length).toBeGreaterThanOrEqual(5)
     })
   })
 })
