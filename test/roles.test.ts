@@ -39,11 +39,24 @@ describe('Role tokens', () => {
     }
   })
 
+  it('reads none of the old alias properties', () => {
+    expect(css).not.toMatch(/--color-(text|background)/)
+  })
+
+  it('gives school its own page colour, after the shared brand scope', () => {
+    const school = css.indexOf("[data-brand='school'],\n  .theme-atom-school,\n  .theme-atom-school-reports {")
+
+    expect(school).toBeGreaterThan(css.indexOf('[data-brand],'))
+    expect(css.slice(school, css.indexOf('}', school))).toContain(
+      '--background-color-page: var(--color-grey-50);'
+    )
+  })
+
   it('re-declares the roles a brand changes inside every brand scope', () => {
     expect(brandBlock).toContain("[data-brand],\n  .theme-atom,")
     expect(brandBlock).toContain('.theme-quest-reports')
     expect(brandBlock).toContain('--background-color-accent-solid: var(--color-primary-800);')
-    expect(brandBlock).toContain('--background-color-page: var(--color-background);')
+    expect(brandBlock).toContain('--background-color-page: var(--color-grey-100);')
     expect(brandBlock).not.toContain('--text-color-default')
     expect(brandBlock).not.toContain('--background-color-danger-solid')
   })

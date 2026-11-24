@@ -18,13 +18,21 @@ const ON_FILL = ['on-accent', 'on-accent-emphasis']
 const SOLID_STEP = '800'
 const DARK_INK = '{color.grey.1200}'
 
-// The colour scales and aliases each brand theme redefines
-const BRAND_OWNED = /^color\.(primary|background)\./
+// The scale each brand theme redefines
+const BRAND_OWNED = /^color\.primary\./
 
 const reference = (value: string): string => value.replace(/[{}]/g, '')
 
 const toVar = (value: string): string =>
   `var(--${reference(value).replace(/\.base$/, '').replace(/\./g, '-')})`
+
+const themeSelectors = (themesPath: string, theme: string): string[] => [
+  ...(BRANDS[theme] ? [`[data-brand='${BRANDS[theme]}']`] : []),
+  `.theme-${theme}`,
+  ...(existsSync(join(themesPath, theme, 'reports'))
+    ? [`.theme-${theme}-reports`]
+    : [])
+]
 
 const brandSelectors = (themesPath: string): string[] =>
   readdirSync(themesPath).flatMap((theme) => [
@@ -97,9 +105,29 @@ export const buildRoles = (): void => {
     }))
   )
   const all = list.map(declare)
+  const brands: Record<string, Record<string, string>> = JSON.parse(
+    readFileSync(join(root, 'src', 'roles', 'brands.json'), 'utf-8')
+  )
+  const overridden = new Set(Object.values(brands).flatMap(Object.keys))
+  const key = ({ group, name }: Role): string => `${group}.${name}`
+
+  // A role one brand overrides is reset in every brand scope, so a brand
+  // nested in another doesn't inherit the outer brand's value
   const brandOwned = list
-    .filter(({ value }) => BRAND_OWNED.test(reference(value)))
+    .filter(
+      (role) =>
+        BRAND_OWNED.test(reference(role.value)) || overridden.has(key(role))
+    )
     .map(declare)
+
+  const themesPath = join(root, 'src', 'themes')
+  const brandOverrides = Object.entries(brands).map(
+    ([theme, own]) =>
+      `  ${themeSelectors(themesPath, theme).join(',\n  ')} {\n    ${list
+        .filter((role) => own[key(role)])
+        .map((role) => declare({ ...role, value: own[key(role)] }))
+        .join('\n    ')}\n  }`
+  )
   const accentRoles = list.filter(isAccent)
 
   const accentScopes = [
@@ -131,7 +159,7 @@ export const buildRoles = (): void => {
     )
   ]
 
-  const scopes = ['[data-brand]', ...brandSelectors(join(root, 'src', 'themes'))]
+  const scopes = ['[data-brand]', ...brandSelectors(themesPath)]
 
   // A custom property resolves var() where it is declared, so a brand set
   // below <html> (a PDF body, a preview) needs its own copy of these
@@ -145,7 +173,7 @@ export const buildRoles = (): void => {
     ${brandOwned.join('\n    ')}
   }
 
-${accentScopes.join('\n\n')}
+${[...brandOverrides, ...accentScopes].join('\n\n')}
 }
 `
 

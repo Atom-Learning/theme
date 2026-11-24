@@ -1,6 +1,6 @@
 
 @theme static {
-  --background-color-page: var(--color-background);
+  --background-color-page: var(--color-grey-100);
   --background-color-surface: var(--color-white);
   --background-color-surface-hover: var(--color-grey-200);
   --background-color-surface-overlay: var(--color-white);
@@ -94,7 +94,7 @@
   .theme-atom-school-reports,
   .theme-quest,
   .theme-quest-reports {
-    --background-color-page: var(--color-background);
+    --background-color-page: var(--color-grey-100);
     --background-color-accent-subtle: var(--color-primary-100);
     --background-color-accent-subtle-hover: var(--color-primary-200);
     --background-color-accent-subtle-active: var(--color-primary-300);
@@ -115,6 +115,12 @@
     --border-color-accent-solid: var(--color-primary-800);
     --border-color-focus: var(--color-primary-800);
     --outline-color-focus: var(--color-primary-800);
+  }
+
+  [data-brand='school'],
+  .theme-atom-school,
+  .theme-atom-school-reports {
+    --background-color-page: var(--color-grey-50);
   }
 
   [data-color-accent='brand'] {

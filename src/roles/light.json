@@ -1,6 +1,6 @@
 {
   "background": {
-    "page": { "$value": "{color.background.base}" },
+    "page": { "$value": "{color.grey.100}" },
     "surface": { "$value": "{color.white}" },
     "surface-hover": { "$value": "{color.grey.200}" },
     "surface-overlay": { "$value": "{color.white}" },
