@@ -12,6 +12,7 @@ interface Property {
   $value?: string | number
   name: string
   filePath?: string
+  $deprecated?: string | boolean
 }
 
 interface Dictionary {
@@ -104,6 +105,8 @@ const generateThemeCSS = (
     if (!varName) return
 
     const value = formatValue(tokenValue(property), category, type)
+    if (property.$deprecated)
+      cssVars.push(`  /* @deprecated ${property.$deprecated} */`)
     cssVars.push(`  ${varName}: ${value};`)
   })
 

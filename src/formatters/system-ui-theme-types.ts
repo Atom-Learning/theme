@@ -1,6 +1,7 @@
 import {
   transformPropertiesToTheme,
-  generateCustomProperties
+  generateCustomProperties,
+  deprecations
 } from './system-ui-theme.ts'
 import { getBuildConfig } from './shared.ts'
 
@@ -32,6 +33,15 @@ const formatter = (dictionary: Dictionary): string => {
     config
   )
 
+  const deprecated = deprecations(
+    dictionary as Parameters<typeof deprecations>[0],
+    config
+  )
+  const jsdoc = (message: string | undefined, indent: string): string =>
+    message === undefined
+      ? ''
+      : `\n${indent}/** @deprecated ${message} */`
+
   const constObjectEntries = Object.entries(theme)
     .filter(([_, value]) => Boolean(value))
     .map(([key, value]) => {
@@ -40,7 +50,8 @@ const formatter = (dictionary: Dictionary): string => {
         .map(([token, tokenValue]) => {
           const formattedToken = formatPropertyName(token)
           const escapedValue = escapeString(tokenValue)
-          return `\n    ${formattedToken}: "${escapedValue}"`
+          const doc = key === 'colors' ? jsdoc(deprecated.colors[token], '    ') : ''
+          return `${doc}\n    ${formattedToken}: "${escapedValue}"`
         })
         .join('')
       return `\n  ${formattedKey}: {${nestedEntries}\n  }`
@@ -49,7 +60,7 @@ const formatter = (dictionary: Dictionary): string => {
   const propertiesEntries = Object.entries(properties)
     .map(([key, value]) => {
       const escapedValue = escapeString(value)
-      return `\n  ${formatPropertyName(key)}: "${escapedValue}"`
+      return `${jsdoc(deprecated.properties[key], '  ')}\n  ${formatPropertyName(key)}: "${escapedValue}"`
     })
     .join('')
 

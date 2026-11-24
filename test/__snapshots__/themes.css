@@ -1,6 +1,8 @@
 @layer theme {
   .theme-atom-school-reports {
+  /* @deprecated Use the bg-page role (--background-color-page) */
   --color-background: hsl(0, 0%, 98%);
+  /* @deprecated Use the bg-accent-subtle role (--background-color-accent-subtle) */
   --color-background-accent: hsl(0, 0%, 96%);
   --color-primary-100: hsl(215, 100%, 98%);
   --color-primary-200: hsl(212, 100%, 95%);
@@ -30,7 +32,9 @@
 @layer theme {
   [data-brand='school'],
   .theme-atom-school {
+  /* @deprecated Use the bg-page role (--background-color-page) */
   --color-background: hsl(0, 0%, 98%);
+  /* @deprecated Use the bg-accent-subtle role (--background-color-accent-subtle) */
   --color-background-accent: hsl(0, 0%, 96%);
   --color-primary-100: hsl(215, 100%, 98%);
   --color-primary-200: hsl(212, 100%, 95%);

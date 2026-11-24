@@ -5,11 +5,17 @@
   --text-*: initial;
   --radius-*: initial;
   --shadow-*: initial;
+  /* @deprecated Use the text-default role (--text-color-default) */
   --color-text-bold: hsl(0, 0%, 12%);
+  /* @deprecated Use the text-default role (--text-color-default) */
   --color-text-regular: hsl(0, 0%, 20%);
+  /* @deprecated Use the text-subtle role (--text-color-subtle) */
   --color-text-subtle: hsl(0, 0%, 33%);
+  /* @deprecated Use the text-subtlest role (--text-color-subtlest) */
   --color-text-minimal: hsl(0, 0%, 46%);
+  /* @deprecated Use the bg-page role (--background-color-page) */
   --color-background: hsl(0, 0%, 96%);
+  /* @deprecated Use the bg-accent-subtle role (--background-color-accent-subtle) */
   --color-background-accent: hsl(215, 100%, 98%);
   --color-black: #000;
   --color-white: #fff;

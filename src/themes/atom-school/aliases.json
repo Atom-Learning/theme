@@ -3,10 +3,12 @@
     "$type": "color",
     "background": {
       "base": {
-        "$value": "{color.grey.50}"
+        "$value": "{color.grey.50}",
+        "$deprecated": "Use the bg-page role (--background-color-page)"
       },
       "accent": {
-        "$value": "{color.grey.100}"
+        "$value": "{color.grey.100}",
+        "$deprecated": "Use the bg-accent-subtle role (--background-color-accent-subtle)"
       }
     }
   }
