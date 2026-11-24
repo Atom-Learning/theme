@@ -42,7 +42,7 @@
         "$value": "hsl(0, 0%, 12%)"
       },
       "1100": {
-        "$value": "hsl(359, 0%, 9%)"
+        "$value": "hsl(0, 0%, 9%)"
       },
       "1200": {
         "$value": "hsl(0, 0%, 6%)"
@@ -734,19 +734,19 @@
     },
     "subject": {
       "english": {
-        "$value": "{color.magenta.700}"
+        "$value": "hsl(333, 75%, 59%)"
       },
       "maths": {
-        "$value": "{color.blue.700}"
+        "$value": "hsl(214, 100%, 58%)"
       },
       "science": {
         "$value": "hsl(256, 65%, 62%)"
       },
       "verbal-reasoning": {
-        "$value": "{color.green.700}"
+        "$value": "hsl(148, 84%, 36%)"
       },
       "non-verbal-reasoning": {
-        "$value": "{color.orange.500}"
+        "$value": "hsl(41, 100%, 55%)"
       },
       "creative-writing": {
         "$value": "hsl(29, 100%, 55%)"
@@ -755,22 +755,22 @@
         "$value": "hsl(257, 53%, 35%)"
       },
       "gcse-english-literature": {
-        "$value": "{color.magenta.700}"
+        "$value": "hsl(333, 75%, 59%)"
       },
       "gcse-english-language": {
         "$value": "hsl(256, 65%, 62%)"
       },
       "gcse-maths": {
-        "$value": "{color.blue.700}"
+        "$value": "hsl(214, 100%, 58%)"
       },
       "gcse-chemistry": {
         "$value": "hsl(29, 100%, 55%)"
       },
       "gcse-physics": {
-        "$value": "{color.coolGrey.700}"
+        "$value": "hsl(206, 9%, 49%)"
       },
       "gcse-biology": {
-        "$value": "{color.green.700}"
+        "$value": "hsl(148, 84%, 36%)"
       }
     },
     "gl": {
