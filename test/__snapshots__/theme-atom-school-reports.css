@@ -1,0 +1,27 @@
+
+@theme static {
+  --color-background: hsl(0, 0%, 98%);
+  --color-background-accent: hsl(0, 0%, 96%);
+  --color-primary-100: hsl(215, 100%, 98%);
+  --color-primary-200: hsl(212, 100%, 95%);
+  --color-primary-300: hsl(211, 100%, 92%);
+  --color-primary-400: hsl(211, 100%, 88%);
+  --color-primary-500: hsl(212, 100%, 80%);
+  --color-primary-600: hsl(213, 100%, 71%);
+  --color-primary-700: hsl(214, 100%, 58%);
+  --color-primary-800: hsl(228, 82%, 35%);
+  --color-primary-900: hsl(228, 63%, 23%);
+  --color-primary-1000: hsl(227, 57%, 11%);
+  --color-primary-1100: hsl(228, 63%, 23%);
+  --color-primary-1200: hsl(227, 57%, 11%);
+  --text-xs: 0.625rem;
+  --text-sm: 0.75rem;
+  --text-md: 0.875rem;
+  --text-lg: 1rem;
+  --text-xl: 1.3125rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.3125rem;
+  --text-4xl: 3.125rem;
+  --font-display: 'Inter', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+}

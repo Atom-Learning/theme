@@ -1,0 +1,17 @@
+
+@theme static {
+  --color-primary-100: hsl(151, 70%, 96%);
+  --color-primary-200: hsl(151, 62%, 92%);
+  --color-primary-300: hsl(151, 53%, 83%);
+  --color-primary-400: hsl(151, 50%, 75%);
+  --color-primary-500: hsl(151, 46%, 64%);
+  --color-primary-600: hsl(158, 42%, 49%);
+  --color-primary-700: hsl(162, 51%, 35%);
+  --color-primary-800: hsl(162, 69%, 28%);
+  --color-primary-900: hsl(164, 100%, 15%);
+  --color-primary-1000: hsl(164, 100%, 13%);
+  --color-primary-1100: hsl(150, 34%, 15%);
+  --color-primary-1200: hsl(150, 30%, 9%);
+  --font-display: 'DM Sans', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+}
