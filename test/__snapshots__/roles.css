@@ -11,6 +11,7 @@
   --background-color-neutral: var(--color-grey-200);
   --background-color-neutral-solid: var(--color-grey-600);
   --background-color-neutral-solid-hover: var(--color-grey-700);
+  --background-color-disabled: var(--color-grey-200);
   --background-color-inverse: var(--color-grey-900);
   --background-color-scrim: var(--color-alpha-600);
   --background-color-accent-subtle: var(--color-primary-100);
@@ -48,6 +49,7 @@
   --text-color-subtlest: var(--color-grey-700);
   --text-color-icon: var(--color-grey-900);
   --text-color-icon-subtle: var(--color-grey-700);
+  --text-color-disabled: var(--color-grey-600);
   --text-color-on-inverse: var(--color-white);
   --text-color-link: var(--color-primary-800);
   --text-color-link-hover: var(--color-primary-900);
@@ -75,6 +77,7 @@
   --border-color-default: var(--color-grey-300);
   --border-color-control: var(--color-grey-700);
   --border-color-control-subtle: var(--color-grey-600);
+  --border-color-disabled: var(--color-grey-700);
   --border-color-accent: var(--color-primary-300);
   --border-color-accent-solid: var(--color-primary-800);
   --border-color-accent-solid-hover: var(--color-primary-900);
