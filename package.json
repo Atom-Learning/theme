@@ -72,6 +72,14 @@
     "./themes": {
       "style": "./lib/themes.css"
     },
+    "./reports": {
+      "style": "./lib/reports.css"
+    },
+    "./roles": {
+      "types": "./lib/roles.d.ts",
+      "style": "./lib/roles.css",
+      "default": "./lib/roles.js"
+    },
     "./assets/fonts/national-2-condensed-bold.woff2": "./lib/assets/fonts/national-2-condensed-bold.woff2",
     "./assets/logos/atom/atom-home-light.svg": "./lib/assets/logos/atom/atom-home-light.svg",
     "./assets/logos/atom/atom-home-primary.svg": "./lib/assets/logos/atom/atom-home-primary.svg",
@@ -115,6 +123,9 @@
       ],
       "media": [
         "./lib/media.d.ts"
+      ],
+      "roles": [
+        "./lib/roles.d.ts"
       ]
     }
   }
