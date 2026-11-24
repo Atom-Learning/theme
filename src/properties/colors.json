@@ -404,22 +404,22 @@
         "$value": "hsl(52, 97%, 63%)"
       },
       "500": {
-        "$value": "hsl(50, 83%, 48%)"
+        "$value": "hsl(51, 100%, 46%)"
       },
       "600": {
         "$value": "hsl(49, 100%, 39%)"
       },
       "700": {
-        "$value": "hsl(47, 87%, 34%)"
+        "$value": "hsl(48, 100%, 35%)"
       },
       "800": {
-        "$value": "hsl(45, 88%, 29%)"
+        "$value": "hsl(46, 100%, 30%)"
       },
       "900": {
         "$value": "hsl(44, 100%, 22%)"
       },
       "1000": {
-        "$value": "hsl(44, 95%, 15%)"
+        "$value": "hsl(44, 100%, 18%)"
       },
       "1100": {
         "$value": "hsl(41, 100%, 11%)"
@@ -734,43 +734,43 @@
     },
     "subject": {
       "english": {
-        "$value": "hsl(333, 75%, 59%)"
+        "$value": "{color.magenta.700}"
       },
       "maths": {
-        "$value": "hsl(214, 100%, 58%)"
+        "$value": "{color.blue.700}"
       },
       "science": {
-        "$value": "hsl(256, 65%, 62%)"
+        "$value": "{color.purple.700}"
       },
       "verbal-reasoning": {
-        "$value": "hsl(148, 84%, 36%)"
+        "$value": "{color.green.700}"
       },
       "non-verbal-reasoning": {
-        "$value": "hsl(41, 100%, 55%)"
+        "$value": "{color.orange.500}"
       },
       "creative-writing": {
-        "$value": "hsl(29, 100%, 55%)"
+        "$value": "{color.orange.700}"
       },
       "exam-skills": {
-        "$value": "hsl(257, 53%, 35%)"
+        "$value": "{color.purple.1000}"
       },
       "gcse-english-literature": {
-        "$value": "hsl(333, 75%, 59%)"
+        "$value": "{color.magenta.700}"
       },
       "gcse-english-language": {
-        "$value": "hsl(256, 65%, 62%)"
+        "$value": "{color.purple.700}"
       },
       "gcse-maths": {
-        "$value": "hsl(214, 100%, 58%)"
+        "$value": "{color.blue.700}"
       },
       "gcse-chemistry": {
-        "$value": "hsl(29, 100%, 55%)"
+        "$value": "{color.orange.700}"
       },
       "gcse-physics": {
-        "$value": "hsl(206, 9%, 49%)"
+        "$value": "{color.coolGrey.700}"
       },
       "gcse-biology": {
-        "$value": "hsl(148, 84%, 36%)"
+        "$value": "{color.green.700}"
       }
     },
     "gl": {

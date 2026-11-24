@@ -473,9 +473,9 @@
     --text-color-accent: var(--color-yellow-800);
     --text-color-accent-hover: var(--color-yellow-900);
     --text-color-accent-active: var(--color-yellow-1000);
-    --text-color-on-accent: var(--color-white);
+    --text-color-on-accent: var(--color-grey-1200);
     --text-color-on-accent-subtle: var(--color-yellow-1000);
-    --text-color-on-accent-emphasis: var(--color-white);
+    --text-color-on-accent-emphasis: var(--color-grey-1200);
     --border-color-accent: var(--color-yellow-300);
     --border-color-accent-solid: var(--color-yellow-800);
   }
