@@ -26,7 +26,7 @@ describe('Role tokens', () => {
     expect(themeBlock).toContain('--background-color-surface: var(--color-white);')
     expect(themeBlock).toContain('--text-color-default: var(--color-grey-1000);')
     expect(themeBlock).toContain('--border-color-control: var(--color-grey-700);')
-    expect(themeBlock).toContain('--outline-color-focus: var(--color-primary-800);')
+    expect(themeBlock).toContain('--outline-color-focus: var(--color-blue-800);')
     expect(themeBlock).toContain('--background-color-danger-solid: var(--color-danger);')
   })
 

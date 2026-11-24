@@ -82,13 +82,13 @@
   --border-color-accent-solid: var(--color-primary-800);
   --border-color-accent-solid-hover: var(--color-primary-900);
   --border-color-accent-solid-active: var(--color-primary-1000);
-  --border-color-focus: var(--color-primary-800);
+  --border-color-focus: var(--color-blue-800);
   --border-color-danger: var(--color-red-300);
   --border-color-success-solid: var(--color-success);
   --border-color-warning-solid: var(--color-warning);
   --border-color-danger-solid: var(--color-danger);
   --border-color-info-solid: var(--color-info);
-  --outline-color-focus: var(--color-primary-800);
+  --outline-color-focus: var(--color-blue-800);
   --outline-color-focus-inverse: var(--color-white);
   --outline-color-accent: var(--color-primary-800);
   --outline-color-danger: var(--color-danger);
@@ -134,8 +134,6 @@
     --border-color-accent-solid: var(--color-primary-800);
     --border-color-accent-solid-hover: var(--color-primary-900);
     --border-color-accent-solid-active: var(--color-primary-1000);
-    --border-color-focus: var(--color-primary-800);
-    --outline-color-focus: var(--color-primary-800);
     --outline-color-accent: var(--color-primary-800);
   }
 
