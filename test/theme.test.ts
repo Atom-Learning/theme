@@ -127,8 +127,8 @@ describe('Theme Output Tests', () => {
         )) as ThemeModule
 
         expect(theme.colors.grey50).toBe('hsl(0, 0%, 98%)')
-        expect(theme.colors.emerald100).toBe('#EEFCF5')
-        expect(theme.colors.emerald1200).toBe('#101E17')
+        expect(theme.colors.emerald100).toBe('hsl(151, 70%, 96%)')
+        expect(theme.colors.emerald1200).toBe('hsl(150, 30%, 9%)')
       })
     })
 
