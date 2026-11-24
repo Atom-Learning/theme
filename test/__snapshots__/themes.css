@@ -28,6 +28,7 @@
 }
 
 @layer theme {
+  [data-brand='school'],
   .theme-atom-school {
   --color-background: hsl(0, 0%, 98%);
   --color-background-accent: hsl(0, 0%, 96%);
@@ -49,6 +50,7 @@
 }
 
 @layer theme {
+  [data-brand='atom'],
   .theme-atom {
   --color-primary-100: hsl(215, 100%, 98%);
   --color-primary-200: hsl(212, 100%, 95%);
@@ -95,6 +97,7 @@
 }
 
 @layer theme {
+  [data-brand='quest'],
   .theme-quest {
   --color-primary-100: hsl(151, 70%, 96%);
   --color-primary-200: hsl(151, 62%, 92%);
