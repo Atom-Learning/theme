@@ -10,7 +10,10 @@ const declared = (css: string) =>
 
 const css = read('roles.css')
 const [themeBlock, scopes] = css.split('@layer theme')
-const brandBlock = scopes.slice(0, scopes.indexOf('[data-color-accent='))
+const brandBlock = scopes.slice(
+  scopes.indexOf('[data-brand],'),
+  scopes.indexOf('[data-color-accent=')
+)
 
 const accent = (name: string) => {
   const start = css.indexOf(`[data-color-accent='${name}'] {`)
@@ -65,6 +68,15 @@ describe('Role tokens', () => {
 // grey-1200 on yellow-800 is 4.47:1. Accepted until yellow-800 is darkened;
 // the floor stops it getting worse
 const ACCEPTED_BELOW_AA: Record<string, number> = { yellow: 4.45 }
+
+describe('Shadow roles', () => {
+  it('are plain variables on :root, outside @theme', () => {
+    expect(themeBlock).not.toContain('--shadow-')
+    expect(scopes).toContain('--shadow-floating-md: var(--shadow-md);')
+    expect(scopes).toContain('--shadow-resting-sm: var(--shadow-sm);')
+    expect(scopes).toContain('--shadow-edge-top: 0 -6px 6px -1px hsla(0, 0%, 20%, 0.05);')
+  })
+})
 
 describe('Accent scopes', () => {
   it('points the accent roles at a hue', () => {

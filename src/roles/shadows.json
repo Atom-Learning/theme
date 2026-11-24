@@ -1,0 +1,11 @@
+{
+  "floating-sm": "var(--shadow-sm)",
+  "floating-md": "var(--shadow-md)",
+  "floating-lg": "var(--shadow-lg)",
+  "floating-xl": "var(--shadow-xl)",
+  "resting-sm": "var(--shadow-sm)",
+  "resting-md": "var(--shadow-md)",
+  "edge-top": "0 -6px 6px -1px hsla(0, 0%, 20%, 0.05)",
+  "edge-bottom": "0 4px 4px -2px hsla(0, 0%, 12%, 0.1)",
+  "edge-end": "4px 0 4px -2px hsla(0, 0%, 12%, 0.1)"
+}

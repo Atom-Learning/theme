@@ -120,6 +120,15 @@ export const buildRoles = (): void => {
     )
     .map(declare)
 
+  const shadows: Record<string, string> = JSON.parse(
+    readFileSync(join(root, 'src', 'roles', 'shadows.json'), 'utf-8')
+  )
+  // Outside @theme: Tailwind inlines theme shadows into its utilities, and
+  // these have to stay variables so a scheme can change them
+  const shadowScope = `  :root {\n    ${Object.entries(shadows)
+    .map(([name, value]) => `--shadow-${name}: ${value};`)
+    .join('\n    ')}\n  }`
+
   const themesPath = join(root, 'src', 'themes')
   const brandOverrides = Object.entries(brands).map(
     ([theme, own]) =>
@@ -169,6 +178,8 @@ export const buildRoles = (): void => {
 }
 
 @layer theme {
+${shadowScope}
+
   ${scopes.join(',\n  ')} {
     ${brandOwned.join('\n    ')}
   }
@@ -186,7 +197,8 @@ ${[...brandOverrides, ...accentScopes].join('\n\n')}
     accents: ['brand', ...accents.hues, ...Object.keys(accents.tones)],
     roles: Object.fromEntries(
       Object.entries(roles).map(([group, tokens]) => [group, Object.keys(tokens)])
-    )
+    ),
+    shadows: Object.keys(shadows)
   }
   const literal = (value: unknown): string => JSON.stringify(value, null, 2)
   const union = (values: string[]): string =>
@@ -212,6 +224,9 @@ export type TextColorRole = ${union(names.roles.text)}
 export type BorderColorRole = ${union(names.roles.border)}
 export type OutlineColorRole = ${union(names.roles.outline)}
 
+export type ShadowRole = ${union(names.shadows)}
+export type ShadowRoleVariable = \`--shadow-\${ShadowRole}\`
+
 export type ColorRoleVariable =
   | \`--background-color-\${BackgroundColorRole}\`
   | \`--text-color-\${TextColorRole}\`
@@ -222,6 +237,7 @@ export declare const brands: Brand[]
 export declare const hues: ColorHue[]
 export declare const tones: ColorTone[]
 export declare const accents: ColorAccent[]
+export declare const shadows: ShadowRole[]
 export declare const roles: {
   background: BackgroundColorRole[]
   text: TextColorRole[]

@@ -81,7 +81,10 @@
     "control-subtle": { "$value": "{color.grey.600}" },
     "accent": { "$value": "{color.primary.300}" },
     "accent-solid": { "$value": "{color.primary.800}" },
+    "accent-solid-hover": { "$value": "{color.primary.900}" },
+    "accent-solid-active": { "$value": "{color.primary.1000}" },
     "focus": { "$value": "{color.primary.800}" },
+    "danger": { "$value": "{color.red.300}" },
     "success-solid": { "$value": "{color.success.base}" },
     "warning-solid": { "$value": "{color.warning.base}" },
     "danger-solid": { "$value": "{color.danger.base}" },
@@ -90,6 +93,7 @@
   "outline": {
     "focus": { "$value": "{color.primary.800}" },
     "focus-inverse": { "$value": "{color.white}" },
+    "accent": { "$value": "{color.primary.800}" },
     "danger": { "$value": "{color.danger.base}" }
   }
 }
