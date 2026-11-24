@@ -22,6 +22,24 @@ const accent = (name: string) => {
 }
 
 describe('Role tokens', () => {
+  // A role class such as border-danger shadows the colour class of the same
+  // name, so the two must agree or existing markup changes colour.
+  it('keeps the value of any colour class a role shares a name with', () => {
+    // The warning base fails contrast as text, so the role is the darker text shade
+    const deliberate = ['--text-color-warning']
+    const base = read('theme-base.css')
+    const changed = [
+      ...themeBlock.matchAll(
+        /(--(?:background|text|border|outline)-color-([\w-]+)): ([^;]+);/g
+      )
+    ]
+      .filter(([, , name]) => base.includes(`--color-${name}:`))
+      .filter(([, , name, value]) => value !== `var(--color-${name})`)
+      .map(([, role]) => role)
+
+    expect(changed).toEqual(deliberate)
+  })
+
   it('names each role by the property it is for', () => {
     expect(themeBlock).toContain('--background-color-surface: var(--color-white);')
     expect(themeBlock).toContain('--text-color-default: var(--color-grey-1000);')

@@ -87,11 +87,10 @@
     "accent-solid-hover": { "$value": "{color.primary.900}" },
     "accent-solid-active": { "$value": "{color.primary.1000}" },
     "focus": { "$value": "{color.blue.800}" },
-    "danger": { "$value": "{color.red.300}" },
-    "success-solid": { "$value": "{color.success.base}" },
-    "warning-solid": { "$value": "{color.warning.base}" },
-    "danger-solid": { "$value": "{color.danger.base}" },
-    "info-solid": { "$value": "{color.info.base}" }
+    "success": { "$value": "{color.success.base}" },
+    "warning": { "$value": "{color.warning.base}" },
+    "danger": { "$value": "{color.danger.base}" },
+    "info": { "$value": "{color.info.base}" }
   },
   "outline": {
     "focus": { "$value": "{color.blue.800}" },
