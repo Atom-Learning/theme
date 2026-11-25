@@ -13,9 +13,11 @@ const PROPERTY: Record<string, string> = {
   outline: 'outline-color'
 }
 
-// Text roles that sit on the solid and emphasis fills, both step 800 in light
-const ON_FILL = ['on-accent', 'on-accent-emphasis']
-const SOLID_STEP = '800'
+// Text roles and the step of the fill each one sits on
+const ON_FILL: Record<string, string> = {
+  'on-accent': '800',
+  'on-accent-emphasis': '1000'
+}
 const DARK_INK = '{color.grey.1200}'
 
 // The scale each brand theme redefines
@@ -146,8 +148,8 @@ export const buildRoles = (): void => {
         hue,
         accentRoles.map((role) => ({
           ...role,
-          value: ON_FILL.includes(role.name)
-            ? inkOn(colors[hue][SOLID_STEP].$value, colors.grey['1200'].$value)
+          value: ON_FILL[role.name]
+            ? inkOn(colors[hue][ON_FILL[role.name]].$value, colors.grey['1200'].$value)
             : remap(role.value, (step) => `{color.${hue}.${step}}`)
         }))
       )

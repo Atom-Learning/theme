@@ -39,7 +39,7 @@
         "text.accent": "{color.warning.text}",
         "text.on-accent": "{color.grey.800}",
         "text.on-accent-subtle": "{color.warning.text}",
-        "text.on-accent-emphasis": "{color.grey.800}"
+        "text.on-accent-emphasis": "{color.grey.1200}"
       }
     },
     "danger": {
