@@ -1,0 +1,71 @@
+name: Release npm package
+
+# Releases are batched rather than cut per merge: semantic-release already
+# aggregates every commit since the last tag into one version, so it only needs
+# triggering once per batch instead of on every push to main.
+on:
+  # Beta is a preview channel, so it publishes per push rather than in batches.
+  # Nothing pushes back to beta (no @semantic-release/git there), so this cannot
+  # retrigger itself.
+  push:
+    branches:
+      - beta
+  workflow_dispatch:
+  schedule:
+    # Backstop so merged work cannot sit unreleased indefinitely. Safe to run
+    # unconditionally — semantic-release exits without publishing when no commit
+    # since the last tag warrants a release. Affects main only: GitHub runs
+    # scheduled workflows on the default branch.
+    # Sunday night, so a batch is on npm before Monday morning.
+    - cron: '0 22 * * 0'
+
+# Serialised and never cancelled: concurrent runs race on the git tag and the npm
+# publish, and cancelling one mid-publish can leave a tag with no package behind it.
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write # Required for npm trusted publishing (OIDC)
+    steps:
+      # @semantic-release/git pushes the release commit straight to main. If main
+      # is protected, github-actions[bot] cannot bypass it, so the push
+      # authenticates as atom-ci-actions, which must be a bypass actor there.
+      - name: Generate a token for the Atom CI app
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ secrets.ATOM_CI_APP_ID }}
+          private-key: ${{ secrets.ATOM_CI_APP_PRIVATE_KEY }}
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          # semantic-release pushes over the bare remote URL whenever the stored
+          # credentials already authenticate it, so the token persisted here is the
+          # identity that reaches main. Leave it as the default and the push is
+          # rejected however GIT_CREDENTIALS below is set.
+          token: ${{ steps.app-token.outputs.token }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24' # Node 24 ships with npm 11, required for OIDC trusted publishing
+      - run: yarn install --frozen-lockfile
+      - run: yarn semantic-release
+        env:
+          # API calls stay on the workflow's own token: @semantic-release/github
+          # comments on and labels every issue a release closes, which needs
+          # `issues: write`, and atom-ci-actions holds no issues permission. A
+          # rejected comment throws, so the run would fail after the package is
+          # already on npm.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Only consulted if the persisted credentials above stop authenticating
+          # the push. semantic-release prefers this over GITHUB_TOKEN when both are
+          # set, so the app stays the pushing identity either way.
+          GIT_CREDENTIALS: x-access-token:${{ steps.app-token.outputs.token }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
