@@ -23,6 +23,8 @@ const DARK_INK = '{color.grey.1200}'
 // The scale each brand theme redefines
 const BRAND_OWNED = /^color\.primary\./
 
+const DARK = "[data-color-scheme='dark']"
+
 const reference = (value: string): string => value.replace(/[{}]/g, '')
 
 const toVar = (value: string): string =>
@@ -48,7 +50,12 @@ interface Accents {
   hues: string[]
   tones: Record<
     string,
-    { hue: string; steps: Record<string, string>; roles?: Record<string, string> }
+    {
+      hue: string
+      steps: Record<string, string>
+      roles?: Record<string, string>
+      dark?: Record<string, string>
+    }
   >
 }
 
@@ -80,8 +87,21 @@ const inkOn = (fill: string, dark: string): string => {
   return getContrast(dark, fill) >= white ? DARK_INK : '{color.white}'
 }
 
-const accentScope = (name: string, roles: Role[]): string =>
-  `  [data-color-accent='${name}'] {\n    ${roles.map(declare).join('\n    ')}\n  }`
+const accentScope = (selector: string, roles: Role[]): string =>
+  `  ${selector} {\n    ${roles.map(declare).join('\n    ')}\n  }`
+
+const lightAccent = (name: string): string => `[data-color-accent='${name}']`
+
+// Descendant and same-element forms both outrank a light accent scope
+const darkAccent = (name: string): string =>
+  `${DARK} [data-color-accent='${name}'],\n  ${DARK}[data-color-accent='${name}']`
+
+const readRoles = (file: string): Role[] => {
+  const groups: Record<string, RoleGroup> = JSON.parse(readFileSync(file, 'utf-8'))
+  return Object.entries(groups).flatMap(([group, tokens]) =>
+    Object.entries(tokens).map(([name, { $value }]) => ({ group, name, value: $value }))
+  )
+}
 
 export const buildRoles = (): void => {
   const root = process.cwd()
@@ -139,38 +159,55 @@ export const buildRoles = (): void => {
         .map((role) => declare({ ...role, value: own[key(role)] }))
         .join('\n    ')}\n  }`
   )
-  const accentRoles = list.filter(isAccent)
+  const accentScopes = (
+    roleList: Role[],
+    selector: (name: string) => string,
+    own: (tone: Accents['tones'][string]) => Record<string, string> | undefined
+  ): string[] => {
+    const accentRoles = roleList.filter(isAccent)
+    return [
+      accentScope(selector('brand'), accentRoles),
+      ...accents.hues.map((hue) =>
+        accentScope(
+          selector(hue),
+          accentRoles.map((role) => ({
+            ...role,
+            value: ON_FILL[role.name]
+              ? inkOn(
+                  colors[hue][ON_FILL[role.name]].$value,
+                  colors.grey['1200'].$value
+                )
+              : remap(role.value, (step) => `{color.${hue}.${step}}`)
+          }))
+        )
+      ),
+      ...Object.entries(accents.tones).map(([tone, scale]) =>
+        accentScope(
+          selector(tone),
+          accentRoles.map((role) => ({
+            ...role,
+            value:
+              own(scale)?.[`${role.group}.${role.name}`] ??
+              remap(
+                role.value,
+                (step) => scale.steps[step] ?? `{color.${scale.hue}.${step}}`
+              )
+          }))
+        )
+      )
+    ]
+  }
 
-  const accentScopes = [
-    accentScope('brand', accentRoles),
-    ...accents.hues.map((hue) =>
-      accentScope(
-        hue,
-        accentRoles.map((role) => ({
-          ...role,
-          value: ON_FILL[role.name]
-            ? inkOn(colors[hue][ON_FILL[role.name]].$value, colors.grey['1200'].$value)
-            : remap(role.value, (step) => `{color.${hue}.${step}}`)
-        }))
-      )
-    ),
-    ...Object.entries(accents.tones).map(([tone, { hue, steps, roles: own }]) =>
-      accentScope(
-        tone,
-        accentRoles.map((role) => ({
-          ...role,
-          value:
-            own?.[`${role.group}.${role.name}`] ??
-            remap(
-              role.value,
-              (step) => steps[step] ?? `{color.${hue}.${step}}`
-            )
-        }))
-      )
-    )
-  ]
+  const darkList = readRoles(join(root, 'src', 'roles', 'dark.json'))
 
   const scopes = ['[data-brand]', ...brandSelectors(themesPath)]
+
+  // Repeated on every brand scope below it, which would otherwise reset the
+  // brand-owned roles to their light values
+  const darkScope = `  ${[DARK, ...scopes.map((scope) => `${DARK} ${scope}`)].join(',\n  ')} {
+    color-scheme: dark;
+    ${darkList.map(declare).join('\n    ')}
+  }`
 
   // A custom property resolves var() where it is declared, so a brand set
   // below <html> (a PDF body, a preview) needs its own copy of these
@@ -186,7 +223,12 @@ ${shadowScope}
     ${brandOwned.join('\n    ')}
   }
 
-${[...brandOverrides, ...accentScopes].join('\n\n')}
+${[
+  ...brandOverrides,
+  ...accentScopes(list, lightAccent, (tone) => tone.roles),
+  darkScope,
+  ...accentScopes(darkList, darkAccent, (tone) => tone.dark)
+].join('\n\n')}
 }
 `
 
