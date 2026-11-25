@@ -42,13 +42,22 @@ describe('release config', () => {
   // publish to `latest` and every consuming app picks them up on next install.
   it('publishes to the dist-tag matching the release channel', async () => {
     const config = await loadConfig(undefined)
-    expect(optionsFor(config.plugins, '@semantic-release/exec').publishCmd).toBe(
-      "npm publish --access public --tag ${nextRelease.channel || 'latest'}"
+    expect(optionsFor(config.plugins, '@semantic-release/exec').publishCmd).toContain(
+      "--tag ${nextRelease.channel || 'latest'}"
     )
     // A ref that is neither main nor beta — including an unset one locally —
     // must fall back to the main-style set, never the stripped beta one.
     expect(names(config.plugins)).toContain('@semantic-release/changelog')
     expect(names(config.plugins)).toContain('@semantic-release/git')
+  })
+
+  // Yarn 1 points every command it runs at registry.yarnpkg.com, where npm
+  // trusted publishing has no credentials.
+  it('publishes to the npm registry explicitly', async () => {
+    const config = await loadConfig('main')
+    expect(optionsFor(config.plugins, '@semantic-release/exec').publishCmd).toContain(
+      '--registry https://registry.npmjs.org'
+    )
   })
 
   it('skips the changelog and commit-back on beta', async () => {
@@ -80,5 +89,12 @@ describe('release config', () => {
       readFileSync(new URL('../package.json', import.meta.url), 'utf8')
     )
     expect(pkg).not.toHaveProperty('release')
+  })
+
+  // npm rejects a provenance-signed publish unless package.json names the
+  // repository the workflow ran in.
+  it('names the repository npm checks provenance against', () => {
+    const pkg = JSON.parse(readFileSync('package.json', 'utf-8'))
+    expect(pkg.repository.url).toBe('git+https://github.com/Atom-Learning/theme.git')
   })
 })
