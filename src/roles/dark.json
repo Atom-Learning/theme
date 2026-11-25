@@ -229,6 +229,9 @@
     "default": {
       "$value": "{color.dark-grey.700}"
     },
+    "overlay": {
+      "$value": "{color.dark-grey.600}"
+    },
     "control": {
       "$value": "{color.dark-grey.900}"
     },

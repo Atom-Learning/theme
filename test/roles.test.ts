@@ -249,6 +249,21 @@ describe('Dark scheme', () => {
     expect(darkAccent('danger')).toContain('--background-color-accent-solid: var(--color-dark-red-800);')
   })
 
+  it('gives overlays a visible border in dark', () => {
+    expect(themeBlock).toContain('--border-color-overlay: var(--color-grey-200);')
+    expect(dark).toContain('--border-color-overlay: var(--color-dark-grey-600);')
+  })
+
+  it('deepens every shadow role in dark', () => {
+    const light = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src', 'roles', 'shadows.json'), 'utf-8'))
+    const darkShadows = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src', 'roles', 'shadows-dark.json'), 'utf-8'))
+
+    expect(Object.keys(darkShadows)).toEqual(Object.keys(light))
+    for (const [name, value] of Object.entries(darkShadows)) {
+      expect(dark).toContain(`--shadow-${name}: ${value};`)
+    }
+  })
+
   it('reaches 4.5:1 for text on every solid and bold fill in dark', async () => {
     const { getContrast } = await import('color2k')
     const { accents } = await import(path.join(process.cwd(), 'lib', 'roles.js'))
