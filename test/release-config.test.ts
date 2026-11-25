@@ -90,4 +90,11 @@ describe('release config', () => {
     )
     expect(pkg).not.toHaveProperty('release')
   })
+
+  // npm rejects a provenance-signed publish unless package.json names the
+  // repository the workflow ran in.
+  it('names the repository npm checks provenance against', () => {
+    const pkg = JSON.parse(readFileSync('package.json', 'utf-8'))
+    expect(pkg.repository.url).toBe('git+https://github.com/Atom-Learning/theme.git')
+  })
 })
