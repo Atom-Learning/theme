@@ -25,7 +25,10 @@ export default {
         // Publishing goes through exec rather than @semantic-release/npm, so the
         // dist-tag is not handled for us. Without --tag, a prerelease would land
         // on `latest` and reach every consumer. channel is null on main.
-        publishCmd: "npm publish --access public --tag ${nextRelease.channel || 'latest'}"
+        // --registry: the workflow runs this through Yarn 1, which points npm at
+        // registry.yarnpkg.com, where trusted publishing has no credentials.
+        publishCmd:
+          "npm publish --access public --registry https://registry.npmjs.org --tag ${nextRelease.channel || 'latest'}"
       }
     ],
     ...(isBeta
