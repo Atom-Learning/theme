@@ -61,9 +61,13 @@ jobs:
           cache: yarn
       - run: yarn install --frozen-lockfile
       # Treats the PR branch as a release branch so the run reports the version
-      # this PR would produce. --no-ci stops it bailing out on a pull request.
+      # this PR would produce.
       - run: yarn semantic-release --dry-run --no-ci --branches "$HEAD_REF"
         env:
           HEAD_REF: ${{ github.head_ref }}
+          # semantic-release reads the branch from these, and on a pull_request
+          # event sees refs/pull/N/merge and exits before checking anything
+          GITHUB_EVENT_NAME: push
+          GITHUB_REF: refs/heads/${{ github.head_ref }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
