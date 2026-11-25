@@ -39,3 +39,31 @@ jobs:
       # Runs the same suite, but with swiftc and kotlinc present the guarded
       # syntax tests in test/native-compile.test.ts actually execute
       - run: yarn clean && yarn test:run
+
+  release-dry-run:
+    name: Release dry run
+    # Fork PRs get a read-only token and no secrets, so the checks below would fail
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      # semantic-release checks it could push to the branch, even in a dry run
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # The default PR checkout is a detached merge commit; semantic-release
+          # needs the branch itself and the full tag history
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+      # Treats the PR branch as a release branch so the run reports the version
+      # this PR would produce. --no-ci stops it bailing out on a pull request.
+      - run: yarn semantic-release --dry-run --no-ci --branches "$HEAD_REF"
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
