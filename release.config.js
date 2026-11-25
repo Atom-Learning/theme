@@ -54,21 +54,24 @@ export default {
           { successCommentCondition: false, failCommentCondition: false }
         ]
       : '@semantic-release/github',
-    [
-      'semantic-release-slack-bot',
-      {
-        packageName: '@atom-learning/theme',
-        // Only main notifies. Beta publishes per push, and no entry matching
-        // `beta` means notifyOnSuccess/notifyOnFail stay unset there, so the
-        // plugin skips it.
-        branchesConfig: [
-          {
-            pattern: 'main',
-            notifyOnFail: true,
-            notifyOnSuccess: true
-          }
-        ]
-      }
-    ]
+    // Only main notifies. The plugin is left out on beta altogether, because it
+    // refuses to start without SLACK_WEBHOOK even when it has nothing to send.
+    ...(isBeta
+      ? []
+      : [
+          [
+            'semantic-release-slack-bot',
+            {
+              packageName: '@atom-learning/theme',
+              branchesConfig: [
+                {
+                  pattern: 'main',
+                  notifyOnFail: true,
+                  notifyOnSuccess: true
+                }
+              ]
+            }
+          ]
+        ])
   ]
 }

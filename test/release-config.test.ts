@@ -55,6 +55,9 @@ describe('release config', () => {
     const config = await loadConfig('beta')
     expect(names(config.plugins)).not.toContain('@semantic-release/changelog')
     expect(names(config.plugins)).not.toContain('@semantic-release/git')
+    // The Slack plugin fails verifyConditions without its webhook, so beta must
+    // not load it
+    expect(names(config.plugins)).not.toContain('semantic-release-slack-bot')
     // Beta must not comment on the PRs its commits reference; main does that
     // when the work actually ships.
     expect(
@@ -64,6 +67,7 @@ describe('release config', () => {
 
   it('keeps the changelog and commit-back on main', async () => {
     const config = await loadConfig('main')
+    expect(names(config.plugins)).toContain('semantic-release-slack-bot')
     expect(names(config.plugins)).toContain('@semantic-release/changelog')
     expect(names(config.plugins)).toContain('@semantic-release/git')
   })
