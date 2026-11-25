@@ -69,7 +69,7 @@
     "accent-solid-active": {
       "$value": "{color.primary.600}"
     },
-    "accent-emphasis": {
+    "accent-bold": {
       "$value": "{color.primary.1000}"
     },
     "success-subtle": {
@@ -84,7 +84,7 @@
     "success-solid-active": {
       "$value": "{color.green.600}"
     },
-    "success-emphasis": {
+    "success-bold": {
       "$value": "{color.success.dark}"
     },
     "warning-subtle": {
@@ -99,7 +99,7 @@
     "warning-solid-active": {
       "$value": "{color.orange.600}"
     },
-    "warning-emphasis": {
+    "warning-bold": {
       "$value": "{color.warning.dark}"
     },
     "danger-subtle": {
@@ -114,7 +114,7 @@
     "danger-solid-active": {
       "$value": "{color.red.600}"
     },
-    "danger-emphasis": {
+    "danger-bold": {
       "$value": "{color.danger.dark}"
     },
     "info-subtle": {
@@ -129,7 +129,7 @@
     "info-solid-active": {
       "$value": "{color.blue.600}"
     },
-    "info-emphasis": {
+    "info-bold": {
       "$value": "{color.info.dark}"
     }
   },
@@ -179,7 +179,7 @@
     "on-accent-subtle": {
       "$value": "{color.primary.300}"
     },
-    "on-accent-emphasis": {
+    "on-accent-bold": {
       "$value": "{color.white}"
     },
     "success": {

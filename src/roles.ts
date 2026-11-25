@@ -16,7 +16,7 @@ const PROPERTY: Record<string, string> = {
 // Text roles and the step of the fill each one sits on
 const ON_FILL: Record<string, string> = {
   'on-accent': '800',
-  'on-accent-emphasis': '1000'
+  'on-accent-bold': '1000'
 }
 const DARK_INK = '{color.grey.1200}'
 
