@@ -111,6 +111,11 @@ describe('Accent scopes', () => {
     expect(accent('danger')).toContain('--background-color-accent-subtle-hover: var(--color-red-200);')
   })
 
+  it('gives the neutral tone the same values as the grey hue', () => {
+    expect(accent('neutral')).toContain('--background-color-accent-solid: var(--color-grey-800);')
+    expect(accent('neutral').replace("'neutral'", "'grey'")).toBe(accent('grey'))
+  })
+
   it('keeps warning text readable on its fills', () => {
     expect(accent('warning')).toContain('--text-color-on-accent: var(--color-grey-800);')
     expect(accent('warning')).toContain('--text-color-accent: var(--color-warning-text);')
@@ -163,8 +168,8 @@ describe('Names for consumers', () => {
     const names = await import(path.join(process.cwd(), 'lib', 'roles.js'))
 
     expect(names.brands).toEqual(['atom', 'school', 'quest'])
-    expect(names.tones).toEqual(['success', 'warning', 'danger', 'info'])
-    expect(names.accents).toHaveLength(21)
+    expect(names.tones).toEqual(['success', 'warning', 'danger', 'info', 'neutral'])
+    expect(names.accents).toHaveLength(22)
     for (const name of names.accents) accent(name)
     for (const role of names.roles.border) {
       expect(css).toContain(`--border-color-${role}:`)
@@ -175,7 +180,7 @@ describe('Names for consumers', () => {
     const types = read('roles.d.ts')
 
     expect(types).toContain("export type Brand = 'atom' | 'school' | 'quest'")
-    expect(types).toContain("export type ColorTone = 'success' | 'warning' | 'danger' | 'info'")
+    expect(types).toContain("export type ColorTone = 'success' | 'warning' | 'danger' | 'info' | 'neutral'")
     expect(types).toContain("export type ColorAccent = 'brand' | ColorHue | ColorTone")
     expect(types).toMatch(/BorderColorRole = .*'control' \| 'control-subtle'/)
   })

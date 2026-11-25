@@ -645,4 +645,28 @@
     --border-color-accent-solid-active: var(--color-info-dark);
     --outline-color-accent: var(--color-info);
   }
+
+  [data-color-accent='neutral'] {
+    --background-color-accent-subtle: var(--color-grey-100);
+    --background-color-accent-subtle-hover: var(--color-grey-200);
+    --background-color-accent-subtle-active: var(--color-grey-300);
+    --background-color-accent-muted: var(--color-grey-200);
+    --background-color-accent-muted-hover: var(--color-grey-300);
+    --background-color-accent-muted-active: var(--color-grey-400);
+    --background-color-accent-solid: var(--color-grey-800);
+    --background-color-accent-solid-hover: var(--color-grey-900);
+    --background-color-accent-solid-active: var(--color-grey-1000);
+    --background-color-accent-emphasis: var(--color-grey-800);
+    --text-color-accent: var(--color-grey-800);
+    --text-color-accent-hover: var(--color-grey-900);
+    --text-color-accent-active: var(--color-grey-1000);
+    --text-color-on-accent: var(--color-white);
+    --text-color-on-accent-subtle: var(--color-grey-1000);
+    --text-color-on-accent-emphasis: var(--color-white);
+    --border-color-accent: var(--color-grey-300);
+    --border-color-accent-solid: var(--color-grey-800);
+    --border-color-accent-solid-hover: var(--color-grey-900);
+    --border-color-accent-solid-active: var(--color-grey-1000);
+    --outline-color-accent: var(--color-grey-800);
+  }
 }

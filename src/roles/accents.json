@@ -59,6 +59,10 @@
         "900": "{color.info.mid}",
         "1000": "{color.info.dark}"
       }
+    },
+    "neutral": {
+      "hue": "grey",
+      "steps": {}
     }
   }
 }
