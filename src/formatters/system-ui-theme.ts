@@ -13,6 +13,7 @@ interface Property {
   path?: string[]
   name: string
   filePath?: string
+  $deprecated?: string | boolean
 }
 
 interface Dictionary {
@@ -167,6 +168,44 @@ const generateCustomPropertyName = (property: Property): string => {
   }
 
   return `--${name}`
+}
+
+const deprecationMessage = (property: Property): string | undefined =>
+  property.$deprecated
+    ? property.$deprecated === true
+      ? ''
+      : property.$deprecated
+    : undefined
+
+// Messages for deprecated colours, keyed as they appear in `theme.colors` and
+// in `properties`
+export const deprecations = (
+  dictionary: Dictionary,
+  config?: ReturnType<typeof getBuildConfig>
+): { colors: Record<string, string>; properties: Record<string, string> } => {
+  const colors: Record<string, string> = {}
+  const properties: Record<string, string> = {}
+
+  ;(dictionary.allTokens || dictionary.allProperties || []).forEach(
+    (property) => {
+      const message = deprecationMessage(property)
+      if (message === undefined || property.attributes.category !== 'color')
+        return
+      if (
+        !shouldIncludeProperty(
+          property as unknown as Parameters<typeof shouldIncludeProperty>[0],
+          config
+        )
+      )
+        return
+
+      const { type, item, subitem } = property.attributes
+      colors[prefix(type, item, subitem || '')] = message
+      properties[generateCustomPropertyName(property)] = message
+    }
+  )
+
+  return { colors, properties }
 }
 
 export const generateCustomProperties = (

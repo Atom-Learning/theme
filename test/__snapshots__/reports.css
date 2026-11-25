@@ -1,0 +1,12 @@
+@layer theme {
+  :root {
+  --text-xs: 0.625rem;
+  --text-sm: 0.75rem;
+  --text-md: 0.875rem;
+  --text-lg: 1rem;
+  --text-xl: 1.3125rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.3125rem;
+  --text-4xl: 3.125rem;
+  }
+}

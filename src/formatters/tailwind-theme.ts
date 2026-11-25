@@ -15,6 +15,7 @@ interface Property {
   $value?: string | number
   name: string
   filePath?: string
+  $deprecated?: string | boolean
 }
 
 interface Dictionary {
@@ -91,7 +92,10 @@ const transformPropertiesToTheme = (
         name = `shadow-${item}`
       }
 
-      return `--${name}: ${formatValue(tokenValue(property), category, type)};`
+      const declaration = `--${name}: ${formatValue(tokenValue(property), category, type)};`
+      return property.$deprecated
+        ? `/* @deprecated ${property.$deprecated} */\n  ${declaration}`
+        : declaration
     })
     .filter((property): property is string => Boolean(property))
 }
