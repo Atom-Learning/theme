@@ -1,6 +1,6 @@
 {
   "name": "@atom-learning/theme",
-  "version": "6.1.0",
+  "version": "6.2.0",
   "description": "Design tokens and assets for Atom Learning, Atom School and Quest",
   "type": "module",
   "main": "lib/theme-base.js",
@@ -21,18 +21,27 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@commitlint/cli": "^21.2.1",
+    "@commitlint/config-conventional": "^21.2.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^7.0.0",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^12.0.6",
+    "@semantic-release/release-notes-generator": "^14.0.1",
     "@types/node": "^20.0.0",
     "color2k": "^2.0.4",
     "del-cli": "^3.0.1",
     "dree": "^5.1.5",
+    "husky": "^4.3.8",
     "npm-run-all": "^4.1.5",
     "pascal-case": "^3.1.2",
+    "semantic-release": "^25.0.0",
+    "semantic-release-slack-bot": "^4.0.2",
     "style-dictionary": "^5.1.1",
     "tsx": "^4.7.0",
     "typescript": "^5.0.0",
     "vitest": "^4.0.16"
   },
-  "dependencies": {},
   "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610",
   "exports": {
     ".": {
@@ -117,5 +126,15 @@
         "./lib/media.d.ts"
       ]
     }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   }
 }
