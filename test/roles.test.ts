@@ -123,7 +123,18 @@ describe('Accent scopes', () => {
 
   it.each(['orange', 'yellow', 'lime'])('puts the darkest grey on a %s fill', (hue) => {
     expect(accent(hue)).toContain('--text-color-on-accent: var(--color-grey-1200);')
-    expect(accent(hue)).toContain('--text-color-on-accent-emphasis: var(--color-grey-1200);')
+  })
+
+  it('uses the darkest step for the bold fill, with white text on every hue', () => {
+    expect(accent('pink')).toContain('--background-color-accent-bold: var(--color-pink-1000);')
+    for (const hue of ['yellow', 'lime', 'orange']) {
+      expect(accent(hue)).toContain('--text-color-on-accent-bold: var(--color-white);')
+    }
+  })
+
+  it('keeps dark text on the warning bold fill', () => {
+    expect(accent('warning')).toContain('--background-color-accent-bold: var(--color-warning-dark);')
+    expect(accent('warning')).toContain('--text-color-on-accent-bold: var(--color-grey-1200);')
   })
 
   it('keeps white text where the fill is dark enough for it', () => {
@@ -228,6 +239,12 @@ describe('Dark scheme', () => {
   it('swaps the light warning text for colours that read on dark fills', () => {
     expect(darkAccent('warning')).toContain('--text-color-accent: var(--color-orange-600);')
     expect(darkAccent('warning')).not.toContain('warning-text')
+  })
+
+  it('keeps the bold fill on the darkest step, with white text', () => {
+    expect(dark).toContain('--background-color-accent-bold: var(--color-primary-1000);')
+    expect(darkAccent('pink')).toContain('--background-color-accent-bold: var(--color-pink-1000);')
+    expect(darkAccent('pink')).toContain('--text-color-on-accent-bold: var(--color-white);')
   })
 
   it('has a dark scope for every accent', async () => {
