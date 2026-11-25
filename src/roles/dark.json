@@ -70,7 +70,7 @@
       "$value": "{color.primary.600}"
     },
     "accent-emphasis": {
-      "$value": "{color.primary.800}"
+      "$value": "{color.primary.1000}"
     },
     "success-subtle": {
       "$value": "{color.green.1100}"
@@ -85,7 +85,7 @@
       "$value": "{color.green.600}"
     },
     "success-emphasis": {
-      "$value": "{color.success.base}"
+      "$value": "{color.success.dark}"
     },
     "warning-subtle": {
       "$value": "{color.orange.1100}"
@@ -100,7 +100,7 @@
       "$value": "{color.orange.600}"
     },
     "warning-emphasis": {
-      "$value": "{color.warning.base}"
+      "$value": "{color.warning.dark}"
     },
     "danger-subtle": {
       "$value": "{color.red.1100}"
@@ -115,7 +115,7 @@
       "$value": "{color.red.600}"
     },
     "danger-emphasis": {
-      "$value": "{color.danger.base}"
+      "$value": "{color.danger.dark}"
     },
     "info-subtle": {
       "$value": "{color.blue.1100}"
@@ -130,7 +130,7 @@
       "$value": "{color.blue.600}"
     },
     "info-emphasis": {
-      "$value": "{color.info.base}"
+      "$value": "{color.info.dark}"
     }
   },
   "text": {
