@@ -75,6 +75,7 @@
   --border-color-subtlest: var(--color-grey-100);
   --border-color-subtle: var(--color-grey-200);
   --border-color-default: var(--color-grey-300);
+  --border-color-overlay: var(--color-grey-200);
   --border-color-control: var(--color-grey-700);
   --border-color-control-subtle: var(--color-grey-600);
   --border-color-disabled: var(--color-grey-700);
@@ -753,6 +754,7 @@
     --border-color-subtlest: var(--color-dark-grey-400);
     --border-color-subtle: var(--color-dark-grey-600);
     --border-color-default: var(--color-dark-grey-700);
+    --border-color-overlay: var(--color-dark-grey-600);
     --border-color-control: var(--color-dark-grey-900);
     --border-color-control-subtle: var(--color-dark-grey-800);
     --border-color-disabled: var(--color-dark-grey-700);
@@ -769,6 +771,15 @@
     --outline-color-focus-inverse: var(--color-white);
     --outline-color-accent: var(--color-dark-primary-800);
     --outline-color-danger: var(--color-dark-red-900);
+    --shadow-floating-sm: 0 1px 3px hsla(0, 0%, 0%, 0.4), 0 1px 2px hsla(0, 0%, 0%, 0.3);
+    --shadow-floating-md: 0 4px 8px hsla(0, 0%, 0%, 0.45), 0 2px 4px hsla(0, 0%, 0%, 0.3);
+    --shadow-floating-lg: 0 12px 24px hsla(0, 0%, 0%, 0.5), 0 6px 8px hsla(0, 0%, 0%, 0.3);
+    --shadow-floating-xl: 0 16px 32px hsla(0, 0%, 0%, 0.55), 0 10px 12px hsla(0, 0%, 0%, 0.3);
+    --shadow-resting-sm: 0 1px 2px hsla(0, 0%, 0%, 0.3);
+    --shadow-resting-md: 0 2px 4px hsla(0, 0%, 0%, 0.35);
+    --shadow-edge-top: 0 -6px 6px -1px hsla(0, 0%, 0%, 0.3);
+    --shadow-edge-bottom: 0 4px 4px -2px hsla(0, 0%, 0%, 0.4);
+    --shadow-edge-end: 4px 0 4px -2px hsla(0, 0%, 0%, 0.4);
   }
 
   [data-color-scheme='dark'] [data-color-accent='brand'],

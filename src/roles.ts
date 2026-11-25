@@ -167,6 +167,12 @@ export const buildRoles = (): void => {
     .map(([name, value]) => `--shadow-${name}: ${value};`)
     .join('\n    ')}\n  }`
 
+  // Dark surfaces need deeper shadows to show at all; overlays lean on
+  // border-overlay for their edge
+  const darkShadows: Record<string, string> = JSON.parse(
+    readFileSync(join(root, 'src', 'roles', 'shadows-dark.json'), 'utf-8')
+  )
+
   const themesPath = join(root, 'src', 'themes')
   const brandOverrides = Object.entries(brands).map(
     ([theme, own]) =>
@@ -228,7 +234,12 @@ export const buildRoles = (): void => {
   // brand-owned roles to their light values
   const darkScope = `  ${[DARK, ...scopes.map((scope) => `${DARK} ${scope}`)].join(',\n  ')} {
     color-scheme: dark;
-    ${darkList.map(declare).join('\n    ')}
+    ${[
+      ...darkList.map(declare),
+      ...Object.entries(darkShadows).map(
+        ([name, value]) => `--shadow-${name}: ${value};`
+      )
+    ].join('\n    ')}
   }`
 
   // A custom property resolves var() where it is declared, so a brand set
