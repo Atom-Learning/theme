@@ -38,6 +38,44 @@
       "1200": {
         "$value": "{color.blue.1200}"
       }
+    },
+    "dark-primary": {
+      "100": {
+        "$value": "{color.dark-blue.100}"
+      },
+      "200": {
+        "$value": "{color.dark-blue.200}"
+      },
+      "300": {
+        "$value": "{color.dark-blue.300}"
+      },
+      "400": {
+        "$value": "{color.dark-blue.400}"
+      },
+      "500": {
+        "$value": "{color.dark-blue.500}"
+      },
+      "600": {
+        "$value": "{color.dark-blue.600}"
+      },
+      "700": {
+        "$value": "{color.dark-blue.700}"
+      },
+      "800": {
+        "$value": "{color.dark-blue.800}"
+      },
+      "900": {
+        "$value": "{color.dark-blue.900}"
+      },
+      "1000": {
+        "$value": "{color.dark-blue.1000}"
+      },
+      "1100": {
+        "$value": "{color.dark-blue.1100}"
+      },
+      "1200": {
+        "$value": "{color.dark-blue.1200}"
+      }
     }
   }
 }
