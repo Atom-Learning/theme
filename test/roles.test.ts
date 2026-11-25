@@ -186,3 +186,52 @@ describe('Names for consumers', () => {
   })
 })
 
+
+describe('Dark scheme', () => {
+  const darkStart = css.indexOf("[data-color-scheme='dark'],")
+  const dark = css.slice(darkStart, css.indexOf('}', darkStart))
+  const darkAccent = (name: string) => {
+    const start = css.indexOf(`[data-color-scheme='dark'] [data-color-accent='${name}'],`)
+    expect(start, `dark ${name} missing`).toBeGreaterThan(-1)
+    return css.slice(start, css.indexOf('}', start))
+  }
+  const groups = (file: string) =>
+    JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src', 'roles', file), 'utf-8'))
+
+  it('gives every role a dark value', () => {
+    const light = groups('light.json')
+    const darkRoles = groups('dark.json')
+
+    for (const group of Object.keys(light)) {
+      expect(Object.keys(darkRoles[group]), group).toEqual(Object.keys(light[group]))
+    }
+  })
+
+  it('flips surfaces and text, and tells the browser', () => {
+    expect(dark).toContain('color-scheme: dark;')
+    expect(dark).toContain('--background-color-surface: var(--color-grey-1100);')
+    expect(dark).toContain('--text-color-default: var(--color-grey-100);')
+  })
+
+  it('wins over a brand scope set below it', () => {
+    expect(dark).toContain("[data-color-scheme='dark'] [data-brand],")
+    expect(dark).toContain("[data-color-scheme='dark'] .theme-quest-reports {")
+    expect(darkStart).toBeGreaterThan(css.indexOf("[data-brand='school']"))
+  })
+
+  it('points the accent roles at the dark end of a hue', () => {
+    expect(darkAccent('pink')).toContain('--background-color-accent-subtle: var(--color-pink-1200);')
+    expect(darkAccent('pink')).toContain('--text-color-on-accent-subtle: var(--color-pink-300);')
+    expect(darkAccent('pink')).toContain('--background-color-accent-solid: var(--color-pink-800);')
+  })
+
+  it('swaps the light warning text for colours that read on dark fills', () => {
+    expect(darkAccent('warning')).toContain('--text-color-accent: var(--color-orange-600);')
+    expect(darkAccent('warning')).not.toContain('warning-text')
+  })
+
+  it('has a dark scope for every accent', async () => {
+    const { accents } = await import(path.join(process.cwd(), 'lib', 'roles.js'))
+    for (const name of accents) darkAccent(name)
+  })
+})
