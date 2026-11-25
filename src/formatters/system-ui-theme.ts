@@ -100,7 +100,12 @@ export const transformPropertiesToTheme = (
     if (category === 'color') {
       theme.colors = {
         ...(theme.colors as Record<string, string>),
-        [prefix(type, item, subitem || '')]: String(tokenValue(property))
+        // Kebab-case scale names (dark-grey) key as camelCase, like coolGrey
+        [prefix(
+          type.replace(/-(\w)/g, (_, letter: string) => letter.toUpperCase()),
+          item,
+          subitem || ''
+        )]: String(tokenValue(property))
       }
       return
     }

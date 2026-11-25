@@ -12,6 +12,18 @@
   --color-primary-1000: hsl(164, 100%, 13%);
   --color-primary-1100: hsl(150, 34%, 15%);
   --color-primary-1200: hsl(150, 30%, 9%);
+  --color-dark-primary-100: #0e1512;
+  --color-dark-primary-200: #131c18;
+  --color-dark-primary-300: #132d23;
+  --color-dark-primary-400: #153a2c;
+  --color-dark-primary-500: #1c4737;
+  --color-dark-primary-600: #275544;
+  --color-dark-primary-700: #326653;
+  --color-dark-primary-800: #3d7c64;
+  --color-dark-primary-900: #47a080;
+  --color-dark-primary-1000: #49ad89;
+  --color-dark-primary-1100: #4fd4a7;
+  --color-dark-primary-1200: #b5eed6;
   --text-xs: 0.625rem;
   --text-sm: 0.75rem;
   --text-md: 0.875rem;

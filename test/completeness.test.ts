@@ -34,6 +34,7 @@ const flatten = (group: TokenGroup, trail: string[] = []): SourceToken[] => {
 
 const BASE_FILES = [
   'src/properties/colors.json',
+  'src/properties/colors-dark.json',
   'src/properties/aliases.json',
   'src/properties/sizes.json',
   'src/properties/containers.json',
@@ -44,7 +45,8 @@ const BASE_FILES = [
 const baseTokens = BASE_FILES.flatMap((file) => flatten(readJson(file)))
 
 // Mirrors the naming contract in src/native.ts
-const nativeName = ([, type, item, subitem]: string[]): string => {
+const nativeName = ([, group, item, subitem]: string[]): string => {
+  const type = group.replace(/-(\w)/g, (_, letter: string) => letter.toUpperCase())
   if (!item || item === 'base') return type
   const sub = subitem === 'base' ? '' : (subitem ?? '')
   return parseInt(item)

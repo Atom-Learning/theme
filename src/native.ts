@@ -17,7 +17,9 @@ interface TransformedToken {
 // color.subject.gcse-maths -> subjectGcseMaths, size.font.sm -> fontSm.
 // `base` segments collapse (color.info.base -> info, size.space.base -> space).
 export const nativeName = (token: TransformedToken): string => {
-  const { type = '', item, subitem = '' } = token.attributes || {}
+  const { type: group = '', item, subitem = '' } = token.attributes || {}
+  // Kebab-case scale names (dark-grey) aren't valid identifiers
+  const type = group.replace(/-(\w)/g, (_, letter: string) => letter.toUpperCase())
   if (!item || item === 'base') return type
   const sub = subitem === 'base' ? '' : subitem
   return parseInt(item)
