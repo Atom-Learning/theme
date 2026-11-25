@@ -40,6 +40,12 @@
         "text.on-accent": "{color.grey.800}",
         "text.on-accent-subtle": "{color.warning.text}",
         "text.on-accent-emphasis": "{color.grey.800}"
+      },
+      "dark": {
+        "text.accent": "{color.orange.600}",
+        "text.on-accent": "{color.grey.1000}",
+        "text.on-accent-subtle": "{color.orange.300}",
+        "text.on-accent-emphasis": "{color.grey.1000}"
       }
     },
     "danger": {
