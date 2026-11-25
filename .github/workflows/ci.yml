@@ -62,12 +62,14 @@ jobs:
       - run: yarn install --frozen-lockfile
       # Treats the PR branch as a release branch so the run reports the version
       # this PR would produce.
-      - run: yarn semantic-release --dry-run --no-ci --branches "$HEAD_REF"
+      # semantic-release reads the branch from GITHUB_REF, and on a pull_request
+      # event sees refs/pull/N/merge and exits before checking anything. Actions
+      # ignores GITHUB_* set through `env`, so they are exported in the shell.
+      - run: |
+          export GITHUB_EVENT_NAME=push
+          export GITHUB_REF="refs/heads/$HEAD_REF"
+          yarn semantic-release --dry-run --no-ci --branches "$HEAD_REF"
         env:
           HEAD_REF: ${{ github.head_ref }}
-          # semantic-release reads the branch from these, and on a pull_request
-          # event sees refs/pull/N/merge and exits before checking anything
-          GITHUB_EVENT_NAME: push
-          GITHUB_REF: refs/heads/${{ github.head_ref }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
