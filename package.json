@@ -1,6 +1,6 @@
 {
   "name": "@atom-learning/theme",
-  "version": "6.2.0",
+  "version": "6.3.0",
   "description": "Design tokens and assets for Atom Learning, Atom School and Quest",
   "type": "module",
   "main": "lib/theme-base.js",
