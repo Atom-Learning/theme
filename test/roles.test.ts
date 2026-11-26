@@ -250,6 +250,12 @@ describe('Dark scheme', () => {
     expect(darkAccent('danger')).toContain('--background-color-accent-solid: var(--color-dark-red-800);')
   })
 
+  // Radix's grey jumps from 4:1 at step 10 to 8.5:1 at 11, so the quietest
+  // text shares the subtle step rather than miss 4.5:1
+  it('keeps the quietest text readable in dark', () => {
+    expect(dark).toContain('--text-color-subtlest: var(--color-dark-grey-1100);')
+  })
+
   it('gives overlays a visible border in dark', () => {
     expect(themeBlock).toContain('--border-color-overlay: var(--color-grey-200);')
     expect(dark).toContain('--border-color-overlay: var(--color-dark-grey-600);')
