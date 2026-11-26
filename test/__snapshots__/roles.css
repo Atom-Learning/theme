@@ -725,7 +725,7 @@
     --background-color-info-bold: var(--color-dark-blue-600);
     --text-color-default: var(--color-dark-grey-1200);
     --text-color-subtle: var(--color-dark-grey-1100);
-    --text-color-subtlest: var(--color-dark-grey-1000);
+    --text-color-subtlest: var(--color-dark-grey-1100);
     --text-color-icon: var(--color-dark-grey-1100);
     --text-color-icon-subtle: var(--color-dark-grey-900);
     --text-color-disabled: var(--color-dark-grey-800);
@@ -1331,4 +1331,40 @@
     --border-color-accent-solid-active: var(--color-dark-grey-700);
     --outline-color-accent: var(--color-dark-grey-800);
   }
+}
+
+@utility shadow-floating-sm {
+  box-shadow: var(--shadow-floating-sm);
+}
+
+@utility shadow-floating-md {
+  box-shadow: var(--shadow-floating-md);
+}
+
+@utility shadow-floating-lg {
+  box-shadow: var(--shadow-floating-lg);
+}
+
+@utility shadow-floating-xl {
+  box-shadow: var(--shadow-floating-xl);
+}
+
+@utility shadow-resting-sm {
+  box-shadow: var(--shadow-resting-sm);
+}
+
+@utility shadow-resting-md {
+  box-shadow: var(--shadow-resting-md);
+}
+
+@utility shadow-edge-top {
+  box-shadow: var(--shadow-edge-top);
+}
+
+@utility shadow-edge-bottom {
+  box-shadow: var(--shadow-edge-bottom);
+}
+
+@utility shadow-edge-end {
+  box-shadow: var(--shadow-edge-end);
 }
