@@ -13,15 +13,17 @@ const PROPERTY: Record<string, string> = {
   outline: 'outline-color'
 }
 
-// Text roles and the step of the fill each one sits on
-const ON_FILL: Record<string, string> = {
-  'on-accent': '800',
-  'on-accent-bold': '1000'
+// Text roles and the step of the fill each one sits on, per scheme
+const ON_FILL: Record<Scheme, Record<string, string>> = {
+  light: { 'on-accent': '800', 'on-accent-bold': '1000' },
+  dark: { 'on-accent': '800', 'on-accent-bold': '600' }
 }
+
+type Scheme = 'light' | 'dark'
 const DARK_INK = '{color.grey.1200}'
 
 // The scale each brand theme redefines
-const BRAND_OWNED = /^color\.primary\./
+const BRAND_OWNED = /^color\.(dark-)?primary\./
 
 const DARK = "[data-color-scheme='dark']"
 
@@ -54,7 +56,6 @@ interface Accents {
       hue: string
       steps: Record<string, string>
       roles?: Record<string, string>
-      dark?: Record<string, string>
     }
   >
 }
@@ -76,6 +77,13 @@ const isAccent = ({ name }: Role): boolean => /(^|-)accent(-|$)/.test(name)
 const remap = (value: string, to: (step: string) => string): string => {
   const [, step] = reference(value).match(/^color\.primary\.(\d+)$/) ?? []
   return step ? to(step) : value
+}
+
+// Dark roles read the dark scales, which have no status tokens to swap in
+const remapDark = (value: string, hue: string): string => {
+  const [, step] =
+    reference(value).match(/^color\.dark-primary\.(\d+)$/) ?? []
+  return step ? `{color.dark-${hue}.${step}}` : value
 }
 
 const TEXT_CONTRAST = 4.5
@@ -113,11 +121,19 @@ export const buildRoles = (): void => {
     readFileSync(join(root, 'src', 'roles', 'accents.json'), 'utf-8')
   )
 
-  const { color: colors }: {
-    color: Record<string, Record<string, { $value: string }>>
-  } = JSON.parse(
+  type Scales = Record<string, Record<string, { $value: string }>>
+  const { color: colors }: { color: Scales } = JSON.parse(
     readFileSync(join(root, 'src', 'properties', 'colors.json'), 'utf-8')
   )
+  const { color: darkScales }: { color: Scales } = JSON.parse(
+    readFileSync(join(root, 'src', 'properties', 'colors-dark.json'), 'utf-8')
+  )
+  const darkColors: Scales = Object.fromEntries(
+    Object.entries(darkScales)
+      .filter(([name]) => name.startsWith('dark-'))
+      .map(([name, scale]) => [name.slice('dark-'.length), scale])
+  )
+  const ink = colors.grey['1200'].$value
 
   const list: Role[] = Object.entries(roles).flatMap(([group, tokens]) =>
     Object.entries(tokens).map(([name, { $value }]) => ({
@@ -151,6 +167,12 @@ export const buildRoles = (): void => {
     .map(([name, value]) => `--shadow-${name}: ${value};`)
     .join('\n    ')}\n  }`
 
+  // Dark surfaces need deeper shadows to show at all; overlays lean on
+  // border-overlay for their edge
+  const darkShadows: Record<string, string> = JSON.parse(
+    readFileSync(join(root, 'src', 'roles', 'shadows-dark.json'), 'utf-8')
+  )
+
   const themesPath = join(root, 'src', 'themes')
   const brandOverrides = Object.entries(brands).map(
     ([theme, own]) =>
@@ -162,23 +184,26 @@ export const buildRoles = (): void => {
   const accentScopes = (
     roleList: Role[],
     selector: (name: string) => string,
-    own: (tone: Accents['tones'][string]) => Record<string, string> | undefined
+    scheme: Scheme
   ): string[] => {
     const accentRoles = roleList.filter(isAccent)
+    const onFill = ON_FILL[scheme]
+    // A hue's text on its fills follows contrast in either scheme
+    const forHue = (hue: string, role: Role): string => {
+      if (onFill[role.name]) {
+        const scale = scheme === 'dark' ? darkColors : colors
+        return inkOn(scale[hue][onFill[role.name]].$value, ink)
+      }
+      return scheme === 'dark'
+        ? remapDark(role.value, hue)
+        : remap(role.value, (step) => `{color.${hue}.${step}}`)
+    }
     return [
       accentScope(selector('brand'), accentRoles),
       ...accents.hues.map((hue) =>
         accentScope(
           selector(hue),
-          accentRoles.map((role) => ({
-            ...role,
-            value: ON_FILL[role.name]
-              ? inkOn(
-                  colors[hue][ON_FILL[role.name]].$value,
-                  colors.grey['1200'].$value
-                )
-              : remap(role.value, (step) => `{color.${hue}.${step}}`)
-          }))
+          accentRoles.map((role) => ({ ...role, value: forHue(hue, role) }))
         )
       ),
       ...Object.entries(accents.tones).map(([tone, scale]) =>
@@ -187,11 +212,14 @@ export const buildRoles = (): void => {
           accentRoles.map((role) => ({
             ...role,
             value:
-              own(scale)?.[`${role.group}.${role.name}`] ??
-              remap(
-                role.value,
-                (step) => scale.steps[step] ?? `{color.${scale.hue}.${step}}`
-              )
+              scheme === 'dark'
+                ? forHue(scale.hue, role)
+                : (scale.roles?.[`${role.group}.${role.name}`] ??
+                  remap(
+                    role.value,
+                    (step) =>
+                      scale.steps[step] ?? `{color.${scale.hue}.${step}}`
+                  ))
           }))
         )
       )
@@ -206,11 +234,22 @@ export const buildRoles = (): void => {
   // brand-owned roles to their light values
   const darkScope = `  ${[DARK, ...scopes.map((scope) => `${DARK} ${scope}`)].join(',\n  ')} {
     color-scheme: dark;
-    ${darkList.map(declare).join('\n    ')}
+    ${[
+      ...darkList.map(declare),
+      ...Object.entries(darkShadows).map(
+        ([name, value]) => `--shadow-${name}: ${value};`
+      )
+    ].join('\n    ')}
   }`
 
   // A custom property resolves var() where it is declared, so a brand set
   // below <html> (a PDF body, a preview) needs its own copy of these
+  // Tailwind bakes a theme shadow's value into its class, so these classes
+  // read the role variables and follow the scheme
+  const shadowUtilities = Object.keys(shadows)
+    .map((name) => `@utility shadow-${name} {\n  box-shadow: var(--shadow-${name});\n}`)
+    .join('\n\n')
+
   const css = `
 @theme static {
   ${all.join('\n  ')}
@@ -225,11 +264,13 @@ ${shadowScope}
 
 ${[
   ...brandOverrides,
-  ...accentScopes(list, lightAccent, (tone) => tone.roles),
+  ...accentScopes(list, lightAccent, 'light'),
   darkScope,
-  ...accentScopes(darkList, darkAccent, (tone) => tone.dark)
+  ...accentScopes(darkList, darkAccent, 'dark')
 ].join('\n\n')}
 }
+
+${shadowUtilities}
 `
 
   writeFileSync(join(root, 'lib', 'roles.css'), css, 'utf-8')

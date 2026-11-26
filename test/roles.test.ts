@@ -53,7 +53,8 @@ describe('Role tokens', () => {
     const used = [...css.matchAll(/var\((--[\w-]+)\)/g)].map((match) => match[1])
 
     for (const brand of ['atom', 'atom-school', 'quest']) {
-      const available = new Set([...base, ...declared(read(`theme-${brand}.css`))])
+      // roles.css declares the shadow role variables its utilities read
+      const available = new Set([...base, ...declared(read(`theme-${brand}.css`)), ...declared(css)])
       const missing = used.filter((name) => !available.has(name))
 
       expect(missing, `missing in ${brand}`).toEqual([])
@@ -218,10 +219,11 @@ describe('Dark scheme', () => {
     }
   })
 
-  it('flips surfaces and text, and tells the browser', () => {
+  it('flips surfaces and text onto the dark grey scale, and tells the browser', () => {
     expect(dark).toContain('color-scheme: dark;')
-    expect(dark).toContain('--background-color-surface: var(--color-grey-1100);')
-    expect(dark).toContain('--text-color-default: var(--color-grey-100);')
+    expect(dark).toContain('--background-color-page: var(--color-dark-grey-100);')
+    expect(dark).toContain('--background-color-surface: var(--color-dark-grey-200);')
+    expect(dark).toContain('--text-color-default: var(--color-dark-grey-1200);')
   })
 
   it('wins over a brand scope set below it', () => {
@@ -230,21 +232,67 @@ describe('Dark scheme', () => {
     expect(darkStart).toBeGreaterThan(css.indexOf("[data-brand='school']"))
   })
 
-  it('points the accent roles at the dark end of a hue', () => {
-    expect(darkAccent('pink')).toContain('--background-color-accent-subtle: var(--color-pink-1200);')
-    expect(darkAccent('pink')).toContain('--text-color-on-accent-subtle: var(--color-pink-300);')
-    expect(darkAccent('pink')).toContain('--background-color-accent-solid: var(--color-pink-800);')
+  it('reads the brand from its dark primary scale', () => {
+    expect(dark).toContain('--background-color-accent-solid: var(--color-dark-primary-800);')
+    expect(dark).toContain('--text-color-accent: var(--color-dark-primary-1100);')
   })
 
-  it('swaps the light warning text for colours that read on dark fills', () => {
-    expect(darkAccent('warning')).toContain('--text-color-accent: var(--color-orange-600);')
+  it("points the accent roles at the hue's dark scale", () => {
+    expect(darkAccent('pink')).toContain('--background-color-accent-subtle: var(--color-dark-pink-300);')
+    expect(darkAccent('pink')).toContain('--background-color-accent-solid: var(--color-dark-pink-800);')
+    expect(darkAccent('pink')).toContain('--background-color-accent-bold: var(--color-dark-pink-600);')
+    expect(darkAccent('pink')).toContain('--text-color-on-accent-subtle: var(--color-dark-pink-1100);')
+  })
+
+  it("gives a tone its hue's dark scale, with no light status tokens", () => {
+    expect(darkAccent('warning')).toContain('--text-color-accent: var(--color-dark-orange-1100);')
     expect(darkAccent('warning')).not.toContain('warning-text')
+    expect(darkAccent('danger')).toContain('--background-color-accent-solid: var(--color-dark-red-800);')
   })
 
-  it('keeps the bold fill on the darkest step, with white text', () => {
-    expect(dark).toContain('--background-color-accent-bold: var(--color-primary-1000);')
-    expect(darkAccent('pink')).toContain('--background-color-accent-bold: var(--color-pink-1000);')
-    expect(darkAccent('pink')).toContain('--text-color-on-accent-bold: var(--color-white);')
+  // Radix's grey jumps from 4:1 at step 10 to 8.5:1 at 11, so the quietest
+  // text shares the subtle step rather than miss 4.5:1
+  it('keeps the quietest text readable in dark', () => {
+    expect(dark).toContain('--text-color-subtlest: var(--color-dark-grey-1100);')
+  })
+
+  it('gives overlays a visible border in dark', () => {
+    expect(themeBlock).toContain('--border-color-overlay: var(--color-grey-200);')
+    expect(dark).toContain('--border-color-overlay: var(--color-dark-grey-600);')
+  })
+
+  it('gives every shadow role a utility class that reads its variable', () => {
+    const light = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src', 'roles', 'shadows.json'), 'utf-8'))
+    for (const name of Object.keys(light)) {
+      expect(css).toContain(`@utility shadow-${name} {\n  box-shadow: var(--shadow-${name});\n}`)
+    }
+  })
+
+  it('deepens every shadow role in dark', () => {
+    const light = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src', 'roles', 'shadows.json'), 'utf-8'))
+    const darkShadows = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src', 'roles', 'shadows-dark.json'), 'utf-8'))
+
+    expect(Object.keys(darkShadows)).toEqual(Object.keys(light))
+    for (const [name, value] of Object.entries(darkShadows)) {
+      expect(dark).toContain(`--shadow-${name}: ${value};`)
+    }
+  })
+
+  it('reaches 4.5:1 for text on every solid and bold fill in dark', async () => {
+    const { getContrast } = await import('color2k')
+    const { accents } = await import(path.join(process.cwd(), 'lib', 'roles.js'))
+    const base = read('theme-base.css')
+    const value = (variable: string) =>
+      base.match(new RegExp(`${variable}: ([^;]+);`))?.[1] ?? variable
+
+    for (const name of accents.filter((accent: string) => accent !== 'brand')) {
+      const scope = darkAccent(name)
+      for (const [fill, text] of [['accent-solid', 'on-accent'], ['accent-bold', 'on-accent-bold']]) {
+        const fillVar = scope.match(new RegExp(`--background-color-${fill}: var\\((--[\\w-]+)\\)`))![1]
+        const textVar = scope.match(new RegExp(`--text-color-${text}: var\\((--[\\w-]+)\\)`))![1]
+        expect(getContrast(value(textVar), value(fillVar)), `${name} ${text}`).toBeGreaterThanOrEqual(4.5)
+      }
+    }
   })
 
   it('has a dark scope for every accent', async () => {

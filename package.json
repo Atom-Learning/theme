@@ -7,6 +7,7 @@
   "types": "lib/theme-base.d.ts",
   "scripts": {
     "build": "node ./src/build.ts --path=./src/themes",
+    "generate:dark-scales": "node ./src/dark-scales.ts --write",
     "prepublishOnly": "run-s clean build test:run",
     "clean": "del ./lib",
     "pretest": "run-s build",

@@ -12,6 +12,18 @@
   --color-primary-1000: hsl(228, 82%, 35%);
   --color-primary-1100: hsl(228, 63%, 23%);
   --color-primary-1200: hsl(227, 57%, 11%);
+  --color-dark-primary-100: #0d1522;
+  --color-dark-primary-200: #0f1929;
+  --color-dark-primary-300: #10264d;
+  --color-dark-primary-400: #0c2f6b;
+  --color-dark-primary-500: #133b7f;
+  --color-dark-primary-600: #1d4893;
+  --color-dark-primary-700: #2958ab;
+  --color-dark-primary-800: #326acc;
+  --color-dark-primary-900: #3b78e3;
+  --color-dark-primary-1000: #5d98ff;
+  --color-dark-primary-1100: #86b3ff;
+  --color-dark-primary-1200: #d0e1ff;
   --font-display: 'National 2 Condensed', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
 }
