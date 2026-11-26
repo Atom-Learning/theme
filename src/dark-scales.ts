@@ -87,7 +87,12 @@ export const generateScale = (color: string, reference: string[]) => {
     lightness[8] = from + (to - from) / 3
     lightness[9] = from + ((to - from) * 2) / 3
   }
-  return ref.map(([, C], i) => fromOklch([lightness[i], C * scale, cH]))
+  // Step 9 is solid's hover in dark; Radix's jump from 8 makes hover glare, so
+  // its lightness and chroma sit a third of the way from 8 to 10
+  lightness[8] = lightness[7] + (lightness[9] - lightness[7]) / 3
+  const chroma = ref.map(([, C]) => C)
+  chroma[8] = chroma[7] + (chroma[9] - chroma[7]) / 3
+  return chroma.map((C, i) => fromOklch([lightness[i], C * scale, cH]))
 }
 
 const luminance = (color: string) => {

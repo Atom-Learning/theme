@@ -244,6 +244,12 @@ export const buildRoles = (): void => {
 
   // A custom property resolves var() where it is declared, so a brand set
   // below <html> (a PDF body, a preview) needs its own copy of these
+  // Tailwind bakes a theme shadow's value into its class, so these classes
+  // read the role variables and follow the scheme
+  const shadowUtilities = Object.keys(shadows)
+    .map((name) => `@utility shadow-${name} {\n  box-shadow: var(--shadow-${name});\n}`)
+    .join('\n\n')
+
   const css = `
 @theme static {
   ${all.join('\n  ')}
@@ -263,6 +269,8 @@ ${[
   ...accentScopes(darkList, darkAccent, 'dark')
 ].join('\n\n')}
 }
+
+${shadowUtilities}
 `
 
   writeFileSync(join(root, 'lib', 'roles.css'), css, 'utf-8')

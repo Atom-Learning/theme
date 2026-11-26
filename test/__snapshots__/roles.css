@@ -1332,3 +1332,39 @@
     --outline-color-accent: var(--color-dark-grey-800);
   }
 }
+
+@utility shadow-floating-sm {
+  box-shadow: var(--shadow-floating-sm);
+}
+
+@utility shadow-floating-md {
+  box-shadow: var(--shadow-floating-md);
+}
+
+@utility shadow-floating-lg {
+  box-shadow: var(--shadow-floating-lg);
+}
+
+@utility shadow-floating-xl {
+  box-shadow: var(--shadow-floating-xl);
+}
+
+@utility shadow-resting-sm {
+  box-shadow: var(--shadow-resting-sm);
+}
+
+@utility shadow-resting-md {
+  box-shadow: var(--shadow-resting-md);
+}
+
+@utility shadow-edge-top {
+  box-shadow: var(--shadow-edge-top);
+}
+
+@utility shadow-edge-bottom {
+  box-shadow: var(--shadow-edge-bottom);
+}
+
+@utility shadow-edge-end {
+  box-shadow: var(--shadow-edge-end);
+}

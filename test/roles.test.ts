@@ -53,7 +53,8 @@ describe('Role tokens', () => {
     const used = [...css.matchAll(/var\((--[\w-]+)\)/g)].map((match) => match[1])
 
     for (const brand of ['atom', 'atom-school', 'quest']) {
-      const available = new Set([...base, ...declared(read(`theme-${brand}.css`))])
+      // roles.css declares the shadow role variables its utilities read
+      const available = new Set([...base, ...declared(read(`theme-${brand}.css`)), ...declared(css)])
       const missing = used.filter((name) => !available.has(name))
 
       expect(missing, `missing in ${brand}`).toEqual([])
@@ -252,6 +253,13 @@ describe('Dark scheme', () => {
   it('gives overlays a visible border in dark', () => {
     expect(themeBlock).toContain('--border-color-overlay: var(--color-grey-200);')
     expect(dark).toContain('--border-color-overlay: var(--color-dark-grey-600);')
+  })
+
+  it('gives every shadow role a utility class that reads its variable', () => {
+    const light = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src', 'roles', 'shadows.json'), 'utf-8'))
+    for (const name of Object.keys(light)) {
+      expect(css).toContain(`@utility shadow-${name} {\n  box-shadow: var(--shadow-${name});\n}`)
+    }
   })
 
   it('deepens every shadow role in dark', () => {
