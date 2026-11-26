@@ -3,24 +3,30 @@
     "$type": "color",
     "text": {
       "bold": {
-        "$value": "{color.grey.1000}"
+        "$value": "{color.grey.1000}",
+        "$deprecated": "Use the text-default role (--text-color-default)"
       },
       "regular": {
-        "$value": "{color.grey.900}"
+        "$value": "{color.grey.900}",
+        "$deprecated": "Use the text-default role (--text-color-default)"
       },
       "subtle": {
-        "$value": "{color.grey.800}"
+        "$value": "{color.grey.800}",
+        "$deprecated": "Use the text-subtle role (--text-color-subtle)"
       },
       "minimal": {
-        "$value": "{color.grey.700}"
+        "$value": "{color.grey.700}",
+        "$deprecated": "Use the text-subtlest role (--text-color-subtlest)"
       }
     },
     "background": {
       "base": {
-        "$value": "{color.grey.100}"
+        "$value": "{color.grey.100}",
+        "$deprecated": "Use the bg-page role (--background-color-page)"
       },
       "accent": {
-        "$value": "{color.blue.100}"
+        "$value": "{color.blue.100}",
+        "$deprecated": "Use the bg-accent-subtle role (--background-color-accent-subtle)"
       }
     }
   }

@@ -14,6 +14,7 @@ import { setBuildConfig } from './formatters/shared.ts'
 import { readdirSync, readFileSync, writeFileSync, unlinkSync } from 'node:fs'
 import { join } from 'node:path'
 
+import { buildRoles } from './roles.ts'
 import config from './style.config.ts'
 
 const { values } = parseArgs({
@@ -144,6 +145,8 @@ const run = async (): Promise<void> => {
 
   // Combine all theme CSS files into one
   combineAllThemes()
+
+  buildRoles()
 }
 
 run().catch((error) => {

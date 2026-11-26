@@ -12,6 +12,7 @@ interface Property {
   $value?: string | number
   name: string
   filePath?: string
+  $deprecated?: string | boolean
 }
 
 interface Dictionary {
@@ -104,11 +105,34 @@ const generateThemeCSS = (
     if (!varName) return
 
     const value = formatValue(tokenValue(property), category, type)
+    if (property.$deprecated)
+      cssVars.push(`  /* @deprecated ${property.$deprecated} */`)
     cssVars.push(`  ${varName}: ${value};`)
   })
 
   return cssVars.join('\n')
 }
+
+export const BRANDS: Record<string, string> = {
+  atom: 'atom',
+  'atom-school': 'school',
+  quest: 'quest'
+}
+// Any one brand's reports build carries the scale: it is the same for all of them
+const REPORTS_SOURCE = 'quest-reports'
+
+const selectorFor = (themeName: string): string => {
+  const brand = BRANDS[themeName]
+  return brand
+    ? `[data-brand='${brand}'],\n  .theme-${themeName}`
+    : `.theme-${themeName}`
+}
+
+const textSizes = (cssVars: string): string =>
+  cssVars
+    .split('\n')
+    .filter((line) => line.trim().startsWith('--text-'))
+    .join('\n')
 
 const formatter = (dictionary: Dictionary): string => {
   const config = getBuildConfig()
@@ -127,11 +151,19 @@ const formatter = (dictionary: Dictionary): string => {
   }
 
   const themeCSS = `@layer theme {
-  .theme-${themeName} {
+  ${selectorFor(themeName)} {
 ${cssVars}
   }
 }
 `
+
+  if (themeName === REPORTS_SOURCE) {
+    writeFileSync(
+      join(process.cwd(), 'lib', 'reports.css'),
+      `@layer theme {\n  :root {\n${textSizes(cssVars)}\n  }\n}\n`,
+      'utf-8'
+    )
+  }
 
   // Write to a temporary file for later combination
   const tempPath = join(process.cwd(), 'lib', `.theme-${themeName}.css.tmp`)

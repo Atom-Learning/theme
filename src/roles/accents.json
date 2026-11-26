@@ -1,0 +1,68 @@
+{
+  "hues": [
+    "grey",
+    "blue",
+    "pink",
+    "marsh",
+    "green",
+    "red",
+    "orange",
+    "purple",
+    "cyan",
+    "teal",
+    "magenta",
+    "lime",
+    "lapis",
+    "maroon",
+    "emerald",
+    "yellow"
+  ],
+  "tones": {
+    "success": {
+      "hue": "green",
+      "steps": {
+        "100": "{color.success.light}",
+        "800": "{color.success.base}",
+        "900": "{color.success.mid}",
+        "1000": "{color.success.dark}"
+      }
+    },
+    "warning": {
+      "hue": "orange",
+      "steps": {
+        "100": "{color.warning.light}",
+        "800": "{color.warning.base}",
+        "900": "{color.warning.mid}",
+        "1000": "{color.warning.dark}"
+      },
+      "roles": {
+        "text.accent": "{color.warning.text}",
+        "text.on-accent": "{color.grey.800}",
+        "text.on-accent-subtle": "{color.warning.text}",
+        "text.on-accent-bold": "{color.grey.1200}"
+      }
+    },
+    "danger": {
+      "hue": "red",
+      "steps": {
+        "100": "{color.danger.light}",
+        "800": "{color.danger.base}",
+        "900": "{color.danger.mid}",
+        "1000": "{color.danger.dark}"
+      }
+    },
+    "info": {
+      "hue": "blue",
+      "steps": {
+        "100": "{color.info.light}",
+        "800": "{color.info.base}",
+        "900": "{color.info.mid}",
+        "1000": "{color.info.dark}"
+      }
+    },
+    "neutral": {
+      "hue": "grey",
+      "steps": {}
+    }
+  }
+}
