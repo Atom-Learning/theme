@@ -17,6 +17,11 @@
     "emerald",
     "yellow"
   ],
+  "brightFills": {
+    "yellow": "500",
+    "lime": "600",
+    "orange": "600"
+  },
   "tones": {
     "success": {
       "hue": "green",
@@ -37,7 +42,7 @@
       },
       "roles": {
         "text.accent": "{color.warning.text}",
-        "text.on-accent": "{color.grey.800}",
+        "text.on-accent": "{color.grey.1200}",
         "text.on-accent-subtle": "{color.warning.text}",
         "text.on-accent-bold": "{color.grey.1200}"
       }
