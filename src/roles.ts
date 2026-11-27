@@ -13,11 +13,14 @@ const PROPERTY: Record<string, string> = {
   outline: 'outline-color'
 }
 
-// Text roles and the step of the fill each one sits on
+// Text roles and the fill role each one sits on
 const ON_FILL: Record<string, string> = {
-  'on-accent': '800',
-  'on-accent-bold': '1000'
+  'on-accent': 'background.accent-solid',
+  'on-accent-bold': 'background.accent-bold'
 }
+
+// The solid fill and its borders; a bright hue moves these up its scale
+const SOLID_FILL = /^(background|border)\.accent-solid(-hover|-active)?$/
 const DARK_INK = '{color.grey.1200}'
 
 // The scale each brand theme redefines
@@ -46,6 +49,9 @@ const brandSelectors = (themesPath: string): string[] =>
 
 interface Accents {
   hues: string[]
+  // Hues whose step 800 is a mid-tone that neither white nor dark text reads
+  // well on: their solid fill sits at this lighter step, under dark text
+  brightFills?: Record<string, string>
   tones: Record<
     string,
     { hue: string; steps: Record<string, string>; roles?: Record<string, string> }
@@ -143,17 +149,30 @@ export const buildRoles = (): void => {
 
   const accentScopes = [
     accentScope('brand', accentRoles),
-    ...accents.hues.map((hue) =>
-      accentScope(
+    ...accents.hues.map((hue) => {
+      const shift = Number(accents.brightFills?.[hue] ?? 800) - 800
+      const values = new Map(
+        accentRoles.map((role) => [
+          key(role),
+          remap(role.value, (step) =>
+            `{color.${hue}.${SOLID_FILL.test(key(role)) ? Number(step) + shift : step}}`
+          )
+        ])
+      )
+      const colorOf = (value: string): string => {
+        const [, scale, step] = reference(value).match(/^color\.(\w+)\.(\d+)$/) ?? []
+        return colors[scale][step].$value
+      }
+      return accentScope(
         hue,
         accentRoles.map((role) => ({
           ...role,
           value: ON_FILL[role.name]
-            ? inkOn(colors[hue][ON_FILL[role.name]].$value, colors.grey['1200'].$value)
-            : remap(role.value, (step) => `{color.${hue}.${step}}`)
+            ? inkOn(colorOf(values.get(ON_FILL[role.name])!), colors.grey['1200'].$value)
+            : values.get(key(role))!
         }))
       )
-    ),
+    }),
     ...Object.entries(accents.tones).map(([tone, { hue, steps, roles: own }]) =>
       accentScope(
         tone,

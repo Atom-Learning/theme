@@ -83,9 +83,12 @@ describe('Role tokens', () => {
   })
 })
 
-// grey-1200 on yellow-800 is 4.47:1. Accepted until yellow-800 is darkened;
-// the floor stops it getting worse
-const ACCEPTED_BELOW_AA: Record<string, number> = { yellow: 4.45 }
+describe('Surface border', () => {
+  it('matches the surface fill, so it separates an element from what is behind it', () => {
+    expect(themeBlock).toContain('--border-color-surface: var(--color-white);')
+    expect(themeBlock).toContain('--background-color-surface: var(--color-white);')
+  })
+})
 
 describe('Shadow roles', () => {
   it('are plain variables on :root, outside @theme', () => {
@@ -117,12 +120,25 @@ describe('Accent scopes', () => {
   })
 
   it('keeps warning text readable on its fills', () => {
-    expect(accent('warning')).toContain('--text-color-on-accent: var(--color-grey-800);')
+    expect(accent('warning')).toContain('--text-color-on-accent: var(--color-grey-1200);')
     expect(accent('warning')).toContain('--text-color-accent: var(--color-warning-text);')
   })
 
   it.each(['orange', 'yellow', 'lime'])('puts the darkest grey on a %s fill', (hue) => {
     expect(accent(hue)).toContain('--text-color-on-accent: var(--color-grey-1200);')
+  })
+
+  it.each([
+    ['yellow', 500],
+    ['lime', 600],
+    ['orange', 600]
+  ])('moves the %s solid fill and its borders up to step %i, keeping text at 800', (hue, step) => {
+    expect(accent(hue)).toContain(`--background-color-accent-solid: var(--color-${hue}-${step});`)
+    expect(accent(hue)).toContain(`--background-color-accent-solid-hover: var(--color-${hue}-${step + 100});`)
+    expect(accent(hue)).toContain(`--background-color-accent-solid-active: var(--color-${hue}-${step + 200});`)
+    expect(accent(hue)).toContain(`--border-color-accent-solid: var(--color-${hue}-${step});`)
+    expect(accent(hue)).toContain(`--text-color-accent: var(--color-${hue}-800);`)
+    expect(accent(hue)).toContain(`--background-color-accent-bold: var(--color-${hue}-1000);`)
   })
 
   it('uses the darkest step for the bold fill, with white text on every hue', () => {
@@ -141,7 +157,7 @@ describe('Accent scopes', () => {
     expect(accent('pink')).toContain('--text-color-on-accent: var(--color-white);')
   })
 
-  it('reaches 4.5:1 for text on every hue\'s solid fill, bar the accepted exceptions', async () => {
+  it('reaches 4.5:1 for text on every hue\'s solid fill', async () => {
     const { getContrast } = await import('color2k')
     const { hues } = await import(path.join(process.cwd(), 'lib', 'roles.js'))
     const colors = JSON.parse(
@@ -153,9 +169,8 @@ describe('Accent scopes', () => {
         ? colors.grey['1200'].$value
         : '#fff'
 
-      expect(getContrast(ink, colors[hue]['800'].$value), hue).toBeGreaterThanOrEqual(
-        ACCEPTED_BELOW_AA[hue] ?? 4.5
-      )
+      const [, step] = accent(hue).match(/--background-color-accent-solid: var\(--color-\w+-(\d+)\)/)!
+      expect(getContrast(ink, colors[hue][step].$value), hue).toBeGreaterThanOrEqual(4.5)
     }
   })
 

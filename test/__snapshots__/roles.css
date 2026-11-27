@@ -78,6 +78,7 @@
   --border-color-control: var(--color-grey-700);
   --border-color-control-subtle: var(--color-grey-600);
   --border-color-disabled: var(--color-grey-700);
+  --border-color-surface: var(--color-white);
   --border-color-accent: var(--color-primary-300);
   --border-color-accent-solid: var(--color-primary-800);
   --border-color-accent-solid-hover: var(--color-primary-900);
@@ -317,9 +318,9 @@
     --background-color-accent-muted: var(--color-orange-200);
     --background-color-accent-muted-hover: var(--color-orange-300);
     --background-color-accent-muted-active: var(--color-orange-400);
-    --background-color-accent-solid: var(--color-orange-800);
-    --background-color-accent-solid-hover: var(--color-orange-900);
-    --background-color-accent-solid-active: var(--color-orange-1000);
+    --background-color-accent-solid: var(--color-orange-600);
+    --background-color-accent-solid-hover: var(--color-orange-700);
+    --background-color-accent-solid-active: var(--color-orange-800);
     --background-color-accent-bold: var(--color-orange-1000);
     --text-color-accent: var(--color-orange-800);
     --text-color-accent-hover: var(--color-orange-900);
@@ -328,9 +329,9 @@
     --text-color-on-accent-subtle: var(--color-orange-1000);
     --text-color-on-accent-bold: var(--color-white);
     --border-color-accent: var(--color-orange-300);
-    --border-color-accent-solid: var(--color-orange-800);
-    --border-color-accent-solid-hover: var(--color-orange-900);
-    --border-color-accent-solid-active: var(--color-orange-1000);
+    --border-color-accent-solid: var(--color-orange-600);
+    --border-color-accent-solid-hover: var(--color-orange-700);
+    --border-color-accent-solid-active: var(--color-orange-800);
     --outline-color-accent: var(--color-orange-800);
   }
 
@@ -437,9 +438,9 @@
     --background-color-accent-muted: var(--color-lime-200);
     --background-color-accent-muted-hover: var(--color-lime-300);
     --background-color-accent-muted-active: var(--color-lime-400);
-    --background-color-accent-solid: var(--color-lime-800);
-    --background-color-accent-solid-hover: var(--color-lime-900);
-    --background-color-accent-solid-active: var(--color-lime-1000);
+    --background-color-accent-solid: var(--color-lime-600);
+    --background-color-accent-solid-hover: var(--color-lime-700);
+    --background-color-accent-solid-active: var(--color-lime-800);
     --background-color-accent-bold: var(--color-lime-1000);
     --text-color-accent: var(--color-lime-800);
     --text-color-accent-hover: var(--color-lime-900);
@@ -448,9 +449,9 @@
     --text-color-on-accent-subtle: var(--color-lime-1000);
     --text-color-on-accent-bold: var(--color-white);
     --border-color-accent: var(--color-lime-300);
-    --border-color-accent-solid: var(--color-lime-800);
-    --border-color-accent-solid-hover: var(--color-lime-900);
-    --border-color-accent-solid-active: var(--color-lime-1000);
+    --border-color-accent-solid: var(--color-lime-600);
+    --border-color-accent-solid-hover: var(--color-lime-700);
+    --border-color-accent-solid-active: var(--color-lime-800);
     --outline-color-accent: var(--color-lime-800);
   }
 
@@ -533,9 +534,9 @@
     --background-color-accent-muted: var(--color-yellow-200);
     --background-color-accent-muted-hover: var(--color-yellow-300);
     --background-color-accent-muted-active: var(--color-yellow-400);
-    --background-color-accent-solid: var(--color-yellow-800);
-    --background-color-accent-solid-hover: var(--color-yellow-900);
-    --background-color-accent-solid-active: var(--color-yellow-1000);
+    --background-color-accent-solid: var(--color-yellow-500);
+    --background-color-accent-solid-hover: var(--color-yellow-600);
+    --background-color-accent-solid-active: var(--color-yellow-700);
     --background-color-accent-bold: var(--color-yellow-1000);
     --text-color-accent: var(--color-yellow-800);
     --text-color-accent-hover: var(--color-yellow-900);
@@ -544,9 +545,9 @@
     --text-color-on-accent-subtle: var(--color-yellow-1000);
     --text-color-on-accent-bold: var(--color-white);
     --border-color-accent: var(--color-yellow-300);
-    --border-color-accent-solid: var(--color-yellow-800);
-    --border-color-accent-solid-hover: var(--color-yellow-900);
-    --border-color-accent-solid-active: var(--color-yellow-1000);
+    --border-color-accent-solid: var(--color-yellow-500);
+    --border-color-accent-solid-hover: var(--color-yellow-600);
+    --border-color-accent-solid-active: var(--color-yellow-700);
     --outline-color-accent: var(--color-yellow-800);
   }
 
@@ -588,7 +589,7 @@
     --text-color-accent: var(--color-warning-text);
     --text-color-accent-hover: var(--color-warning-mid);
     --text-color-accent-active: var(--color-warning-dark);
-    --text-color-on-accent: var(--color-grey-800);
+    --text-color-on-accent: var(--color-grey-1200);
     --text-color-on-accent-subtle: var(--color-warning-text);
     --text-color-on-accent-bold: var(--color-grey-1200);
     --border-color-accent: var(--color-orange-300);
