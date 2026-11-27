@@ -83,6 +83,13 @@ describe('Role tokens', () => {
   })
 })
 
+describe('Surface border', () => {
+  it('matches the surface fill, so it separates an element from what is behind it', () => {
+    expect(themeBlock).toContain('--border-color-surface: var(--color-white);')
+    expect(themeBlock).toContain('--background-color-surface: var(--color-white);')
+  })
+})
+
 describe('Shadow roles', () => {
   it('are plain variables on :root, outside @theme', () => {
     expect(themeBlock).not.toContain('--shadow-')

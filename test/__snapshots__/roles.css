@@ -78,6 +78,7 @@
   --border-color-control: var(--color-grey-700);
   --border-color-control-subtle: var(--color-grey-600);
   --border-color-disabled: var(--color-grey-700);
+  --border-color-surface: var(--color-white);
   --border-color-accent: var(--color-primary-300);
   --border-color-accent-solid: var(--color-primary-800);
   --border-color-accent-solid-hover: var(--color-primary-900);

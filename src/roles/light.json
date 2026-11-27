@@ -82,6 +82,7 @@
     "control": { "$value": "{color.grey.700}" },
     "control-subtle": { "$value": "{color.grey.600}" },
     "disabled": { "$value": "{color.grey.700}" },
+    "surface": { "$value": "{color.white}" },
     "accent": { "$value": "{color.primary.300}" },
     "accent-solid": { "$value": "{color.primary.800}" },
     "accent-solid-hover": { "$value": "{color.primary.900}" },
